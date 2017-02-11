@@ -17,11 +17,10 @@ const del = require('del');
 const ejs = require('ejs');
 const webpack = require('webpack');
 
-// TODO: Update configuration settings
 const config = {
-  title: 'Tabula',                         // Your website title
-  url: 'https://www.tabula.life',          // Your website URL
-  trackingID: 'UA-78107364-2',             // Google Analytics Site's ID
+  title: 'Tabula',
+  gSuiteId: 'UA-78107364-2',
+  description: 'Tabula is an AI course recommendation tool for Harvard College students',
 };
 
 const tasks = new Map(); // The collection of automation tasks ('clean', 'build', 'publish', etc.)
@@ -94,7 +93,7 @@ tasks.set('build', () => {
 });
 
 //
-// Build and publish the website
+// Build and publish the website (credit to: https://github.com/kriasoft/react-static-boilerplate/issues/130)
 // -----------------------------------------------------------------------------
 tasks.set('publish', () => {
   const ghPages = require('gh-pages');
