@@ -16,7 +16,6 @@
     "minimatch": "^3.0.3",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
-    "react-mdl": "^1.6.1",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "whatwg-fetch": "^1.0.0"
@@ -34,6 +33,7 @@
     "babel-register": "^6.9.0",
     "babel-runtime": "^6.9.2",
     "browser-sync": "^2.13.0",
+    "bulma": "^0.3.1",
     "chai": "^3.5.0",
     "connect-history-api-fallback": "^1.2.0",
     "css-loader": "^0.23.1",
@@ -46,6 +46,7 @@
     "eslint-plugin-react": "^5.2.2",
     "file-loader": "^0.9.0",
     "firebase-tools": "^3.0.4",
+    "font-awesome": "^4.7.0",
     "front-matter": "^2.1.0",
     "gh-pages": "^0.12.0",
     "highlight.js": "^9.5.0",

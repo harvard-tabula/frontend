@@ -1,13 +1,3 @@
-/**
- * React Static Boilerplate
- * https://github.com/kriasoft/react-static-boilerplate
- *
- * Copyright © 2015-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 /* eslint-disable global-require */
 
 const path = require('path');
@@ -32,10 +22,6 @@ const config = {
 
   // The entry point for the bundle
   entry: [
-    /* Material Design Lite (https://getmdl.io) */
-    '!!style!css!react-mdl/extra/material.min.css',
-    'react-mdl/extra/material.min.js',
-    /* The main entry point of your JavaScript application */
     './main.js',
   ],
 
@@ -103,10 +89,8 @@ const config = {
           'style-loader',
           `css-loader?${JSON.stringify({
             sourceMap: isDebug,
-            // CSS Modules https://github.com/css-modules/css-modules
             modules: true,
             localIdentName: isDebug ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
-            // CSS Nano http://cssnano.co/options/
             minimize: !isDebug,
           })}`,
           'postcss-loader',

@@ -4,19 +4,24 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Tabula</title>
-    <meta name="description" content="">
+    <meta name="description" content="Tabula is an AI course recommendation tool for Harvard College students">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,500italic,700,700italic">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
   </head>
   <body>
     <div id="container"></div>
-    <script src="/dist/main.33a8af8e1e3ca21d26c6.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
     <script>
-      window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
-      ga('create','UA-78107364-2','auto');ga('send','pageview')
+      var config = {
+        apiKey: "AIzaSyBYzST-I7MSJK3tR9mjIhz0gzHa4VuKua8",
+        authDomain: "tabula-158417.firebaseapp.com",
+        databaseURL: "https://tabula-158417.firebaseio.com",
+        storageBucket: "tabula-158417.appspot.com",
+        messagingSenderId: "744871386196"
+      };
+      firebase.initializeApp(config);
     </script>
-    <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+    <script src="/dist/main.js?4b2f7e63763d11cde12c"></script>
   </body>
 </html>
