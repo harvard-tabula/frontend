@@ -32,6 +32,7 @@ const config = {
 
   // The entry point for the bundle
   entry: [
+    '!!style!css!bulma/css/bulma.css',
     './main.js',
   ],
 
@@ -83,6 +84,10 @@ const config = {
   // Options affecting the normal modules
   module: {
     loaders: [
+      {
+        test: /\.sass$/,
+        loaders: ['sass-loader']
+      },
       {
         test: /\.jsx?$/,
         include: [
