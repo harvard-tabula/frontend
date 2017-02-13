@@ -7,9 +7,8 @@ import cx from 'classnames';
 function Footer() {
   return (
     <footer className="footer">
-      <div className="container">
-        <div className="content has-text-centered">
-          <p>© {"{Jessica Wang, Joe Kahn}"}</p>
+      <div className="">
+        <div className="">
           <Link to="/privacy">Privacy & Terms</Link>
           <a className="icon" href="https://github.com/josephwandile/tabula">
             <i className="fa fa-github" aria-hidden="true"></i>
