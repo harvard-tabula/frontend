@@ -12,8 +12,10 @@ import history from './core/history';
 
 let routes = require('./routes.json'); // Loaded with utils/routes-loader.js
 const container = document.getElementById('container');
-import './node_modules/bulma/css/bulma.css';
 
+// CSS packages TODO
+//import './node_modules/bulma/css/bulma.css';
+//import './node_modules/font-awesome/css/font-awesome.css';
 
 function renderComponent(component) {
   ReactDOM.render(<Provider store={store}>{component}</Provider>, container);

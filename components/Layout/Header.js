@@ -7,14 +7,20 @@ class Header extends React.Component {
 
   render() {
     return (
-      <nav className="nav" ref={node => (this.root = node)}>
-        <div className="nav-left">
-          <Link className="nav-item" to="/">
-            Tabula
-          </Link>
+      <div className='hero is-medium is-primary'>
+        <div className='hero-head'>
+          <div className='nav'>
+            <div className="container" ref={node => (this.root = node)}>
+              <div className="nav-left">
+                <Link className="nav-item" to="/">
+                  Tabula
+                </Link>
+              </div>
+              <Navigation/>
+            </div>
+          </div>
         </div>
-        <Navigation />
-      </nav>
+      </div>
     );
   }
 

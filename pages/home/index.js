@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import Layout from '../../components/Layout';
-import s from './styles.css';
 
 class HomePage extends React.Component {
 
@@ -14,8 +13,10 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <Layout className={s.content}>
-        <h4>The start of something beautiful.</h4>
+      <Layout>
+        <div className='heading has-text-centered'>
+          <h1 className='title'>The start of something beautiful</h1>
+        </div>
       </Layout>
     );
   }

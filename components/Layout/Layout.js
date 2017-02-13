@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
 import Header from './Header';
 import Footer from '../Footer';
-import s from './Layout.css';
 
 class Layout extends React.Component {
 
@@ -16,7 +14,7 @@ class Layout extends React.Component {
         <div>
           <Header />
           <main>
-            <div {...this.props} className={cx(s.content, this.props.className)} />
+            <div className='section is-large' {...this.props} />
             <Footer />
           </main>
         </div>
