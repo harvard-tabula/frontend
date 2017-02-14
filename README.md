@@ -1,31 +1,18 @@
-# React Static Boilerplate
+# Tabula: SEAS course-recommendation engine
 
-> [**React Static Boilerplate**](https://github.com/kriasoft/react-static-boilerplate) (RSB) is an
-> opinionated boilerplate and tooling for creating modern stand-alone web applications (aka
-> [SPA](https://en.wikipedia.org/wiki/Single-page_application)s) for a serverless architecture. RSB
-> significantly reduces cost by eliminating the need for servers such as EC2 instances because the
-> entire site can be hosted directly from CDN ([Firebase](https://www.firebase.com/), [GitHub
-> Pages](https://pages.github.com/), [Amazon S3](http://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html),
-> or other similar cloud storage). Sites built with RSB cab be fully functional with REST API or
-> GraphQL calls to micro-services such as [Amazon Lambda](https://aws.amazon.com/lambda/),
-> [Azure Functions](https://azure.microsoft.com/services/functions/), or dynamic Docker endpoints
-> hosted on [DigitalOcean](https://www.digitalocean.com/?refcode=eef302dbae9f&utm_source=github&utm_medium=oss_sponsorships&utm_campaign=opencollective).
-> RSB demonstrates how to use component-based UI development approach with best of breed
+> [**React Static Boilerplate**](https:www.tabula.life) is built upon [**React Static Boilerplate**](https://github.com/kriasoft/react-static-boilerplate), 
+> a template which demonstrates how to use component-based UI development approach with best of breed
 > technologies including [React](http://facebook.github.io/react/), [Redux](http://redux.js.org/),
 > [Babel](http://babeljs.io/), [Webpack](https://webpack.github.io/), [Browsersync](https://browsersync.io/),
 > [React Hot Loader](http://gaearon.github.io/react-hot-loader/) and more.
 
-### Features
+### Getting up to speed
 
-&nbsp; &nbsp; ✓ Modern JavaScript syntax ([ES2015](http://babeljs.io/docs/learn-es2015/)+) via [Babel](http://babeljs.io/), modern CSS syntax via [PostCSS](https://github.com/postcss/postcss)<br>
-&nbsp; &nbsp; ✓ Component-based UI architecture via [React](http://facebook.github.io/react/), [Webpack](https://webpack.github.io/) and [CSS Modules](https://github.com/css-modules/css-modules)<br>
-&nbsp; &nbsp; ✓ Application state management /w time-travel debugging via [Redux](http://redux.js.org/) (see [`main.js`](main.js), [`core/store.js`](core/store.js))<br>
-&nbsp; &nbsp; ✓ Routing and navigation via [`path-to-regexp`](https://github.com/pillarjs/path-to-regexp) and [`history`](https://github.com/mjackson/history) (see [`main.js`](main.js), [`core/router.js`](core/router.js), [`utils/routes-loader.js`](utils/routes-loader.js))<br>
-&nbsp; &nbsp; ✓ [Code-splitting](https://github.com/webpack/docs/wiki/code-splitting) and async chunk loading via [Webpack](https://webpack.github.io/) and [ES6 System.import()](http://www.2ality.com/2014/09/es6-modules-final.html)<br>
-&nbsp; &nbsp; ✓ Hot Module Replacement ([HMR](https://webpack.github.io/docs/hot-module-replacement.html)) /w [React Hot Loader](http://gaearon.github.io/react-hot-loader/)<br>
-&nbsp; &nbsp; ✓ Cross-device testing with [Browsersync](https://browsersync.io/) (see [`run.js#start`](run.js))<br>
-&nbsp; &nbsp; ✓ **24/7** community support on [Gitter](https://gitter.im/kriasoft/react-static-boilerplate); customization requests on [Codementor](https://www.codementor.io/koistya)<br>
+We highly recommend reading 
 
+* https://medium.freecodecamp.com/you-might-not-need-react-router-38673620f3d#.i818ofeqo and https://github.com/kriasoft/react-static-boilerplate/blob/master/docs/routing-and-navigation.md to get up to speed on routing
+* http://bulma.io/documentation/overview/start/ to get a feel for what the CSS framework we're using offers
+* https://blog.cloudflare.com/secure-and-fast-github-pages-with-cloudflare/ to understand how we're utilizing Cloudflare to get free SSL hosting with a custom domain
 
 ### Directory Layout
 
@@ -90,7 +77,7 @@ $ npm run test                  # Run unit tests. Or, `npm run test:watch`
 ### How to Deploy
 
 ```shell
-$ node run publish              # Build and publish the website to Firebase, same as `npm run publish`
+$ node run publish              # Build and publish the website to your gh-pages branch, same as `npm run publish`
 ```
 
 If you need just to build the project without publishing it, run:

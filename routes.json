@@ -21,7 +21,7 @@
     "page": "./pages/home"
   },
   {
-    "path": "/privacy/",
+    "path": "/privacy",
     "page": "./pages/privacy"
   }
 ]
