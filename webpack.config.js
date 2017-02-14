@@ -75,10 +75,6 @@ const config = {
   module: {
     loaders: [
       {
-        test: /\.sass$/,
-        loaders: ['sass-loader']
-      },
-      {
         test: /\.jsx?$/,
         include: [
           path.resolve(__dirname, './components'),

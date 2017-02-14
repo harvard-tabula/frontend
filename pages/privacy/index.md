@@ -1,8 +1,6 @@
----
-title: Privacy
----
+# Privacy
 
-#### Tabula exists to improve the college experience of SEAS students at Harvard. We will never sell, share or otherwise transmit your data to third parties.
+> Tabula exists to improve the college experience of SEAS students at Harvard. We will never sell, share or otherwise transmit your data to third parties.
 
 ## What we collect
 The only data we require is your `@college` email address. Everything else you choose to give us is optional, but will obviously improve your experience.

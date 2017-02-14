@@ -13,6 +13,8 @@ We highly recommend reading
 * https://medium.freecodecamp.com/you-might-not-need-react-router-38673620f3d#.i818ofeqo and https://github.com/kriasoft/react-static-boilerplate/blob/master/docs/routing-and-navigation.md to get up to speed on routing
 * http://bulma.io/documentation/overview/start/ to get a feel for what the CSS framework we're using offers
 * https://blog.cloudflare.com/secure-and-fast-github-pages-with-cloudflare/ to understand how we're utilizing Cloudflare to get free SSL hosting with a custom domain
+* Following Dan Abramov's advice and learning React itself, then npm, JS bundlers, ES6, routing, flux in order.
+* Reading the Webpack documentation https://webpack.js.org/concepts/ if you're unfamiliar with it. 
 
 ### Directory Layout
 
