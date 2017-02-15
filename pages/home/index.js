@@ -10,7 +10,7 @@ class HomePage extends React.Component {
           <div className='heading has-text-centered'>
             <h1 className='title'>The start of something beautiful</h1>
           </div>
-         </div>
+        </div>
       </Layout>
     );
   }
