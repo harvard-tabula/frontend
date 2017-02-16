@@ -6,7 +6,7 @@ import { title, html } from './index.md';
 class AboutPage extends React.Component {
 
   componentDidMount() {
-    document.title = title;
+    document.title = 'Privacy';
   }
 
   render() {
