@@ -1,9 +1,7 @@
 {
-  "name": "Tabula",
-  "version": "0.0.1",
-  "private": false,
-  "repository": "https://github.com/josephwandile/tabula",
-  "license": "MIT",
+  "name": "frontend",
+  "version": "0.0.0",
+  "description": "Course recommendation for SEAS",
   "engines": {
     "node": ">=6",
     "npm": ">=3.8"
@@ -160,5 +158,14 @@
     "publish": "node run publish",
     "publish:debug": "node run publish --debug",
     "start": "node run"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josephwandile/tabula.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/josephwandile/tabula/issues"
+  },
+  "homepage": "https://github.com/josephwandile/tabula#readme"
 }
