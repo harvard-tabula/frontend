@@ -3,7 +3,7 @@ import Layout from '../../components/Layout';
 import s from './styles.css';
 import { title, html } from './index.md';
 
-class AboutPage extends React.Component {
+class PrivacyPage extends React.Component {
 
   componentDidMount() {
     document.title = 'Privacy';
@@ -23,4 +23,4 @@ class AboutPage extends React.Component {
 
 }
 
-export default AboutPage;
+export default PrivacyPage;

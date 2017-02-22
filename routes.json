@@ -21,5 +21,9 @@
   {
     "path": "/privacy/",
     "page": "./pages/privacy"
+  },
+  {
+    "path": "/user/",
+    "page": "./pages/user"
   }
 ]
