@@ -1,0 +1,6 @@
+{
+  "name": "ClassComponent",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./ClassComponent.js"
+}
