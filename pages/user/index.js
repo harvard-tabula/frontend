@@ -21,14 +21,19 @@ class UserPage extends React.Component {
   }
 
   render() {
-    var interests = ["Coding", "Algorithms", "Data Structures", "Machine Learning", "Artifical Intelligence", "Computer Vision", "Natural Language Processing", "Robotics", "Computer Security", "Computer Architecture", "Programming Languages", "Computational Biology"];
-    var interestItems = interests.map((interest) =>
-      <SuccessTag item={interest} />
+    var academicInterests = ["Coding", "Algorithms", "Data Structures", "Machine Learning & Artifical Intelligence", "Computer Graphics", "Robotics", "Computer Security", "Computer Architecture", "Programming Languages", "Computational Biology"];
+    var academicInterestItems = academicInterests.map((academcicInterest) =>
+      <SuccessTag item={academcicInterest} />
     );
 
-    var experiences = ["Code a website", "Wrote Mathematical Proof", "Code a for loop", "Coded an algorithm"];
-    var experienceItems = experiences.map((experience) =>
-      <SuccessTag item={experience} />
+    var professionalInterests = ["Software Engineer", "Project/Product Manager", "Design", "Backend", "Frontend", "Security", "Mobile", "Hardware", "Databases", "Networks", "Finance"];
+    var professionalInterestItems = professionalInterests.map((professionalInterest) =>
+      <SuccessTag item={professionalInterest} />
+    );
+
+    var milestones = ["Code a website", "Wrote Mathematical Proof", "Code a for loop", "Coded an algorithm"];
+    var milestoneItems = milestones.map((milestone) =>
+      <SuccessTag item={milestone} />
     );
 
     var languages = ["Python", "C", "C++", "R", "Haskell", "JAVA", "Javascript", "CSS"];
@@ -65,11 +70,23 @@ class UserPage extends React.Component {
               <div className="column">
                 <label className="label">Name</label>
                   <p className="control">
-                    <input className="input" type="text" placeholder="Rob Bowden"></input>
+                    <input className="input" type="text" placeholder="ie. Rob Bowden"></input>
                   </p>
                 <label className="label">Email</label>
                   <p className="control">
-                    <input className="input" type="email" placeholder="robbowden@college.harvard.edu"></input>
+                    <input className="input" type="email" placeholder="ie. robbowden@college.harvard.edu"></input>
+                  </p>
+                <label className="label">Concentration</label>
+                  <p className="control">
+                    <input className="input" type="email" placeholder="ie. Computer Science"></input>
+                  </p>
+                <label className="label">Years Coding</label>
+                  <p className="control">
+                    <input className="input" type="email" placeholder="ie. 2"></input>
+                  </p>
+                <label className="label">Graduation Year</label>
+                  <p className="control">
+                    <input className="input" type="email" placeholder="ie. 2018"></input>
                   </p>
               </div>
             </div>
@@ -81,17 +98,25 @@ class UserPage extends React.Component {
         <section>
           <div className="container">
             <div className="header">
-              <h2 className="subtitle">Interests</h2>
+              <h2 className="subtitle">Academic Interests</h2>
             </div>
-            {interestItems}
+            {academicInterestItems}
           </div>
         </section>
         <section>
           <div className="container">
             <div className="header">
-              <h2 className="subtitle">Previous Experience</h2>
+              <h2 className="subtitle">Professional Interests</h2>
             </div>
-            {experienceItems}
+            {professionalInterestItems}
+          </div>
+        </section>
+        <section>
+          <div className="container">
+            <div className="header">
+              <h2 className="subtitle">Milestones</h2>
+            </div>
+            {milestoneItems}
           </div>
         </section>
         <section>
@@ -159,6 +184,8 @@ class ClassList extends React.Component {
                 <th>Class name</th>
                 <th>Grade</th>
                 <th>Workload</th>
+                <th>Semester</th>
+                <th>Assoicated Emojis</th>
               </tr>
             </thread>
             <tbody>
@@ -276,6 +303,31 @@ class ClassComponent extends React.Component {
               </select>
             </span>
           </p>
+        </td>
+        <td>
+          <p className="control">
+            <span className="select">
+              <select>
+                <option>Fall 2016</option>
+                <option>Spring 2016</option>
+                <option>Fall 2015</option>
+                <option>Spring 2015</option>
+                <option>Fall 2014</option>
+                <option>Spring 2014</option>
+                <option>Fall 2013</option>
+              </select>
+            </span>
+          </p>
+        </td>
+        <td>
+          <SuccessTag item="😍" />
+          <SuccessTag item="😆" />
+          <SuccessTag item="😫" />
+          <SuccessTag item="😐" />
+          <SuccessTag item="😴" />
+          <SuccessTag item="😓" />
+          <SuccessTag item="😡" />
+          <SuccessTag item="🤕" />
         </td>
       </tr>
     );
