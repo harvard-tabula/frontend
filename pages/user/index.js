@@ -1,12 +1,15 @@
 import React, { PropTypes } from 'react';
 import Layout from '../../components/Layout';
+import SuccessTag from '../../components/SuccessTag';
+import ClassComponent from '../../components/ClassComponent';
+import ClassList from '../../components/ClassList';
 import s from './styles.css';
 
 class UserPage extends React.Component {
   constructor () {
     super();
     this.state = {
-      numChildren: 4
+      numClasses: 4
     };
   }
 
@@ -16,7 +19,7 @@ class UserPage extends React.Component {
 
   onAddClass () {
     this.setState({
-      numChildren: this.state.numChildren + 1
+      numClasses: this.state.numClasses + 1
     });
   }
 
@@ -41,12 +44,10 @@ class UserPage extends React.Component {
       <SuccessTag item={language} />
     );
 
-    const children = []
-    for (var i = 0; i < this.state.numChildren; i+=1) {
-      children.push(<ClassComponent />);
+    const classes = []
+    for (var i = 0; i < this.state.numClasses; i+=1) {
+      classes.push(<ClassComponent />);
     };
-
-    console.log(children);
 
     return (
       <Layout className='section'>
@@ -55,7 +56,6 @@ class UserPage extends React.Component {
             <h1 className='title'>User Profile</h1>
           </div>
         </div>
-
         <section className="section">
           <div className="container">
             <div className="heading">
@@ -92,8 +92,8 @@ class UserPage extends React.Component {
             </div>
           </div>
         </section>
-        <ClassList addChild={this.onAddClass.bind(this)}>
-          {children}
+        <ClassList addClass={this.onAddClass.bind(this)}>
+          {classes}
         </ClassList>
         <section>
           <div className="container">
@@ -128,208 +128,6 @@ class UserPage extends React.Component {
           </div>
         </section>
       </Layout>
-    );
-  }
-}
-
-class SuccessTag extends React.Component {
-  constructor () {
-    super();
-    this.state = {
-      isSuccess: true,
-      buttonClassName:"tag is-medium"
-    };
-  }
-
-  tagClick () {
-    this.setState(prevState => ({
-      isSuccess: !prevState.isSuccess
-    }));
-    const ifSuccess = this.state.isSuccess;
-    var className = (ifSuccess) ? "tag is-medium is-success" : "tag is-medium";
-    this.setState({buttonClassName:className});
-  }
-
-  render() {
-    return (
-      <span className={this.state.buttonClassName} onClick={this.tagClick.bind(this)}>{this.props.item}</span>
-    );
-  }
-}
-
-class ClassList extends React.Component {
-  render () {
-    return (
-      // <section className="section">
-      //   <div className="container">
-      //     <div className="heading">
-      //       <h2 className="subtitle">Classes Taken</h2>
-      //     </div>
-      //     <div id="class-pane">
-      //       {this.props.children}
-      //     </div>
-      //     <a className="button" onClick={this.props.addChild}>Add Class</a>
-      //   </div>
-      // </section>
-
-
-      <section className="section">
-        <div className="container">
-          <div className="heading">
-            <h2 className="subtitle">Classes Taken</h2>
-          </div>
-          <table className="table">
-            <thread>
-              <tr>
-                <th>Class name</th>
-                <th>Grade</th>
-                <th>Workload</th>
-                <th>Semester</th>
-                <th>Assoicated Emojis</th>
-              </tr>
-            </thread>
-            <tbody>
-              <div id="class-pane">
-                {this.props.children}
-              </div>
-            </tbody>
-          </table>
-          <a className="button" onClick={this.props.addChild}>Add Class</a>
-        </div>
-      </section>
-    );
-  }
-}
-
-class ClassComponent extends React.Component {
-  render () {
-    return (
-      // <div className="card">
-      //   <div className="columns">
-      //     <div className="column is-3">
-      //       <label className="label">Class Name</label>
-      //         <p className="control has-icon has-icon-right">
-      //           <input className="input is-success" type="text" placeholder="Text input" value="CS50"></input>
-      //           <span className="icon is-small">
-      //             <i className="fa fa-check"></i>
-      //           </span>
-      //         </p>
-      //     </div>
-      //     <div className="column is-1">
-      //       <label className="label">Grade</label>
-      //         <p className="control">
-      //           <span className="select">
-      //             <select>
-      //               <option>A</option>
-      //               <option>A-</option>
-      //               <option>B+</option>
-      //               <option>B</option>
-      //               <option>B-</option>
-      //               <option>C+</option>
-      //               <option>C</option>
-      //               <option>C-</option>
-      //             </select>
-      //           </span>
-      //         </p>
-      //     </div>
-      //     <div className="column is-2">
-      //       <label className="label">Workload</label>
-      //         <p className="control">
-      //           <span className="select">
-      //             <select>
-      //               <option>1 hour</option>
-      //               <option>2 hours</option>
-      //               <option>3 hours</option>
-      //               <option>4 hours</option>
-      //               <option>5 hours</option>
-      //               <option>6 hours</option>
-      //               <option>7 hours</option>
-      //               <option>8 hours</option>
-      //               <option>9 hours</option>
-      //               <option>10 hours</option>
-      //               <option>11 hours</option>
-      //               <option>12 hours</option>
-      //               <option>13 hours</option>
-      //               <option>14 hours</option>
-      //               <option>15 hours</option>
-      //               <option>15+ hours</option>
-      //             </select>
-      //           </span>
-      //         </p>
-      //     </div>
-      //   </div>
-      // </div>
-
-      <tr>
-        <td>
-          <input className="input" type="text" placeholder="Class ID" value=""></input>
-        </td>
-        <td>
-          <p className="control">
-            <span className="select">
-              <select>
-                <option>A</option>
-                <option>A-</option>
-                <option>B+</option>
-                <option>B</option>
-                <option>B-</option>
-                <option>C+</option>
-                <option>C</option>
-                <option>C-</option>
-              </select>
-            </span>
-          </p>
-        </td>
-        <td>
-          <p className="control">
-            <span className="select">
-              <select>
-                <option>1 hour</option>
-                <option>2 hours</option>
-                <option>3 hours</option>
-                <option>4 hours</option>
-                <option>5 hours</option>
-                <option>6 hours</option>
-                <option>7 hours</option>
-                <option>8 hours</option>
-                <option>9 hours</option>
-                <option>10 hours</option>
-                <option>11 hours</option>
-                <option>12 hours</option>
-                <option>13 hours</option>
-                <option>14 hours</option>
-                <option>15 hours</option>
-                <option>15+ hours</option>
-              </select>
-            </span>
-          </p>
-        </td>
-        <td>
-          <p className="control">
-            <span className="select">
-              <select>
-                <option>Fall 2016</option>
-                <option>Spring 2016</option>
-                <option>Fall 2015</option>
-                <option>Spring 2015</option>
-                <option>Fall 2014</option>
-                <option>Spring 2014</option>
-                <option>Fall 2013</option>
-              </select>
-            </span>
-          </p>
-        </td>
-        <td>
-          <SuccessTag item="😍" />
-          <SuccessTag item="😆" />
-          <SuccessTag item="😫" />
-          <SuccessTag item="😐" />
-          <SuccessTag item="😴" />
-          <SuccessTag item="😓" />
-          <SuccessTag item="😡" />
-          <SuccessTag item="🤕" />
-        </td>
-      </tr>
     );
   }
 }
