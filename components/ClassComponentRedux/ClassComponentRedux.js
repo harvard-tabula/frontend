@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import SuccessTag from '../SuccessTag';
+import SuccessTagRedux from '../SuccessTagRedux/SuccessTagRedux'
 
-const ClassComponentRedux = ({num, onBlurCourseId, onChangeGrade, onChangeWorkload, onChangeSemester,
-                              onClickEmoji1, onClickEmoji2, onClickEmoji3, onClickEmoji4, onClickEmoji5,
-                              onClickEmoji6, onClickEmoji7, onClickEmoji8}) => (
+const ClassComponentRedux = ({num, emojis, onBlurCourseId, onChangeGrade, onChangeWorkload, onChangeSemester,
+                              onClickEmoji}) => (
     <tr>
       <td>
         <input className="input" type="text" placeholder="Class ID" id={"courseId" + num}
@@ -68,21 +68,15 @@ const ClassComponentRedux = ({num, onBlurCourseId, onChangeGrade, onChangeWorklo
         </p>
       </td>
       <td>
-        <SuccessTagRedux  
-            key={0}
-            text={"😍"}
-            className={milestone.className}
-            {...milestone}
-            onClick={() => onTagClick(milestone.id)}
+        {emojis.map(emoji =>
+          <SuccessTagRedux  
+            key={emoji.id}
+            text={emoji.text}
+            className={emoji.className}
+            {...emoji}
+            onClick={() => onClickEmoji(num, emoji.id)}
           />
-        <SuccessTag item="😍" />
-        <SuccessTag item="😆" />
-        <SuccessTag item="😫" />
-        <SuccessTag item="😐" />
-        <SuccessTag item="😴" />
-        <SuccessTag item="😓" />
-        <SuccessTag item="😡" />
-        <SuccessTag item="🤕" />
+        )}
       </td>
     </tr>
 )
