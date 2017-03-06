@@ -25,5 +25,9 @@
   {
     "path": "/user/",
     "page": "./pages/user"
+  },
+  {
+    "path": "/userRedux/",
+    "page": "./pages/userRedux"
   }
 ]
