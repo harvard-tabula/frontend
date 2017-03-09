@@ -1,5 +1,10 @@
 let nextClassId = 0
 
+export const ENTER_NAME = 'ENTER_NAME'
+export const ENTER_EMAIL = 'ENTER_EMAIL'
+export const ENTER_CONCENTRATION = 'ENTER_CONCENTRATION'
+export const ENTER_CODINGYEARS = 'ENTER_CODINGYEARS'
+export const ENTER_GRADUATION = 'ENTER_GRADUATION'
 export const ADD_CLASS = 'ADD_CLASS'
 export const TOGGLE_EMOJI = 'TOGGLE_EMOJI'
 export const ENTER_COURSEID = 'ENTER_COURSEID'
@@ -11,6 +16,40 @@ export const TOGGLE_PROFESSIONALINTEREST = 'TOGGLE_PROFESSIONALINTEREST'
 export const TOGGLE_MILESTONE = 'TOGGLE_MILESTONE'
 export const TOGGLE_LANGUAGE = 'TOGGLE_LANGUAGE'
 
+export const enterName = (text) => {
+	return {
+		type: ENTER_NAME,
+		payload: {name: text}
+	}
+}
+
+export const enterEmail = (text) => {
+	return {
+		type: ENTER_EMAIL,
+		payload: {email: text}
+	}
+}
+
+export const enterConcentration = (text) => {
+	return {
+		type: ENTER_CONCENTRATION,
+		payload: {concentration: text}
+	}
+}
+
+export const enterCodingYears = (text) => {
+	return {
+		type: ENTER_CODINGYEARS,
+		payload: {codingYears: text}
+	}
+}
+
+export const enterGraduation = (text) => {
+	return {
+		type: ENTER_GRADUATION,
+		payload: {graduation: text}
+	}
+}
 
 export const addClass = () => {
 	return {
