@@ -1,8 +1,4 @@
-export const ENTER_NAME = 'ENTER_NAME'
-export const ENTER_EMAIL = 'ENTER_EMAIL'
-export const ENTER_CONCENTRATION = 'ENTER_CONCENTRATION'
-export const ENTER_CODINGYEARS = 'ENTER_CODINGYEARS'
-export const ENTER_GRADUATION = 'ENTER_GRADUATION'
+import {ENTER_NAME, ENTER_EMAIL, ENTER_CONCENTRATION, ENTER_CODINGYEARS, ENTER_GRADUATION} from '../../actions/user/index'
 
 const userInformation = (state={}, action) => {
 	switch (action.type){

@@ -1,11 +1,7 @@
 import update from 'react-addons-update';
 
-export const ADD_CLASS = 'ADD_CLASS'
-export const ENTER_COURSEID = 'ENTER_COURSEID'
-export const ENTER_GRADE = 'ENTER_GRADE'
-export const ENTER_WORKLOAD = 'ENTER_WORKLOAD'
-export const ENTER_SEMESTER = 'ENTER_SEMESTER'
-export const TOGGLE_EMOJI = 'TOGGLE_EMOJI'
+import {ADD_CLASS, ENTER_COURSEID, ENTER_GRADE, ENTER_WORKLOAD, ENTER_SEMESTER, 
+	TOGGLE_EMOJI, REQUEST_CLASSES, RECEIVE_CLASSES} from '../../actions/user/index'
 
 const classElement = (state={}, action) => {
 	switch (action.type){
@@ -69,37 +65,86 @@ const classElement = (state={}, action) => {
 			return state
 	}
 }
+// // Original redux without api
+// const classes = (state = [], action) => {
+// 	switch (action.type) {
+// 		case ADD_CLASS:
+// 			return [
+// 				...state,
+// 				classElement(undefined, action)
+// 			]
+// 		case ENTER_COURSEID:
+// 			return state.map(t =>
+// 				classElement(t, action)
+// 			)
+// 		case ENTER_GRADE:
+// 			return state.map(t =>
+// 				classElement(t, action)
+// 			)
+// 		case ENTER_WORKLOAD:
+// 			return state.map(t =>
+// 				classElement(t, action)
+// 			)
+// 		case ENTER_SEMESTER:
+// 			return state.map(t =>
+// 				classElement(t, action)
+// 			)
+// 		case TOGGLE_EMOJI:
+// 			return state.map(t =>
+// 				classElement(t, action)
+// 			)
+// 		default:
+// 			return state
+// 	}
+// }
 
-const classes = (state = [], action) => {
-	switch (action.type) {
+function classes(state = {
+	isFetching: false,
+	didInvalidate: false,
+	items: []
+}, action) {
+	switch (action.type){
+		case REQUEST_CLASSES:
+			return Object.assign({}, state, {
+				isFetching: true,
+				didInvalidate: false
+			})
+		case RECEIVE_CLASSES:
+			return Object.assign({}, state,{
+				isFetching: false,
+				didInvalidate: false,
+				items: action.payload.classes,
+				lastUpdated: action.payload.receivedAt
+			})
 		case ADD_CLASS:
 			return [
-				...state,
+				...items,
 				classElement(undefined, action)
 			]
 		case ENTER_COURSEID:
-			return state.map(t =>
+			return items.map(t =>
 				classElement(t, action)
 			)
 		case ENTER_GRADE:
-			return state.map(t =>
+			return items.map(t =>
 				classElement(t, action)
 			)
 		case ENTER_WORKLOAD:
-			return state.map(t =>
+			return items.map(t =>
 				classElement(t, action)
 			)
 		case ENTER_SEMESTER:
-			return state.map(t =>
+			return items.map(t =>
 				classElement(t, action)
 			)
 		case TOGGLE_EMOJI:
-			return state.map(t =>
+			return items.map(t =>
 				classElement(t, action)
 			)
 		default:
-			return state
+			return items
 	}
 }
+
 
 export default classes

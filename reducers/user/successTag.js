@@ -1,4 +1,6 @@
-export const TOGGLE_TAG = 'TOGGLE_TAG'
+import {TOGGLE_TAG} from '../../actions/user/index'
+
+
 
 const successTag = (state={}, action) => {
 	switch (action.type){

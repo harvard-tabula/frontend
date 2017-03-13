@@ -1,5 +1,4 @@
-export const ADD_PROFESSIONALINTEREST = 'ADD_PROFESSIONALINTEREST'
-export const TOGGLE_PROFESSIONALINTEREST = 'TOGGLE_PROFESSIONALINTEREST'
+import {ADD_PROFESSIONALINTEREST, TOGGLE_PROFESSIONALINTEREST} from '../../actions/user/index'
 
 const professionalInterest = (state={}, action) => {
 	switch (action.type){

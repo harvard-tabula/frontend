@@ -1,5 +1,4 @@
-export const ADD_MILESTONE = 'ADD_MILESTONE'
-export const TOGGLE_MILESTONE = 'TOGGLE_MILESTONE'
+import {ADD_MILESTONE, TOGGLE_MILESTONE} from '../../actions/user/index'
 
 const milestone = (state={}, action) => {
 	switch (action.type){

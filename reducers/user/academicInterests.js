@@ -1,5 +1,4 @@
-export const ADD_ACADEMICINTEREST = 'ADD_ACADEMICINTEREST'
-export const TOGGLE_ACADEMICINTEREST = 'TOGGLE_ACADEMICINTEREST'
+import {ADD_ACADEMICINTEREST, TOGGLE_ACADEMICINTEREST} from '../../actions/user/index'
 
 const academicInterest = (state={}, action) => {
 	switch (action.type){
