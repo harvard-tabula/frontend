@@ -8,46 +8,84 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import { createStore } from 'redux';
+import thunkMiddleware from 'redux-thunk'
+import createLogger from 'redux-logger'
+import { createStore, applyMiddleware } from 'redux';
 import userApp from '../reducers/user/' 
+import { fetchProfile } from '../actions/user'
 
 const initialState = { 
-  	academicInterests: [{id:0, text:'Coding', success: false, className:'tag is-medium'}, 
-  				{id:1, text:'Algorithms', success: false, className:'tag is-medium'},
-  				{id:2, text:'Data Structures', success: false, className:'tag is-medium'},
-  				{id:3, text:'Machine Learning & Artifical Intelligence', success: false, className:'tag is-medium'},
-  				{id:4, text:'Computer Graphics', success: false, className:'tag is-medium'},
-  				{id:5, text:'Robotics', success: false, className:'tag is-medium'},
-  				{id:6, text:'Computer Security', success: false, className:'tag is-medium'},
-  				{id:7, text:'Computer Architecture', success: false, className:'tag is-medium'},
-  				{id:8, text:'Programming Languages', success: false, className:'tag is-medium'},
-  				{id:9, text:'Computational Biology', success: false, className:'tag is-medium'}],
-  	professionalInterests: [{id:0, text:'Software Engineer', success: false, className:'tag is-medium'}, 
-  				{id:1, text:'Project/Product Manager', success: false, className:'tag is-medium'},
-  				{id:2, text:'Design', success: false, className:'tag is-medium'},
-  				{id:3, text:'Backend', success: false, className:'tag is-medium'},
-  				{id:4, text:'Frontend', success: false, className:'tag is-medium'},
-  				{id:5, text:'Security', success: false, className:'tag is-medium'},
-  				{id:6, text:'Mobile', success: false, className:'tag is-medium'},
-  				{id:7, text:'Hardware', success: false, className:'tag is-medium'},
-  				{id:8, text:'Databases', success: false, className:'tag is-medium'},
-  				{id:9, text:'Networks', success: false, className:'tag is-medium'},
-  				{id:10, text:'Finance', success: false, className:'tag is-medium'}],
-  	milestones: [{id:0, text:'Code a website', success: false, className:'tag is-medium'}, 
-  				{id:1, text:'Wrote Mathematical Proof', success: false, className:'tag is-medium'},
-  				{id:2, text:'Code a for loop', success: false, className:'tag is-medium'},
-  				{id:3, text:'Coded an algorithm', success: false, className:'tag is-medium'}],
-  	languages: [{id:0, text:'Python', success: false, className:'tag is-medium'}, 
-  				{id:1, text:'C', success: false, className:'tag is-medium'},
-  				{id:2, text:'C++', success: false, className:'tag is-medium'},
-  				{id:3, text:'R', success: false, className:'tag is-medium'},
-  				{id:4, text:'Haskell', success: false, className:'tag is-medium'},
-  				{id:5, text:'JAVA', success: false, className:'tag is-medium'},
-  				{id:6, text:'Javascript', success: false, className:'tag is-medium'},
-  				{id:7, text:'CSS', success: false, className:'tag is-medium'}]
+  profile: {
+    "avatar": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
+    "concentration": null,
+    "email": "jessicawang@college.harvard.edu",
+    "ethnicity": null,
+    "gender": null,
+    "name": "Jessica Wang",
+    "tags": [],
+    "year": null,
+    "years_coding": null
+  },
+  tags: [
+    {id:0, text:'Coding', success: false, category: "academic"}, 
+    {id:1, text:'Algorithms', success: false, category: "academic"},
+    {id:2, text:'Data Structures', success: false, category: "academic"},
+    {id:3, text:'Machine Learning & Artifical Intelligence', success: false, category: "academic"},
+    {id:4, text:'Computer Graphics', success: false, category: "academic"},
+    {id:5, text:'Robotics', success: false, category: "academic"},
+    {id:6, text:'Computer Security', success: false, category: "academic"},
+    {id:7, text:'Computer Architecture', success: false, category: "academic"},
+    {id:8, text:'Programming Languages', success: false, category: "academic"},
+    {id:9, text:'Computational Biology', success: false, category: "academic"},
+    {id:10, text:'Software Engineer', success: false, category: "professional"}, 
+    {id:11, text:'Project/Product Manager', success: false, category: "professional"},
+    {id:12, text:'Design', success: false, category: "professional"},
+    {id:13, text:'Backend', success: false, category: "professional"},
+    {id:14, text:'Frontend', success: false, category: "professional"},
+    {id:15, text:'Security', success: false, category: "professional"},
+    {id:16, text:'Mobile', success: false, category: "professional"},
+    {id:17, text:'Hardware', success: false, category: "professional"},
+    {id:18, text:'Databases', success: false, category: "professional"},
+    {id:19, text:'Networks', success: false, category: "professional"},
+    {id:20, text:'Finance', success: false, category: "professional"},
+    {id:24, text:'Code a website', success: false, category: "milestone"}, 
+    {id:21, text:'Wrote Mathematical Proof', success: false, category: "milestone"},
+    {id:22, text:'Code a for loop', success: false, category: "milestone"},
+    {id:23, text:'Coded an algorithm', success: false, category: "milestone"},
+    {id:25, text:'Python', success: false, category: "language"}, 
+    {id:31, text:'C', success: false, category: "language"},
+    {id:32, text:'C++', success: false, category: "language"},
+    {id:33, text:'R', success: false, category: "language"},
+    {id:34, text:'Haskell', success: false, category: "language"},
+    {id:35, text:'JAVA', success: false, category: "language"},
+    {id:36, text:'Javascript', success: false, category: "language"},
+    {id:37, text:'CSS', success: false, category: "language"}
+  ],
+  tagCategories: [
+    {id:1, title: "Academic Interests", categoryTitle: "academic"},
+    {id:2, title: "Professional Interests", categoryTitle: "professional"},
+    {id:3, title: "Milestones", categoryTitle: "milestone"},
+    {id:4, title: "Languages", categoryTitle: "language"}
+  ]
 };
 
-const store = createStore(userApp, initialState);
+const loggerMiddleware = createLogger();
+
+const store = createStore(
+  userApp,
+  applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware
+  )
+)
+
+store.dispatch(fetchProfile()).then(() =>
+  console.log(store.getState()),
+  console.log("fetching")
+)
+
+// const store = createStore (userApp, initialState)
+// console.log(store.getState())
 
 store.subscribe(() => {
   console.log(store.getState());

@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import ClassComponentRedux from '../ClassComponentRedux/ClassComponentRedux'
 
-const ClassListRedux = ({classes, onBlurCourseId, onChangeGrade, onChangeWorkload, onChangeSemester, onClickEmoji}) => (
+const ClassListRedux = ({classes, grades, workloads, semesters,
+  onBlurCourseId, onChangeGrade, onChangeWorkload, onChangeSemester, onClickEmoji}) => (
   <section className="section">
         <div className="container">
           <div className="heading">
@@ -21,6 +22,10 @@ const ClassListRedux = ({classes, onBlurCourseId, onChangeGrade, onChangeWorkloa
               <div id="class-pane">
                 {classes.map(classElement =>
                   <ClassComponentRedux  
+                    key={classElement.id}
+                    grades={grades}
+                    workloads={workloads}
+                    semesters={semesters}
                     key={classElement.id}
                     num={classElement.id}
                     emojis={classElement.emojis}

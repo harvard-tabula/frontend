@@ -1,7 +1,5 @@
 import {TOGGLE_TAG} from '../../actions/user/index'
 
-
-
 const successTag = (state={}, action) => {
 	switch (action.type){
 		case TOGGLE_TAG:

@@ -65,86 +65,86 @@ const classElement = (state={}, action) => {
 			return state
 	}
 }
-// // Original redux without api
-// const classes = (state = [], action) => {
-// 	switch (action.type) {
+// Original redux without api
+const classes = (state = [], action) => {
+	switch (action.type) {
+		case ADD_CLASS:
+			return [
+				...state,
+				classElement(undefined, action)
+			]
+		case ENTER_COURSEID:
+			return state.map(t =>
+				classElement(t, action)
+			)
+		case ENTER_GRADE:
+			return state.map(t =>
+				classElement(t, action)
+			)
+		case ENTER_WORKLOAD:
+			return state.map(t =>
+				classElement(t, action)
+			)
+		case ENTER_SEMESTER:
+			return state.map(t =>
+				classElement(t, action)
+			)
+		case TOGGLE_EMOJI:
+			return state.map(t =>
+				classElement(t, action)
+			)
+		default:
+			return state
+	}
+}
+
+// function classes(state = {
+// 	isFetching: false,
+// 	didInvalidate: false,
+// 	items: []
+// }, action) {
+// 	switch (action.type){
+// 		case REQUEST_CLASSES:
+// 			return Object.assign({}, state, {
+// 				isFetching: true,
+// 				didInvalidate: false
+// 			})
+// 		case RECEIVE_CLASSES:
+// 			return Object.assign({}, state,{
+// 				isFetching: false,
+// 				didInvalidate: false,
+// 				items: action.payload.classes,
+// 				lastUpdated: action.payload.receivedAt
+// 			})
 // 		case ADD_CLASS:
 // 			return [
-// 				...state,
+// 				...items,
 // 				classElement(undefined, action)
 // 			]
 // 		case ENTER_COURSEID:
-// 			return state.map(t =>
+// 			return items.map(t =>
 // 				classElement(t, action)
 // 			)
 // 		case ENTER_GRADE:
-// 			return state.map(t =>
+// 			return items.map(t =>
 // 				classElement(t, action)
 // 			)
 // 		case ENTER_WORKLOAD:
-// 			return state.map(t =>
+// 			return items.map(t =>
 // 				classElement(t, action)
 // 			)
 // 		case ENTER_SEMESTER:
-// 			return state.map(t =>
+// 			return items.map(t =>
 // 				classElement(t, action)
 // 			)
 // 		case TOGGLE_EMOJI:
-// 			return state.map(t =>
+// 			return items.map(t =>
 // 				classElement(t, action)
 // 			)
 // 		default:
 // 			return state
 // 	}
 // }
-
-function classes(state = {
-	isFetching: false,
-	didInvalidate: false,
-	items: []
-}, action) {
-	switch (action.type){
-		case REQUEST_CLASSES:
-			return Object.assign({}, state, {
-				isFetching: true,
-				didInvalidate: false
-			})
-		case RECEIVE_CLASSES:
-			return Object.assign({}, state,{
-				isFetching: false,
-				didInvalidate: false,
-				items: action.payload.classes,
-				lastUpdated: action.payload.receivedAt
-			})
-		case ADD_CLASS:
-			return [
-				...items,
-				classElement(undefined, action)
-			]
-		case ENTER_COURSEID:
-			return items.map(t =>
-				classElement(t, action)
-			)
-		case ENTER_GRADE:
-			return items.map(t =>
-				classElement(t, action)
-			)
-		case ENTER_WORKLOAD:
-			return items.map(t =>
-				classElement(t, action)
-			)
-		case ENTER_SEMESTER:
-			return items.map(t =>
-				classElement(t, action)
-			)
-		case TOGGLE_EMOJI:
-			return items.map(t =>
-				classElement(t, action)
-			)
-		default:
-			return items
-	}
-}
 
 
 export default classes

@@ -5,7 +5,10 @@ import { enterCourseID, enterGrade, enterWorkload, enterSemester,
 
 const mapStateToProps = (state) => {
 	return {
-		classes: state.classes
+		classes: state.classes,
+		grades: ["A", "A-", "B+", "B", "B-", "C+", "C", "C-"],
+		workloads: ["1 hour", "2 hour", "3 hour", "4 hour", "5 hour", "6 hour", "7 hour", "8 hour", "9 hour"],
+		semesters: ["Spring 2017", "Fall 2016", "Spring 2016"]
 	}
 }
 

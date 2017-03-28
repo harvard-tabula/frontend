@@ -12,7 +12,7 @@ const Milestones = ({milestones, onTagClick}) => (
           <SuccessTagRedux  
             key={milestone.id}
             text={milestone.text}
-            className={milestone.className}
+            success={milestone.success}
             {...milestone}
             onClick={() => onTagClick(milestone.id)}
           />

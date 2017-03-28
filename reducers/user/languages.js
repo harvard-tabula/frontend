@@ -7,16 +7,14 @@ const language = (state={}, action) => {
 			return {
 				id: 'language' + action.payload.id,
 				text: '',
-				success: false,
-				className: 'tag is-medium'
+				success: false
 			}
 		case TOGGLE_LANGUAGE:
 			if (state.id != action.payload.id) {
 				return state
 			}
 			return Object.assign({}, state, {
-				success: !state.success,
-				className: ((state.success) ? "tag is-medium" : "tag is-medium is-success")
+				success: !state.success
 			})
 		default:
 			return state

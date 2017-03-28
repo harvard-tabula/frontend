@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 
-const ClassListRedux = ({userInformation, onBlurName, onBlurEmail, onChangeConcentration, onChangeCodingYears, onChangeGraduation}) => (
+const ClassListRedux = ({userInformation, concentrations, years_coding, year, ethnicities, genders,
+onBlurName, onBlurEmail, onChangeConcentration, 
+onChangeYearsCoding, onChangeGraduation, onChangeGender, onChangeEthnicity}) => (
   <section className="section">
     <div className="container">
       <div className="heading">
@@ -16,26 +18,37 @@ const ClassListRedux = ({userInformation, onBlurName, onBlurEmail, onChangeConce
           <label className="label">Name</label>
             <p className="control">
               <input className="input" type="text" placeholder="ie. Rob Bowden" id="name"
-              onBlur={() => onBlurName(document.getElementById("name").value)}></input>
+              onBlur={(e) => onBlurName(e.target.value)}></input>
             </p>
           <label className="label">Email</label>
             <p className="control">
               <input className="input" type="text" placeholder="ie. robbowden@college.harvard.edu" id="email"
-              onBlur={() => onBlurEmail(document.getElementById("email").value)}></input>
+              onBlur={(e) => onBlurEmail(e.target.value)}></input>
+            </p>
+          <label className="label">Gender</label>
+            <p className="control">
+              <span className="select">
+                <select id="gender"
+                onChange={(e) => onChangeGender(e.target.value)}>
+                  {genders.map(gender => <option value={gender}>{gender}</option>)}
+                </select>
+              </span>
+            </p>
+          <label className="label">Ethnicity</label>
+            <p className="control">
+              <span className="select">
+                <select id="ethniticy"
+                onChange={(e) => onChangeGender(e.target.value)}>
+                  {ethnicities.map(ethnicity => <option value={ethnicity}>{ethnicity}</option>)}
+                </select>
+              </span>
             </p>
           <label className="label">Concentration</label>
             <p className="control">
               <span className="select">
                 <select id="concentration"
-                onChange={() => onChangeConcentration(document.getElementById("concentration").value)}>
-                  <option value="Applied Mathematics">Applied Mathematics</option>
-                  <option value="Bioengineering">Bioengineering</option>
-                  <option value="Computer Science">Computer Science</option>
-                  <option value="Electrical Engineering">Electrical Engineering</option>
-                  <option value="Environmental Science and Engineering">Environmental Science and Engineering</option>
-                  <option value="Mechanical Engineering">Mechanical Engineering</option>
-                  <option value="Mathematics">Mathematics</option>
-                  <option value="Statistics">Statistics</option>
+                onChange={(e) => onChangeConcentration(e.target.value)}>
+                  {concentrations.map(concentration => <option value={concentration}>{concentration}</option>)}
                 </select>
               </span>
             </p>
@@ -43,22 +56,19 @@ const ClassListRedux = ({userInformation, onBlurName, onBlurEmail, onChangeConce
             <p className="control">
               <span className="select">
                 <select id="codingYears"
-                onChange={() => onChangeCodingYears(document.getElementById("codingYears").value)}>
-                  <option value="0">0</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8+-</option>
+                onChange={(e) => onChangeCodingYears(e.target.value)}>
+                  {years_coding.map(years_coding_element => <option value={years_coding_element}>{years_coding_element}</option>)}
                 </select>
               </span>
             </p>
           <label className="label">Graduation Year</label>
             <p className="control">
-              <input className="input" type="email" placeholder="ie. 2018"></input>
+              <span className="select">
+                <select id="year"
+                onChange={(e) => onChangeYear(e.target.value)}>
+                  {year.map(years_element => <option value={years_element}>{years_element}</option>)}
+                </select>
+              </span>
             </p>
         </div>
       </div>
