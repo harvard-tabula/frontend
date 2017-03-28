@@ -1,6 +1,6 @@
 import update from 'react-addons-update';
 
-import {ADD_CLASS, ENTER_COURSEID, ENTER_GRADE, ENTER_WORKLOAD, ENTER_SEMESTER, 
+import {ADD_CLASS, REMOVE_CLASS, ENTER_COURSEID, ENTER_GRADE, ENTER_WORKLOAD, ENTER_SEMESTER, 
 	TOGGLE_EMOJI, REQUEST_CLASSES, RECEIVE_CLASSES} from '../../actions/user/index'
 
 const classElement = (state={}, action) => {
@@ -73,6 +73,8 @@ const classes = (state = [], action) => {
 				...state,
 				classElement(undefined, action)
 			]
+		case REMOVE_CLASS:
+			return state.filter((item) => item.id !== action.payload.id)
 		case ENTER_COURSEID:
 			return state.map(t =>
 				classElement(t, action)

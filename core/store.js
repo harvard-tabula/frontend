@@ -71,21 +71,20 @@ const initialState = {
 
 const loggerMiddleware = createLogger();
 
-const store = createStore(
-  userApp,
-  applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware
-  )
-)
+// const store = createStore(
+//   userApp,
+//   applyMiddleware(
+//     thunkMiddleware,
+//     loggerMiddleware
+//   )
+// )
 
-store.dispatch(fetchProfile()).then(() =>
-  console.log(store.getState()),
-  console.log("fetching")
-)
+// store.dispatch(fetchProfile()).then(() =>
+//   console.log(store.getState())
+// )
 
-// const store = createStore (userApp, initialState)
-// console.log(store.getState())
+const store = createStore (userApp, initialState)
+console.log(store.getState())
 
 store.subscribe(() => {
   console.log(store.getState());

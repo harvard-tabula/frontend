@@ -8,6 +8,7 @@ export const ENTER_YEAR = 'ENTER_YEAR'
 export const ENTER_GENDER = 'ENTER_GENDER'
 export const ENTER_ETHNICITY = 'ENTER_ETHNICITY'
 export const ADD_CLASS = 'ADD_CLASS'
+export const REMOVE_CLASS = 'REMOVE_CLASS'
 export const TOGGLE_EMOJI = 'TOGGLE_EMOJI'
 export const ENTER_COURSEID = 'ENTER_COURSEID'
 export const ENTER_GRADE = 'ENTER_GRADE'
@@ -83,6 +84,14 @@ export function addClass () {
 		payload: {id: nextClassId++}
 	}
 }
+
+export function removeClass (id) {
+	return {
+		type: REMOVE_CLASS,
+		payload: {id: id.num}
+	}
+}
+
 
 export function enterCourseID (id, text) {
 	return {
@@ -218,20 +227,20 @@ function receiveProfile(json) {
 
 export function fetchProfile() {
 	let header = new Headers({
-		'Access-Control-Allow-Origin':'*',
-		'Content-Type': 'multipart/form-data' 
+		'Access-Control-Allow-Origin':'*'
 	})
 
 	let sentData ={
 		method: 'GET',
 		mode: 'cors',
 		header: header,
-		body: null
+		body: null,
+		credentials: 'include'
 	}
 
 	return dispatch => {
 		dispatch(requestProfile())
-		return fetch('https://api.tabula.life', sentData)
+		return fetch('https://api.tabula.life/', sentData)
 			.then(function(response) {console.log(response); response.json})
 			.then(json =>
 				dispatch(receiveProfile(json))

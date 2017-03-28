@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import ClassListRedux from '../../components/ClassListRedux/ClassListRedux'
 import { enterCourseID, enterGrade, enterWorkload, enterSemester,
-    toggleEmoji, fetchClassesIfNeeded, } from '../../actions/user'
+    toggleEmoji, fetchClassesIfNeeded, removeClass} from '../../actions/user'
 
 class AsyncClasses extends Component {
   constructor(props) {
@@ -52,6 +52,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onClickEmoji: (id, emojiId) => {
       dispatch(toggleEmoji(id, emojiId))
+    },
+    onClickRemove: (id) => {
+      dispatch(removeClass(id))
     }
   }
 }

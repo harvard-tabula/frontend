@@ -3,7 +3,8 @@ import SuccessTag from '../SuccessTag';
 import SuccessTagRedux from '../SuccessTagRedux/SuccessTagRedux'
 
 const ClassComponentRedux = ({grades, workloads, semesters, num,emojis, 
-  onBlurCourseId, onChangeGrade, onChangeWorkload, onChangeSemester, onClickEmoji}) => (
+  onBlurCourseId, onChangeGrade, onChangeWorkload, onChangeSemester, onClickEmoji,
+  onClickRemove }) => (
     <tr>
       <td>
         <input className="input" type="text" placeholder="Class ID" id={"courseId" + num}
@@ -49,6 +50,9 @@ const ClassComponentRedux = ({grades, workloads, semesters, num,emojis,
             onClick={() => onClickEmoji(num, emoji.id)}
           />
         )}
+      </td>
+      <td>
+        <a className="delete" onClick={() => onClickRemove({num})}></a>
       </td>
     </tr>
 )
