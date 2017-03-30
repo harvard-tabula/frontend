@@ -4,8 +4,9 @@ import { toggleTag } from '../../actions/user'
 
 const mapStateToProps = (state, ownProps) => {
 	return {
-		list: state.tags.filter(t => t.category == ownProps.categoryTitle),
-		title: ownProps.title
+		list: state.tags.tags.filter(t => t.category == ownProps.categoryTitle),
+		title: ownProps.title,
+		selected: state.profile.profile.tags
 	}
 }
 

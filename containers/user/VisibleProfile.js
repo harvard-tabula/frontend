@@ -6,8 +6,9 @@ import { enterName, enterEmail, enterConcentration,
 
 const mapStateToProps = (state) => {
 	return {
-		profile: state.profiley,
-		concentrations: ["Applied Mathematics", "Bioengineering", "Computer Science", "Electrical Engineering"],
+		profile: state.profile.profile,
+		name: state.profile.profile.name,
+		concentrations: state.concentrations.concentrations,
 		years_coding: ["0", "1", "2", "3"],
 		year: ["2017", "2018", "2019", "2020"],
 		ethnicities: ["Caucasian", "Asian", "African America"],

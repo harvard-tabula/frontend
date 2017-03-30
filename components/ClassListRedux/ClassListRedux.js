@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import ClassComponentRedux from '../ClassComponentRedux/ClassComponentRedux'
 
-const ClassListRedux = ({classes, grades, workloads, semesters,
+const ClassListRedux = ({classes, grades, workloads, semesters, emojis,
   onBlurCourseId, onChangeGrade, onChangeWorkload, onChangeSemester, onClickEmoji,
   onClickRemove }) => (
   <section className="section">
@@ -29,7 +29,8 @@ const ClassListRedux = ({classes, grades, workloads, semesters,
                     semesters={semesters}
                     key={classElement.id}
                     num={classElement.id}
-                    emojis={classElement.emojis}
+                    emojis={emojis}
+                    tags={classElement.course_tags}
                     {...classElement}
                     onBlurCourseId={onBlurCourseId}
                     onChangeGrade={onChangeGrade}

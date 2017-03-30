@@ -1,4 +1,4 @@
-import {TOGGLE_TAG} from '../../actions/user/index'
+import { TOGGLE_TAG, REQUEST_TAGS, RECEIVE_TAGS } from '../../actions/user/index'
 
 const tag = (state={}, action) => {
 	switch (action.type){
@@ -14,15 +14,31 @@ const tag = (state={}, action) => {
 	}
 }
 
-const tags = (state = [], action) => {
+function tags(state = {
+	isFetching: false,
+	didInvalidate: false,
+	fetched: false,
+	tags:[]
+}, action) {
 	switch (action.type) {
-		case TOGGLE_TAG:
-			return state.map(t =>
-				tag(t, action)
-			)
+		case REQUEST_TAGS:
+			return Object.assign({}, state, {
+				isFetching: true,
+				didInvalidate: false,
+				fetched: false
+			})
+		case RECEIVE_TAGS:
+			return Object.assign({}, state, {
+				isFetching: false,
+				didInvalidate: false,
+				fetched: true,
+				tags: action.payload.tags,
+				lastUpdated: action.payload.receivedAt
+			})
 		default:
 			return state
 	}
 }
+
 
 export default tags

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import SuccessTag from '../SuccessTag';
 import SuccessTagRedux from '../SuccessTagRedux/SuccessTagRedux'
 
-const ClassComponentRedux = ({grades, workloads, semesters, num,emojis, 
+const ClassComponentRedux = ({grades, workloads, semesters, num, emojis, tags,
   onBlurCourseId, onChangeGrade, onChangeWorkload, onChangeSemester, onClickEmoji,
   onClickRemove }) => (
     <tr>
@@ -45,7 +45,7 @@ const ClassComponentRedux = ({grades, workloads, semesters, num,emojis,
           <SuccessTagRedux  
             key={emoji.id}
             text={emoji.text}
-            className={emoji.className}
+            success={(tags.indexOf(emoji.id) > -1 ? true : false)}
             {...emoji}
             onClick={() => onClickEmoji(num, emoji.id)}
           />

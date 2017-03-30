@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import SuccessTagRedux from '../SuccessTagRedux/SuccessTagRedux'
 
-const SuccessTagList = ({title, list, onTagClick}) => (
+const SuccessTagList = ({title, list, selected, onTagClick}) => (
   <section className="section">
     <div className="container">
       <div className="heading">
@@ -11,8 +11,8 @@ const SuccessTagList = ({title, list, onTagClick}) => (
         {list.map(listElement =>
           <SuccessTagRedux  
             key={listElement.id}
-            text={listElement.text}
-            success={listElement.success}
+            text={listElement.name}
+            success={(selected.indexOf(listElement.id) > -1 ? true : false)}
             id={listElement.id}
             {...listElement}
             onClick={() => onTagClick(listElement.id)}

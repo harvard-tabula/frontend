@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const ClassListRedux = ({userInformation, concentrations, years_coding, year, ethnicities, genders,
+const UserInformation = ({profile, name, concentrations, years_coding, year, ethnicities, genders,
 onBlurName, onBlurEmail, onChangeConcentration, 
 onChangeYearsCoding, onChangeGraduation, onChangeGender, onChangeEthnicity}) => (
   <section className="section">
@@ -11,19 +11,19 @@ onChangeYearsCoding, onChangeGraduation, onChangeGender, onChangeEthnicity}) => 
       <div className="columns">
         <div className="column is-one-third">
             <figure className="image is-256by256">
-              <img src="http://bulma.io/images/placeholders/256x256.png"></img>
+              <img src={profile.avatar}></img>
             </figure>
         </div>
         <div className="column">
           <label className="label">Name</label>
             <p className="control">
               <input className="input" type="text" placeholder="ie. Rob Bowden" id="name"
-              onBlur={(e) => onBlurName(e.target.value)}></input>
+              onBlur={(e) => onBlurName(e.target.value)} value={profile.name}></input>
             </p>
           <label className="label">Email</label>
             <p className="control">
               <input className="input" type="text" placeholder="ie. robbowden@college.harvard.edu" id="email"
-              onBlur={(e) => onBlurEmail(e.target.value)}></input>
+              onBlur={(e) => onBlurEmail(e.target.value)} value={profile.email}></input>
             </p>
           <label className="label">Gender</label>
             <p className="control">
@@ -38,7 +38,7 @@ onChangeYearsCoding, onChangeGraduation, onChangeGender, onChangeEthnicity}) => 
             <p className="control">
               <span className="select">
                 <select id="ethniticy"
-                onChange={(e) => onChangeGender(e.target.value)}>
+                onChange={(e) => onChangeEthnicity(e.target.value)}>
                   {ethnicities.map(ethnicity => <option value={ethnicity}>{ethnicity}</option>)}
                 </select>
               </span>
@@ -48,7 +48,7 @@ onChangeYearsCoding, onChangeGraduation, onChangeGender, onChangeEthnicity}) => 
               <span className="select">
                 <select id="concentration"
                 onChange={(e) => onChangeConcentration(e.target.value)}>
-                  {concentrations.map(concentration => <option value={concentration}>{concentration}</option>)}
+                  {concentrations.map(concentration => <option key={concentration.id} value={concentration.name}>{concentration.name}</option>)}
                 </select>
               </span>
             </p>
@@ -76,4 +76,4 @@ onChangeYearsCoding, onChangeGraduation, onChangeGender, onChangeEthnicity}) => 
   </section>
 )
 
-export default ClassListRedux;
+export default UserInformation;

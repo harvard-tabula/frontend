@@ -1,4 +1,4 @@
-import update from 'react-addons-update';
+import update from 'immutability-helper';
 
 import {ADD_CLASS, REMOVE_CLASS, ENTER_COURSEID, ENTER_GRADE, ENTER_WORKLOAD, ENTER_SEMESTER, 
 	TOGGLE_EMOJI, REQUEST_CLASSES, RECEIVE_CLASSES} from '../../actions/user/index'
@@ -7,26 +7,22 @@ const classElement = (state={}, action) => {
 	switch (action.type){
 		case ADD_CLASS:
 			return {
-				id: action.payload.id,
-				courseId: '',
+				course: {
+					id: ''
+				},
 				grade: '',
 				workload: '',
 				semester: '',
-				emojis: [{id: 0, success: false, text:'😍', className: "tag is-medium"}, 
-						{id: 1, success: false, text:'😆', className: "tag is-medium"},
-						{id: 2, success: false, text:'😫', className: "tag is-medium"},
-						{id: 3, success: false, text:'😐', className: "tag is-medium"},
-						{id: 4, success: false, text:'😴', className: "tag is-medium"},
-						{id: 5, success: false, text:'😓', className: "tag is-medium"},
-						{id: 6, success: false, text:'😡', className: "tag is-medium"},
-						{id: 7, success: false, text:'🤕', className: "tag is-medium"}]
+				course_tags: []
 			}
 		case ENTER_COURSEID:
 			if (state.id != action.payload.id) {
 				return state
 			}
-			return Object.assign({}, state, {
-				courseId: action.payload.courseId
+			return update(state, {
+				course: {
+					id: {$set: action.payload.courseId}
+				}
 			})
 		case ENTER_GRADE:
 			if (state.id != action.payload.id) {
@@ -50,103 +46,108 @@ const classElement = (state={}, action) => {
 				semester: action.payload.semester
 			})
 		case TOGGLE_EMOJI:
-			if ((state.id != action.payload.id) && (state.emojis.id != action.payload.emojiId)) {
+			if (state.id != action.payload.id) {
 				return state
+			} else if (state.course_tags.indexOf(action.payload.emojiId) > -1){
+				return update(state, {
+					course_tags: {$apply: function(x) {return x.filter((item) => item !== action.payload.emojiId)}}
+				})
 			}
-			return update(state, {
-				emojis: {
-					[action.payload.emojiId]: {
-						success: {$set : !state.emojis[action.payload.emojiId].success},
-						className: {$set : ((state.emojis[action.payload.emojiId].success) ? "tag is-medium" : "tag is-medium is-success")}
-					}
-				}
+			return update(state,{
+				course_tags: {$push: [action.payload.emojiId]}
 			})
 		default:
 			return state
 	}
 }
-// Original redux without api
-const classes = (state = [], action) => {
-	switch (action.type) {
-		case ADD_CLASS:
-			return [
-				...state,
-				classElement(undefined, action)
-			]
-		case REMOVE_CLASS:
-			return state.filter((item) => item.id !== action.payload.id)
-		case ENTER_COURSEID:
-			return state.map(t =>
-				classElement(t, action)
-			)
-		case ENTER_GRADE:
-			return state.map(t =>
-				classElement(t, action)
-			)
-		case ENTER_WORKLOAD:
-			return state.map(t =>
-				classElement(t, action)
-			)
-		case ENTER_SEMESTER:
-			return state.map(t =>
-				classElement(t, action)
-			)
-		case TOGGLE_EMOJI:
-			return state.map(t =>
-				classElement(t, action)
-			)
-		default:
-			return state
-	}
-}
 
-// function classes(state = {
-// 	isFetching: false,
-// 	didInvalidate: false,
-// 	items: []
-// }, action) {
-// 	switch (action.type){
-// 		case REQUEST_CLASSES:
-// 			return Object.assign({}, state, {
-// 				isFetching: true,
-// 				didInvalidate: false
-// 			})
-// 		case RECEIVE_CLASSES:
-// 			return Object.assign({}, state,{
-// 				isFetching: false,
-// 				didInvalidate: false,
-// 				items: action.payload.classes,
-// 				lastUpdated: action.payload.receivedAt
-// 			})
+// // Original redux without api
+// const classes = (state = [], action) => {
+// 	switch (action.type) {
 // 		case ADD_CLASS:
 // 			return [
-// 				...items,
+// 				...state,
 // 				classElement(undefined, action)
 // 			]
+		// case REMOVE_CLASS:
+		// 	return state.filter((item) => item.id !== action.payload.id)
 // 		case ENTER_COURSEID:
-// 			return items.map(t =>
+// 			return state.map(t =>
 // 				classElement(t, action)
 // 			)
 // 		case ENTER_GRADE:
-// 			return items.map(t =>
+// 			return state.map(t =>
 // 				classElement(t, action)
 // 			)
 // 		case ENTER_WORKLOAD:
-// 			return items.map(t =>
+// 			return state.map(t =>
 // 				classElement(t, action)
 // 			)
 // 		case ENTER_SEMESTER:
-// 			return items.map(t =>
+// 			return state.map(t =>
 // 				classElement(t, action)
 // 			)
 // 		case TOGGLE_EMOJI:
-// 			return items.map(t =>
+// 			return state.map(t =>
 // 				classElement(t, action)
 // 			)
 // 		default:
 // 			return state
 // 	}
 // }
+
+function classes(state = {
+	isFetching: false,
+	didInvalidate: false,
+	fetched: false,
+	classes: []
+}, action) {
+	switch (action.type){
+		case REQUEST_CLASSES:
+			return Object.assign({}, state, {
+				isFetching: true,
+				didInvalidate: false
+			})
+		case RECEIVE_CLASSES:
+			return Object.assign({}, state,{
+				isFetching: false,
+				didInvalidate: false,
+				fetched: true,
+				classes: action.payload.classes,
+				lastUpdated: action.payload.receivedAt
+			})
+		case ADD_CLASS:
+			return update(state, {
+				classes: {$push: [classElement(undefined, action)]}
+			})
+		case REMOVE_CLASS:
+			return update(state, {
+				classes: {$apply: function(x) {return x.filter((item) => item.id !== action.payload.id)}}
+			})
+		case ENTER_COURSEID:
+			return update(state, {
+				classes: {$apply: function(x) {return x.map(t => classElement(t, action));}}
+			})
+		case ENTER_GRADE:
+			return update(state, {
+				classes: {$apply: function(x) {return x.map(t => classElement(t, action));}}
+			})
+		case ENTER_WORKLOAD:
+			return update(state, {
+				classes: {$apply: function(x) {return x.map(t => classElement(t, action));}}
+			})
+		case ENTER_SEMESTER:
+			return update(state, {
+				classes: {$apply: function(x) {return x.map(t => classElement(t, action));}}
+			})
+		case TOGGLE_EMOJI:
+			return update(state, {
+				classes: {$apply: function(x) {return x.map(t => classElement(t, action));}}
+			})
+		default:
+			return state
+	}
+}
 
 
 export default classes

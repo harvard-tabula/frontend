@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux'
 import classes from './classes'
-import academicInterests from './academicInterests'
-import professionalInterests from './professionalInterests'
-import milestones from './milestones'
-import languages from './languages'
 import tags from './tags'
+import semesters from './semesters'
+import concentrations from './concentrations'
 import userInformation from './userInformation'
 import profile from './profile'
 
@@ -19,7 +17,9 @@ const userApp = combineReducers({
 	classes,
 	tags,
 	profile,
-	tagCategories
+	tagCategories,
+	semesters,
+	concentrations
 })
 
 export default userApp
