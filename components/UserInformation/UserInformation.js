@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const UserInformation = ({profile, name, concentrations, years_coding, year, ethnicities, genders,
-onBlurName, onBlurEmail, onChangeConcentration, 
+onChangeName, onChangeEmail, onChangeConcentration, 
 onChangeYearsCoding, onChangeGraduation, onChangeGender, onChangeEthnicity}) => (
   <section className="section">
     <div className="container">
@@ -18,12 +18,12 @@ onChangeYearsCoding, onChangeGraduation, onChangeGender, onChangeEthnicity}) => 
           <label className="label">Name</label>
             <p className="control">
               <input className="input" type="text" placeholder="ie. Rob Bowden" id="name"
-              onBlur={(e) => onBlurName(e.target.value)} value={profile.name}></input>
+              onChange={(e) => onChangeName(e.target.value)} value={profile.name}></input>
             </p>
           <label className="label">Email</label>
             <p className="control">
               <input className="input" type="text" placeholder="ie. robbowden@college.harvard.edu" id="email"
-              onBlur={(e) => onBlurEmail(e.target.value)} value={profile.email}></input>
+              onChange={(e) => onChangeEmail(e.target.value)} value={profile.email}></input>
             </p>
           <label className="label">Gender</label>
             <p className="control">
@@ -48,7 +48,6 @@ onChangeYearsCoding, onChangeGraduation, onChangeGender, onChangeEthnicity}) => 
               <span className="select">
                 <select id="concentration"
                 onChange={(e) => onChangeConcentration(e.target.value)}>
-                  {concentrations.map(concentration => <option key={concentration.id} value={concentration.name}>{concentration.name}</option>)}
                 </select>
               </span>
             </p>

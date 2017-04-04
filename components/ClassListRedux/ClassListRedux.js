@@ -23,14 +23,16 @@ const ClassListRedux = ({classes, grades, workloads, semesters, emojis,
               <div id="class-pane">
                 {classes.map(classElement =>
                   <ClassComponentRedux  
-                    key={classElement.id}
                     grades={grades}
                     workloads={workloads}
                     semesters={semesters}
-                    key={classElement.id}
                     num={classElement.id}
                     emojis={emojis}
                     tags={classElement.course_tags}
+                    name={classElement.course.name_short==null ? '' : classElement.course.name_short}
+                    grade={(classElement.grade==null) || (!classElement.grade)  ? '' : classElement.grade}
+                    semester={(classElement.semester==null) || (!classElement.semester) ? '' : classElement.semester}
+                    hours={(classElement.hours==null) || (!classElement.hours) ? '' : classElement.hours}
                     {...classElement}
                     onBlurCourseId={onBlurCourseId}
                     onChangeGrade={onChangeGrade}

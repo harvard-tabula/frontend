@@ -18,10 +18,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onBlurName: (text) => {
+		onChangeName: (text) => {
 			dispatch(enterName(text))
 		},
-		onBlurEmail: (text) => {
+		onChangeEmail: (text) => {
 			dispatch(enterEmail(text))
 		},
 		onChangeConcentration: (text) => {

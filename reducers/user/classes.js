@@ -21,7 +21,7 @@ const classElement = (state={}, action) => {
 			}
 			return update(state, {
 				course: {
-					id: {$set: action.payload.courseId}
+					name_short: {$set: action.payload.courseId}
 				}
 			})
 		case ENTER_GRADE:

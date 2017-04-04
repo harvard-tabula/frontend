@@ -13,7 +13,7 @@ import createLogger from 'redux-logger'
 import { createStore, applyMiddleware } from 'redux';
 import userApp from '../reducers/user/' 
 import { fetchProfileIfNeeded, fetchClassesIfNeeded, fetchTagsIfNeeded,
-    fetchSemestersIfNeeded, fetchConcentrationsIfNeeded } from '../actions/user'
+    fetchSemestersIfNeeded, fetchConcentrationsIfNeeded, fetchLogin } from '../actions/user'
 
 const initialState = { 
   tagCategories: [
@@ -34,6 +34,8 @@ const store = createStore(
     loggerMiddleware
   )
 )
+
+// store.dispatch(fetchLogin())
 
 store.dispatch(fetchProfileIfNeeded())
 store.dispatch(fetchClassesIfNeeded())

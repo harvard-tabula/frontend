@@ -21,6 +21,9 @@ class UserReduxPage extends React.Component {
 	          </div>
 	        </div>
 	    	<div>
+	    		<VisibleProfile />
+	    		<VisibleClassList />
+	    		<AddClass />
 	    		<VisibleTag />
 			</div>
 		</Layout>

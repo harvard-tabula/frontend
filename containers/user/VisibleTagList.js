@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import SuccessTagList from '../../components/SuccessTagList/SuccessTagList'
-import { toggleTag } from '../../actions/user'
+import { clickTag } from '../../actions/user'
 
 const mapStateToProps = (state, ownProps) => {
 	return {
@@ -13,7 +13,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onTagClick: (id) => {
-			dispatch(toggleTag(id))
+			dispatch(clickTag(id))
 		}
 	}
 }

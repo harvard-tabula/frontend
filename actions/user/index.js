@@ -135,6 +135,42 @@ export function toggleTag (id) {
 	}
 }
 
+export function clickTag (id) {
+	return (dispatch, getState) => {
+		const originalState = getState()
+		dispatch(toggleTag(id))
+		const newState = getState()
+		let header = new Headers({
+			'Access-Control-Allow-Origin':'*',
+			'Access-Control-Allow-Methods': 'PUT, OPTIONS, HEAD, GET',
+			'Access-Control-Request-Headers': 'Access-Control-Allow-Origin, Content-Type',
+			'Access-Control-Allow-Headers': 'Access-Control-Allow-Origin, Content-Type',
+			'Content-Type': 'application/json'
+		})
+		let sentData ={
+			method: 'PUT',
+			mode: 'cors',
+			header: header,
+			body: JSON.stringify({
+				gender: newState.profile.profile.gender,
+				ethnicity: newState.profile.profile.ethnicity,
+				name: newState.profile.profile.name,
+				tag_ids: newState.profile.profile.tags,
+				concentration_id: newState.profile.profile.concentration,
+				years_coding: newState.profile.profile.years_coding,
+				year: newState.profile.profile.year
+
+			}),
+			credentials: 'cors',
+			redirect: 'follow'
+		}
+		fetch('https://api.tabula.life/profile', sentData)
+			.then(response => {console.log(response)})
+			.catch(error => {console.log(error); dispatch(toggleTag(id))})
+
+	}
+}
+
 function requestClasses() {
 	return{
 		type: REQUEST_CLASSES
@@ -218,7 +254,8 @@ function receiveProfile(json) {
 export function fetchProfile() {
 	let header = new Headers({
 		'Access-Control-Allow-Origin':'*',
-		'Content-Type': 'application/json'
+		'Content-Type': 'application/json',
+		'Access-Control-Allow-Methods': 'PUT, OPTIONS, HEAD, GET'
 	})
 
 	let sentData ={
@@ -448,5 +485,26 @@ export function fetchConcentrationsIfNeeded() {
 		} else {
 			return Promise.resolve()
 		}
+	}
+}
+
+
+export function fetchLogin() {
+	let header = new Headers({
+		'Access-Control-Allow-Origin':'*',
+		'Content-Type': 'application/json'
+	})
+
+	let sentData ={
+		method: 'GET',
+		mode: 'cors',
+		header: header,
+		body: null
+	}
+
+	return dispatch => {
+		dispatch(requestConcentrations())
+		return fetch('https://api.tabula.life/login', sentData)
+			.then(response => response.json())
 	}
 }
