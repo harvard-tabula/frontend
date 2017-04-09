@@ -13,7 +13,8 @@ export const TOGGLE_EMOJI = 'TOGGLE_EMOJI'
 export const ENTER_COURSEID = 'ENTER_COURSEID'
 export const ENTER_GRADE = 'ENTER_GRADE'
 export const ENTER_WORKLOAD = 'ENTER_WORKLOAD'
-export const ENTER_SEMESTER = 'ENTER_SEMESTER'
+export const ENTER_TERM = 'ENTER_TERM'
+export const ENTER_CLASS_YEAR = 'ENTER_CLASS_YEAR'
 export const TOGGLE_TAG = 'TOGGLE_TAG'
 export const REQUEST_CLASSES = 'REQUEST_CLASSES'
 export const RECEIVE_CLASSES = 'RECEIVE_CLASSES'
@@ -25,6 +26,8 @@ export const REQUEST_SEMESTERS = 'REQUEST_SEMESTERS'
 export const RECEIVE_SEMESTERS = 'RECEIVE_SEMESTERS'
 export const REQUEST_CONCENTRATIONS = 'REQUEST_CONCENTRATIONS'
 export const RECEIVE_CONCENTRATIONS = 'RECEIVE_CONCENTRATIONS'
+export const REQUEST_USER_INFO = 'REQUEST_USER_INFO'
+export const RECEIVE_USER_INFO = 'RECEIVE_USER_INFO'
 
 
 let nextClassId=0
@@ -114,10 +117,17 @@ export function enterWorkload (id, text) {
 	}
 }
 
-export function enterSemester (id, text) {
+export function enterTerm (id, text) {
 	return {
-		type: ENTER_SEMESTER,
-		payload: {id: id.num, semester:text}
+		type: ENTER_TERM,
+		payload: {id: id.num, term:text}
+	}
+}
+
+export function enterClassYear (id, text) {
+	return {
+		type: ENTER_CLASS_YEAR,
+		payload: {id: id.num, year:text}
 	}
 }
 
@@ -141,16 +151,11 @@ export function clickTag (id) {
 		dispatch(toggleTag(id))
 		const newState = getState()
 		let header = new Headers({
-			'Access-Control-Allow-Origin':'*',
-			'Access-Control-Allow-Methods': 'PUT, OPTIONS, HEAD, GET',
-			'Access-Control-Request-Headers': 'Access-Control-Allow-Origin, Content-Type',
-			'Access-Control-Allow-Headers': 'Access-Control-Allow-Origin, Content-Type',
 			'Content-Type': 'application/json'
 		})
 		let sentData ={
 			method: 'PUT',
 			mode: 'cors',
-			header: header,
 			body: JSON.stringify({
 				gender: newState.profile.profile.gender,
 				ethnicity: newState.profile.profile.ethnicity,
@@ -159,10 +164,9 @@ export function clickTag (id) {
 				concentration_id: newState.profile.profile.concentration,
 				years_coding: newState.profile.profile.years_coding,
 				year: newState.profile.profile.year
-
 			}),
-			credentials: 'cors',
-			redirect: 'follow'
+			credentials: 'include',
+			headers: header
 		}
 		fetch('https://api.tabula.life/profile', sentData)
 			.then(response => {console.log(response)})
@@ -188,15 +192,9 @@ function receiveClasses(json) {
 }
 
 function fetchClasses(){
-	let header = new Headers({
-		'Access-Control-Allow-Origin':'*',
-		'Content-Type': 'application/json'
-	})
-
 	let sentData ={
 		method: 'GET',
 		mode: 'cors',
-		header: header,
 		body: null,
 		credentials: 'include'
 	}
@@ -252,16 +250,9 @@ function receiveProfile(json) {
 }
 
 export function fetchProfile() {
-	let header = new Headers({
-		'Access-Control-Allow-Origin':'*',
-		'Content-Type': 'application/json',
-		'Access-Control-Allow-Methods': 'PUT, OPTIONS, HEAD, GET'
-	})
-
 	let sentData ={
 		method: 'GET',
 		mode: 'cors',
-		header: header,
 		body: null,
 		credentials: 'include'
 	}
@@ -316,15 +307,9 @@ function receiveTags(json) {
 }
 
 export function fetchTags() {
-	let header = new Headers({
-		'Access-Control-Allow-Origin':'*',
-		'Content-Type': 'application/json'
-	})
-
 	let sentData ={
 		method: 'GET',
 		mode: 'cors',
-		header: header,
 		body: null,
 		credentials: 'include'
 	}
@@ -379,15 +364,9 @@ function receiveSemesters(json) {
 }
 
 export function fetchSemesters() {
-	let header = new Headers({
-		'Access-Control-Allow-Origin':'*',
-		'Content-Type': 'application/json'
-	})
-
 	let sentData ={
 		method: 'GET',
 		mode: 'cors',
-		header: header,
 		body: null,
 		credentials: 'include'
 	}
@@ -442,15 +421,9 @@ function receiveConcentrations(json) {
 }
 
 export function fetchConcentrations() {
-	let header = new Headers({
-		'Access-Control-Allow-Origin':'*',
-		'Content-Type': 'application/json'
-	})
-
 	let sentData ={
 		method: 'GET',
 		mode: 'cors',
-		header: header,
 		body: null,
 		credentials: 'include'
 	}
@@ -488,23 +461,80 @@ export function fetchConcentrationsIfNeeded() {
 	}
 }
 
+function requestUserInfo() {
+	return {
+		type: REQUEST_USER_INFO
+	}
+}
 
-export function fetchLogin() {
-	let header = new Headers({
-		'Access-Control-Allow-Origin':'*',
-		'Content-Type': 'application/json'
-	})
+function receiveUserInfo(json) {
+	return {
+		type: RECEIVE_USER_INFO,
+		payload : {
+			userInfo: json.data,
+			receivedAt: Date.now()
+		}
+	}
+}
 
+export function fetchUserInfo() {
 	let sentData ={
 		method: 'GET',
 		mode: 'cors',
-		header: header,
-		body: null
+		body: null,
+		credentials: 'include'
+	}
+
+	return dispatch => {
+		dispatch(requestUserInfo())
+		return fetch('https://api.tabula.life/ui', sentData)
+			.then(response => response.json())
+			.then(json =>
+				{
+					dispatch(receiveUserInfo(json))
+				}
+			)
+	}
+}
+
+function shouldFetchUserInfo(state) {
+	const userInfo = state.userInfo
+	if (!userInfo || !userInfo.fetched) {
+		return true
+	} else if (userInfo.isFetching) {
+		return false
+	} else {
+		return userInfo.didInvalidate
+	}
+}
+
+export function fetchUserInfoIfNeeded() {
+	return (dispatch, getState) =>{
+		if (shouldFetchUserInfo(getState())) {
+			return dispatch(fetchUserInfo())
+		} else {
+			return Promise.resolve()
+		}
+	}
+}
+
+
+export function fetchLogin() {
+	let sentData ={
+		method: 'GET',
+		mode: 'cors',
+		body: null,
+		credentials: 'include'
 	}
 
 	return dispatch => {
 		dispatch(requestConcentrations())
 		return fetch('https://api.tabula.life/login', sentData)
 			.then(response => response.json())
+			.then(json => {
+				if (json.state==302){
+					window.location = json.redirect
+				}
+			})
 	}
 }

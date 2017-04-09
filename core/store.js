@@ -35,14 +35,7 @@ const store = createStore(
   )
 )
 
-// store.dispatch(fetchLogin())
-
-store.dispatch(fetchProfileIfNeeded())
-store.dispatch(fetchClassesIfNeeded())
-store.dispatch(fetchTagsIfNeeded())
-store.dispatch(fetchSemestersIfNeeded())
-store.dispatch(fetchConcentrationsIfNeeded())
-
+store.dispatch(fetchLogin())
 
 // const store = createStore (userApp, initialState)
 // console.log(store.getState())

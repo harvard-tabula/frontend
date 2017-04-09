@@ -1,14 +1,15 @@
 import { connect } from 'react-redux'
 import ClassListRedux from '../../components/ClassListRedux/ClassListRedux'
-import { enterCourseID, enterGrade, enterWorkload, enterSemester,
+import { enterCourseID, enterGrade, enterWorkload, enterTerm, enterClassYear,
 		toggleEmoji, removeClass } from '../../actions/user'
 
 const mapStateToProps = (state) => {
 	return {
 		classes: state.classes.classes,
-		grades: ["A", "A-", "B+", "B", "B-", "C+", "C", "C-"],
+		grades: state.userInfo.grades,
 		workloads: ["1 hour", "2 hour", "3 hour", "4 hour", "5 hour", "6 hour", "7 hour", "8 hour", "9 hour"],
-		semesters: state.semesters.semesters,
+		terms: state.userInfo.terms,
+		years: ["2014", "2015", "2016", "2017"],
 		emojis: [{id: 0, text:'😍', hover: 'Loved It'}, 
 			{id: 1, text:'😀', hover:'Liked It'},
 			{id: 2, text:'😐', hover:'It was okay'},
@@ -30,8 +31,11 @@ const mapDispatchToProps = (dispatch) => {
 		onChangeWorkload: (id, text) => {
 			dispatch(enterWorkload(id,text))
 		},
-		onChangeSemester: (id, text) => {
-			dispatch(enterSemester(id,text))
+		onChangeTerm: (id, text) => {
+			dispatch(enterTerm(id,text))
+		},
+		onChangeYear: (id, text) =>{
+			dispatch(enterClassYear(id,text))
 		},
 		onClickEmoji: (id, emojiId) => {
 			dispatch(toggleEmoji(id, emojiId))

@@ -1,6 +1,6 @@
 import update from 'immutability-helper';
 
-import {ADD_CLASS, REMOVE_CLASS, ENTER_COURSEID, ENTER_GRADE, ENTER_WORKLOAD, ENTER_SEMESTER, 
+import {ADD_CLASS, REMOVE_CLASS, ENTER_COURSEID, ENTER_GRADE, ENTER_WORKLOAD, ENTER_TERM, ENTER_CLASS_YEAR,
 	TOGGLE_EMOJI, REQUEST_CLASSES, RECEIVE_CLASSES} from '../../actions/user/index'
 
 const classElement = (state={}, action) => {
@@ -13,6 +13,8 @@ const classElement = (state={}, action) => {
 				grade: '',
 				workload: '',
 				semester: '',
+				term: '',
+				year: '',
 				course_tags: []
 			}
 		case ENTER_COURSEID:
@@ -38,12 +40,21 @@ const classElement = (state={}, action) => {
 			return Object.assign({}, state, {
 				workload: action.payload.workload
 			})
-		case ENTER_SEMESTER:
+		case ENTER_TERM:
 			if (state.id != action.payload.id) {
 				return state
 			}
 			return Object.assign({}, state, {
-				semester: action.payload.semester
+				term: action.payload.term,
+				semester: action.payload.term + ' ' + state.year
+			})
+		case ENTER_CLASS_YEAR:
+			if (state.id != action.payload.id) {
+				return state
+			}
+			return Object.assign({}, state, {
+				year: action.payload.year,
+				semester: state.term + ' ' + action.payload.year
 			})
 		case TOGGLE_EMOJI:
 			if (state.id != action.payload.id) {
@@ -136,7 +147,11 @@ function classes(state = {
 			return update(state, {
 				classes: {$apply: function(x) {return x.map(t => classElement(t, action));}}
 			})
-		case ENTER_SEMESTER:
+		case ENTER_TERM:
+			return update(state, {
+				classes: {$apply: function(x) {return x.map(t => classElement(t, action));}}
+			})
+		case ENTER_CLASS_YEAR:
 			return update(state, {
 				classes: {$apply: function(x) {return x.map(t => classElement(t, action));}}
 			})

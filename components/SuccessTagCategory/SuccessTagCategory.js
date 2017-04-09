@@ -5,8 +5,7 @@ const SuccessTagCategory = ({tagCategories}) => (
 	<div>
 		{tagCategories.map(tagCategory =>
 			<VisibleTagList  
-				key={tagCategory.id}
-				title={tagCategory.title}
+				title={tagCategory.text}
 				categoryTitle={tagCategory.categoryTitle}
 				{...tagCategory}
 			/>

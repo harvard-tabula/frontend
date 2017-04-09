@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react';
 import SuccessTag from '../SuccessTag';
 import SuccessTagRedux from '../SuccessTagRedux/SuccessTagRedux'
 
-const ClassComponentRedux = ({grades, workloads, semesters, num, emojis, tags,
-  name, grade, semester, hours,
-  onBlurCourseId, onChangeGrade, onChangeWorkload, onChangeSemester, onClickEmoji,
+const ClassComponentRedux = ({grades, workloads, terms, years, num, emojis, tags,
+  name, grade, term, year, hours,
+  onBlurCourseId, onChangeGrade, onChangeWorkload, onChangeTerm, onChangeYear, onClickEmoji,
   onClickRemove }) => (
     <tr>
       <td>
@@ -14,7 +14,7 @@ const ClassComponentRedux = ({grades, workloads, semesters, num, emojis, tags,
       <td>
         <p className="control">
           <span className="select">
-            <select id={"grades" + num}
+            <select
             onChange={(e) => onChangeGrade({num}, e.target.value)} value={grade}>
               {grades.map(grade => <option value={grade}>{grade}</option>)}
             </select>
@@ -24,7 +24,7 @@ const ClassComponentRedux = ({grades, workloads, semesters, num, emojis, tags,
       <td>
         <p className="control">
           <span className="select">
-            <select id={"workload" + num}
+            <select
             onChange={(e) => onChangeWorkload({num}, e.target.value)} value={hours}>
               {workloads.map(workload => <option value={workload}>{workload}</option>)}
             </select>
@@ -34,9 +34,19 @@ const ClassComponentRedux = ({grades, workloads, semesters, num, emojis, tags,
       <td>
         <p className="control">
           <span className="select">
-            <select id={"semester" + num}
-            onChange={(e) => onChangeSemester({num}, e.target.value)} value={semester}>
-              {semesters.map(semesters => <option value={semesters.semester}>{semesters.semester}</option>)}
+            <select
+            onChange={(e) => onChangeTerm({num}, e.target.value)} value={term}>
+              {terms.map(term => <option value={term}>{term}</option>)}
+            </select>
+          </span>
+        </p>
+      </td>
+      <td>
+        <p className="control">
+          <span className="select">
+            <select
+            onChange={(e) => onChangeYear({num}, e.target.value)} value={year}>
+              {years.map(year => <option value={year}>{year}</option>)}
             </select>
           </span>
         </p>

@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import ClassComponentRedux from '../ClassComponentRedux/ClassComponentRedux'
 
-const ClassListRedux = ({classes, grades, workloads, semesters, emojis,
-  onBlurCourseId, onChangeGrade, onChangeWorkload, onChangeSemester, onClickEmoji,
+const ClassListRedux = ({classes, grades, workloads, terms, years, emojis,
+  onBlurCourseId, onChangeGrade, onChangeWorkload, onChangeTerm, onChangeYear, onClickEmoji,
   onClickRemove }) => (
   <section className="section">
         <div className="container">
@@ -15,7 +15,8 @@ const ClassListRedux = ({classes, grades, workloads, semesters, emojis,
                 <th>Class name</th>
                 <th>Grade</th>
                 <th>Workload</th>
-                <th>Semester</th>
+                <th>Term</th>
+                <th>Year</th>
                 <th>Assoicated Emojis</th>
               </tr>
             </thread>
@@ -25,19 +26,22 @@ const ClassListRedux = ({classes, grades, workloads, semesters, emojis,
                   <ClassComponentRedux  
                     grades={grades}
                     workloads={workloads}
-                    semesters={semesters}
+                    terms={terms}
+                    years={years}
                     num={classElement.id}
                     emojis={emojis}
                     tags={classElement.course_tags}
                     name={classElement.course.name_short==null ? '' : classElement.course.name_short}
                     grade={(classElement.grade==null) || (!classElement.grade)  ? '' : classElement.grade}
-                    semester={(classElement.semester==null) || (!classElement.semester) ? '' : classElement.semester}
+                    term={(classElement.term==null) || (!classElement.term) ? '' : classElement.term}
+                    year={(classElement.year==null) || (!classElement.year) ? '' : classElement.year}
                     hours={(classElement.hours==null) || (!classElement.hours) ? '' : classElement.hours}
                     {...classElement}
                     onBlurCourseId={onBlurCourseId}
                     onChangeGrade={onChangeGrade}
                     onChangeWorkload={onChangeWorkload}
-                    onChangeSemester={onChangeSemester}
+                    onChangeTerm={onChangeTerm}
+                    onChangeYear={onChangeYear}
                     onClickEmoji={onClickEmoji}
                     onClickRemove={onClickRemove}
                   />

@@ -3,7 +3,7 @@ import SuccessTagCategory from '../../components/SuccessTagCategory/SuccessTagCa
 
 const mapStateToProps = (state) => {
 	return {
-		tagCategories: state.tagCategories
+		tagCategories: state.userInfo.tags_categories
 	}
 }
 

@@ -48,6 +48,7 @@ onChangeYearsCoding, onChangeGraduation, onChangeGender, onChangeEthnicity}) => 
               <span className="select">
                 <select id="concentration"
                 onChange={(e) => onChangeConcentration(e.target.value)}>
+                  {concentrations.map(concentration => <option value={concentration.name}>{concentration.name}</option>)}
                 </select>
               </span>
             </p>

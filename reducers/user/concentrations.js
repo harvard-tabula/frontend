@@ -4,7 +4,7 @@ function concentrations(state = {
 	isFetching: false,
 	didInvalidate: false,
 	fetched: false,
-	concentrations:{}
+	concentrations:[]
 }, action) {
 	switch (action.type) {
 		case REQUEST_CONCENTRATIONS:

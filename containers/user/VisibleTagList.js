@@ -4,8 +4,8 @@ import { clickTag } from '../../actions/user'
 
 const mapStateToProps = (state, ownProps) => {
 	return {
-		list: state.tags.tags.filter(t => t.category == ownProps.categoryTitle),
-		title: ownProps.title,
+		list: state.tags.tags.filter(t => t.category == ownProps.category),
+		text: ownProps.text,
 		selected: state.profile.profile.tags
 	}
 }

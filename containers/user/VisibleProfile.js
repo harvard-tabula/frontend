@@ -11,8 +11,8 @@ const mapStateToProps = (state) => {
 		concentrations: state.concentrations.concentrations,
 		years_coding: ["0", "1", "2", "3"],
 		year: ["2017", "2018", "2019", "2020"],
-		ethnicities: ["Caucasian", "Asian", "African America"],
-		genders: ["Female", "Male", "Other"]
+		ethnicities: state.userInfo.ethnicities,
+		genders: state.userInfo.genders
 	}
 }
 
