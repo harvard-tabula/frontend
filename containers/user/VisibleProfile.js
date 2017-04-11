@@ -1,43 +1,42 @@
 import { connect } from 'react-redux'
 import UserInformation from '../../components/UserInformation/UserInformation'
-import { enterName, enterEmail, enterConcentration, 
-	enterYearsCoding, enterGraduation, enterGender,
-	enterEthnicity } from '../../actions/user'
+import { changeName, enterEmail, changeConcentration, 
+	changeYearsCoding, changeYear, changeGender,
+	changeEthnicity } from '../../actions/user'
 
 const mapStateToProps = (state) => {
 	return {
 		profile: state.profile.profile,
 		name: state.profile.profile.name,
 		concentrations: state.concentrations.concentrations,
-		years_coding: ["0", "1", "2", "3"],
-		year: ["2017", "2018", "2019", "2020"],
 		ethnicities: state.userInfo.ethnicities,
-		genders: state.userInfo.genders
+		genders: state.userInfo.genders,
+		concentration: (state.profile.profile.concentration==null ? '' : state.profile.profile.concentration.name)
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onChangeName: (text) => {
-			dispatch(enterName(text))
+			dispatch(changeName(text))
 		},
 		onChangeEmail: (text) => {
 			dispatch(enterEmail(text))
 		},
 		onChangeConcentration: (text) => {
-			dispatch(enterConcentration(text))
+			dispatch(changeConcentration(text))
 		},
 		onChangeYearsCoding: (text) => {
-			dispatch(enterYearsCoding(text))
+			dispatch(changeYearsCoding(text))
 		},
 		onChangeGraduation: (text) => {
-			dispatch(enterYear(text))
+			dispatch(changeYear(text))
 		},
 		onChangeGender: (text) => {
-			dispatch(enterGender(text))
+			dispatch(changeGender(text))
 		},
 		onChangeEthnicity: (text) => {
-			dispatch(enterEthnicity(text))
+			dispatch(changeEthnicity(text))
 		}
 	}
 }

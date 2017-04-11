@@ -6,7 +6,7 @@ const mapStateToProps = (state, ownProps) => {
 	return {
 		list: state.tags.tags.filter(t => t.category == ownProps.category),
 		text: ownProps.text,
-		selected: state.profile.profile.tags
+		selected: state.profile.tag_id
 	}
 }
 

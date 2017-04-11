@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const UserInformation = ({profile, name, concentrations, years_coding, year, ethnicities, genders,
+const UserInformation = ({profile, name, concentrations, years_coding, year, ethnicities, genders, concentration,
 onChangeName, onChangeEmail, onChangeConcentration, 
 onChangeYearsCoding, onChangeGraduation, onChangeGender, onChangeEthnicity}) => (
   <section className="section">
@@ -29,7 +29,7 @@ onChangeYearsCoding, onChangeGraduation, onChangeGender, onChangeEthnicity}) => 
             <p className="control">
               <span className="select">
                 <select id="gender"
-                onChange={(e) => onChangeGender(e.target.value)}>
+                onChange={(e) => onChangeGender(e.target.value)} value={profile.gender}>
                   {genders.map(gender => <option value={gender}>{gender}</option>)}
                 </select>
               </span>
@@ -38,7 +38,7 @@ onChangeYearsCoding, onChangeGraduation, onChangeGender, onChangeEthnicity}) => 
             <p className="control">
               <span className="select">
                 <select id="ethniticy"
-                onChange={(e) => onChangeEthnicity(e.target.value)}>
+                onChange={(e) => onChangeEthnicity(e.target.value)} value={profile.ethnicity}>
                   {ethnicities.map(ethnicity => <option value={ethnicity}>{ethnicity}</option>)}
                 </select>
               </span>
@@ -47,28 +47,20 @@ onChangeYearsCoding, onChangeGraduation, onChangeGender, onChangeEthnicity}) => 
             <p className="control">
               <span className="select">
                 <select id="concentration"
-                onChange={(e) => onChangeConcentration(e.target.value)}>
+                onChange={(e) => onChangeConcentration(e.target.value)} value={concentration}>
                   {concentrations.map(concentration => <option value={concentration.name}>{concentration.name}</option>)}
                 </select>
               </span>
             </p>
           <label className="label">Years Coding</label>
             <p className="control">
-              <span className="select">
-                <select id="codingYears"
-                onChange={(e) => onChangeCodingYears(e.target.value)}>
-                  {years_coding.map(years_coding_element => <option value={years_coding_element}>{years_coding_element}</option>)}
-                </select>
-              </span>
+              <input className="input" type="text" placeholder="ie. .5"
+              onChange={(e) => onChangeYearsCoding(e.target.value)} value={profile.years_coding}></input>
             </p>
           <label className="label">Graduation Year</label>
             <p className="control">
-              <span className="select">
-                <select id="year"
-                onChange={(e) => onChangeYear(e.target.value)}>
-                  {year.map(years_element => <option value={years_element}>{years_element}</option>)}
-                </select>
-              </span>
+              <input className="input" type="text" placeholder="ie. 2018"
+              onChange={(e) => onChangeGraduation(e.target.value)} value={profile.year}></input>
             </p>
         </div>
       </div>
