@@ -10,6 +10,8 @@ export const ENTER_GENDER = 'ENTER_GENDER'
 export const ENTER_ETHNICITY = 'ENTER_ETHNICITY'
 export const ADD_CLASS = 'ADD_CLASS'
 export const REMOVE_CLASS = 'REMOVE_CLASS'
+export const SUGGESTION_SELECTED = 'SUGGESTION_SELECTED'
+export const CLEAR_CLASS_SUGGESTIONS = 'CLEAR_CLASS_SUGGESTIONS'
 export const TOGGLE_EMOJI = 'TOGGLE_EMOJI'
 export const ENTER_COURSEID = 'ENTER_COURSEID'
 export const ENTER_GRADE = 'ENTER_GRADE'
@@ -19,6 +21,8 @@ export const ENTER_CLASS_YEAR = 'ENTER_CLASS_YEAR'
 export const TOGGLE_TAG = 'TOGGLE_TAG'
 export const REQUEST_CLASSES = 'REQUEST_CLASSES'
 export const RECEIVE_CLASSES = 'RECEIVE_CLASSES'
+export const REQUEST_CLASS_SUGGESTIONS = 'REQUEST_CLASS_SUGGESTIONS'
+export const RECEIVE_CLASS_SUGGESTIONS = 'RECEIVE_CLASS_SUGGESTIONS'
 export const REQUEST_PROFILE = 'REQUEST_PROFILE'
 export const RECEIVE_PROFILE = 'RECEIVE_PROFILE'
 export const REQUEST_TAGS = 'REQUEST_TAGS'
@@ -29,9 +33,9 @@ export const REQUEST_CONCENTRATIONS = 'REQUEST_CONCENTRATIONS'
 export const RECEIVE_CONCENTRATIONS = 'RECEIVE_CONCENTRATIONS'
 export const REQUEST_USER_INFO = 'REQUEST_USER_INFO'
 export const RECEIVE_USER_INFO = 'RECEIVE_USER_INFO'
+export const MARK_RECEIVED_CLASSES = 'MARK_RECEIVED_CLASSES'
 
-
-let nextClassId=0
+let nextClassId = -1
 
 export function changeName (text) {
 	return (dispatch, getState) => {
@@ -196,7 +200,6 @@ export function changeYear (text) {
 	}
 }
 
-
 export function enterYear (text) {
 	return {
 		type: ENTER_YEAR,
@@ -269,6 +272,48 @@ export function changeEthnicity (text) {
 	}
 }
 
+export function changeSuggestionSelected (classId, courseId) {
+	return (dispatch, getState) => {
+		const originalState = getState()
+		dispatch(suggestionSelected(classId, courseId))
+		const newState = getState()
+		var classElement = newState.classes.classes.find((classElement) => classElement.id==classId)
+		if(classElement.canPut){
+			let header = new Headers({
+				'Content-Type': 'application/json'
+			})
+			let sentData ={
+				method: 'PUT',
+				mode: 'cors',
+				body: JSON.stringify({
+					id: classElement.course.id,
+					semester: classElement.semester,
+					grade: classElement.grade,
+					course_tag_id: classElement.course_tags,
+					hours: classElement.hours
+				}),
+				credentials: 'include',
+				headers: header
+			}
+			fetch('https://api.tabula.life/history', sentData)
+				.then(response => {console.log(response)})
+		}
+	}
+}
+
+export function suggestionSelected(classId, courseId) {
+	return{
+		type: SUGGESTION_SELECTED,
+		payload: {classId: classId, courseId: courseId}
+	}
+}
+
+export function clearClassSuggestions() {
+	return {
+		type: CLEAR_CLASS_SUGGESTIONS
+	}
+}
+
 export function enterEthnicity(text) {
 	return {
 		type: ENTER_ETHNICITY,
@@ -279,7 +324,7 @@ export function enterEthnicity(text) {
 export function addClass () {
 	return {
 		type: ADD_CLASS,
-		payload: {id: nextClassId++}
+		payload: {id: nextClassId--}
 	}
 }
 
@@ -290,11 +335,39 @@ export function removeClass (id) {
 	}
 }
 
-
 export function enterCourseID (id, text) {
 	return {
 		type: ENTER_COURSEID,
-		payload: {id: id.num, courseId: text}
+		payload: {id: id, courseId: text}
+	}
+}
+
+export function changeGrade (id, text) {
+	return (dispatch, getState) => {
+		const originalState = getState()
+		dispatch(enterGrade(id,text))
+		const newState = getState()
+		var classElement = newState.classes.classes.find((classElement) => classElement.id==id.num)
+		if(classElement.canPut){
+			let header = new Headers({
+				'Content-Type': 'application/json'
+			})
+			let sentData ={
+				method: 'PUT',
+				mode: 'cors',
+				body: JSON.stringify({
+					id: classElement.course.id,
+					semester: classElement.semester,
+					grade: classElement.grade,
+					course_tag_id: classElement.course_tags,
+					hours: classElement.hours
+				}),
+				credentials: 'include',
+				headers: header
+			}
+			fetch('https://api.tabula.life/history', sentData)
+				.then(response => {console.log(response)})
+		}
 	}
 }
 
@@ -305,10 +378,68 @@ export function enterGrade (id, text) {
 	}
 }
 
+export function changeWorkload (id, text) {
+	return (dispatch, getState) => {
+		const originalState = getState()
+		dispatch(enterWorkload(id,text))
+		const newState = getState()
+		var classElement = newState.classes.classes.find((classElement) => classElement.id==id.num)
+		if(classElement.canPut){
+			let header = new Headers({
+				'Content-Type': 'application/json'
+			})
+			let sentData ={
+				method: 'PUT',
+				mode: 'cors',
+				body: JSON.stringify({
+					id: classElement.course.id,
+					semester: classElement.semester,
+					grade: classElement.grade,
+					course_tag_id: classElement.course_tags,
+					hours: classElement.hours
+				}),
+				credentials: 'include',
+				headers: header
+			}
+			fetch('https://api.tabula.life/history', sentData)
+				.then(response => {console.log(response)})
+		}
+	}
+}
+
 export function enterWorkload (id, text) {
 	return {
 		type: ENTER_WORKLOAD,
-		payload: {id: id.num, workload: text}
+		payload: {id: id.num, hours: text}
+	}
+}
+
+export function changeTerm (id, text) {
+	return (dispatch, getState) => {
+		const originalState = getState()
+		dispatch(enterTerm(id,text))
+		const newState = getState()
+		var classElement = newState.classes.classes.find((classElement) => classElement.id==id.num)
+		if(classElement.canPut){
+			let header = new Headers({
+				'Content-Type': 'application/json'
+			})
+			let sentData ={
+				method: 'PUT',
+				mode: 'cors',
+				body: JSON.stringify({
+					id: classElement.course.id,
+					semester: classElement.semester,
+					grade: classElement.grade,
+					course_tag_id: classElement.course_tags,
+					hours: classElement.hours
+				}),
+				credentials: 'include',
+				headers: header
+			}
+			fetch('https://api.tabula.life/history', sentData)
+				.then(response => {console.log(response)})
+		}
 	}
 }
 
@@ -316,6 +447,35 @@ export function enterTerm (id, text) {
 	return {
 		type: ENTER_TERM,
 		payload: {id: id.num, term:text}
+	}
+}
+
+export function changeClassYear (id, text) {
+	return (dispatch, getState) => {
+		const originalState = getState()
+		dispatch(enterClassYear(id,text))
+		const newState = getState()
+		var classElement = newState.classes.classes.find((classElement) => classElement.id==id.num)
+		if(classElement.canPut){
+			let header = new Headers({
+				'Content-Type': 'application/json'
+			})
+			let sentData ={
+				method: 'PUT',
+				mode: 'cors',
+				body: JSON.stringify({
+					id: classElement.course.id,
+					semester: classElement.semester,
+					grade: classElement.grade,
+					course_tag_id: classElement.course_tags,
+					hours: classElement.hours
+				}),
+				credentials: 'include',
+				headers: header
+			}
+			fetch('https://api.tabula.life/history', sentData)
+				.then(response => {console.log(response)})
+		}
 	}
 }
 
@@ -385,6 +545,12 @@ function receiveClasses(json) {
 	}
 }
 
+function markReceivedClasses() {
+	return{
+		type: MARK_RECEIVED_CLASSES
+	}
+}
+
 function fetchClasses(){
 	let sentData ={
 		method: 'GET',
@@ -400,6 +566,7 @@ function fetchClasses(){
 			.then(json =>
 				{
 					dispatch(receiveClasses(json))
+					dispatch(markReceivedClasses())
 				}
 			)
 	}
@@ -420,6 +587,64 @@ export function fetchClassesIfNeeded() {
 	return (dispatch, getState) =>{
 		if (shouldFetchClasses(getState())) {
 			return dispatch(fetchClasses())
+		} else {
+			return Promise.resolve()
+		}
+	}
+}
+
+function requestClassSuggestions() {
+	return{
+		type: REQUEST_CLASS_SUGGESTIONS
+	}
+}
+
+function receiveClassSuggestions(json) {
+	return{
+		type: RECEIVE_CLASS_SUGGESTIONS,
+		payload: {
+			classSuggestions: json.data,
+			receivedAt: Date.now()
+		}
+	}
+}
+
+export function fetchClassSuggestions(text){
+	let sentData ={
+		method: 'GET',
+		mode: 'cors',
+		body: null,
+		credentials: 'include'
+	}
+
+	return (dispatch, getState) =>{
+		dispatch(requestClassSuggestions())
+		return fetch('https://api.tabula.life/coursesearch/' + text, sentData)
+			.then(response => response.json())
+			.then(json =>
+				{
+					dispatch(receiveClassSuggestions(json))
+				}
+			)
+	}
+}
+
+
+function shouldFetchClassSuggestions(state){
+	const classSuggestions = state.classSuggestions
+	if (!classSuggestions || !classSuggestions.fetched) {
+		return true
+	} else if (classSuggestions.isFetching) {
+		return false
+	} else {
+		return classSuggestions.didInvalidate
+	}
+}
+
+export function fetchClassSuggestionsIfNeeded() {
+	return (dispatch, getState) =>{
+		if (shouldFetchClassSuggestions(getState())) {
+			return dispatch(fetchClassSuggestions())
 		} else {
 			return Promise.resolve()
 		}

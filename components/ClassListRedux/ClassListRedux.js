@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 import ClassComponentRedux from '../ClassComponentRedux/ClassComponentRedux'
 
-const ClassListRedux = ({classes, grades, workloads, terms, years, emojis,
-  onBlurCourseId, onChangeGrade, onChangeWorkload, onChangeTerm, onChangeYear, onClickEmoji,
-  onClickRemove }) => (
+const ClassListRedux = ({classes, classSuggestions, grades, workloads, terms, years, emojis,
+  onBlurCourseId, onChangeClassId, onChangeGrade, onChangeWorkload, onChangeTerm, onChangeYear, onClickEmoji,
+  onClickRemove, onSuggestionsClearRequested, getSuggestionValue, renderSuggestion, fetchClassSuggestions,
+  onSuggestionSelected }) => (
   <section className="section">
         <div className="container">
           <div className="heading">
@@ -24,7 +25,9 @@ const ClassListRedux = ({classes, grades, workloads, terms, years, emojis,
               <div id="class-pane">
                 {classes.map(classElement =>
                   <ClassComponentRedux  
+                    kye={classElement.id}
                     grades={grades}
+                    classSuggestions={classSuggestions}
                     workloads={workloads}
                     terms={terms}
                     years={years}
@@ -36,14 +39,19 @@ const ClassListRedux = ({classes, grades, workloads, terms, years, emojis,
                     term={(classElement.term==null) || (!classElement.term) ? '' : classElement.term}
                     year={(classElement.year==null) || (!classElement.year) ? '' : classElement.year}
                     hours={(classElement.hours==null) || (!classElement.hours) ? '' : classElement.hours}
+                    onChangeSuggestion={(event, { newValue }) => onChangeClassId(classElement.id, newValue)}
+                    onSuggestionSelected={(event, {suggestion}) => onSuggestionSelected(classElement.id, suggestion.id)}
                     {...classElement}
-                    onBlurCourseId={onBlurCourseId}
                     onChangeGrade={onChangeGrade}
                     onChangeWorkload={onChangeWorkload}
                     onChangeTerm={onChangeTerm}
                     onChangeYear={onChangeYear}
                     onClickEmoji={onClickEmoji}
                     onClickRemove={onClickRemove}
+                    onSuggestionsClearRequested={onSuggestionsClearRequested}
+                    getSuggestionValue={getSuggestionValue}
+                    renderSuggestion={renderSuggestion}
+                    onSuggestionsFetchRequested={({ value }) => fetchClassSuggestions(value)}
                   />
                 )}
               </div>

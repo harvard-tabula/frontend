@@ -1,15 +1,24 @@
 import React, { PropTypes } from 'react';
+import Autosuggest from 'react-autosuggest';
 import SuccessTag from '../SuccessTag';
 import SuccessTagRedux from '../SuccessTagRedux/SuccessTagRedux'
 
-const ClassComponentRedux = ({grades, workloads, terms, years, num, emojis, tags,
+const ClassComponentRedux = ({classSuggestions, grades, workloads, terms, years, num, emojis, tags,
   name, grade, term, year, hours,
-  onBlurCourseId, onChangeGrade, onChangeWorkload, onChangeTerm, onChangeYear, onClickEmoji,
-  onClickRemove }) => (
+  onChangeGrade, onChangeWorkload, onChangeTerm, onChangeYear, onClickEmoji,
+  onClickRemove, onSuggestionsClearRequested, renderSuggestion, getSuggestionValue, onChangeSuggestion,
+  fetchClassSuggestions, onSuggestionsFetchRequested, onSuggestionSelected }) => (
     <tr>
       <td>
-        <input className="input" type="text" placeholder="Class ID"
-          onChange={(e) => onBlurCourseId({num}, e.target.value)} value={name}></input>
+        <Autosuggest
+          suggestions={classSuggestions}
+          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={onSuggestionsClearRequested}
+          getSuggestionValue={getSuggestionValue}
+          renderSuggestion={(suggestion) =>  <div>{suggestion.catalogue_number}</div>}
+          inputProps={{placeholder:'Enter Course Id', value:name, onChange:onChangeSuggestion}}
+          onSuggestionSelected={onSuggestionSelected}
+        />
       </td>
       <td>
         <p className="control">
@@ -22,14 +31,8 @@ const ClassComponentRedux = ({grades, workloads, terms, years, num, emojis, tags
         </p>
       </td>
       <td>
-        <p className="control">
-          <span className="select">
-            <select
-            onChange={(e) => onChangeWorkload({num}, e.target.value)} value={hours}>
-              {workloads.map(workload => <option value={workload}>{workload}</option>)}
-            </select>
-          </span>
-        </p>
+        <input className="input" type="text" placeholder="Num of Hours (ie. 1)"
+          onChange={(e) => onChangeWorkload({num}, e.target.value)} value={hours}></input>
       </td>
       <td>
         <p className="control">

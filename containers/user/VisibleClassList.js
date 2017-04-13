@@ -1,13 +1,14 @@
 import { connect } from 'react-redux'
 import ClassListRedux from '../../components/ClassListRedux/ClassListRedux'
-import { enterCourseID, enterGrade, enterWorkload, enterTerm, enterClassYear,
-		toggleEmoji, removeClass } from '../../actions/user'
+import { enterCourseID, changeGrade, changeWorkload, changeTerm, changeClassYear,
+		toggleEmoji, removeClass, clearClassSuggestions, fetchClassSuggestions, 
+		changeSuggestionSelected } from '../../actions/user'
 
 const mapStateToProps = (state) => {
 	return {
 		classes: state.classes.classes,
+		classSuggestions: state.classSuggestions.classSuggestions,
 		grades: state.userInfo.grades,
-		workloads: ["1 hour", "2 hour", "3 hour", "4 hour", "5 hour", "6 hour", "7 hour", "8 hour", "9 hour"],
 		terms: state.userInfo.terms,
 		years: ["2014", "2015", "2016", "2017"],
 		emojis: [{id: 0, text:'😍', hover: 'Loved It'}, 
@@ -22,20 +23,20 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onBlurCourseId: (id, text) => {
-			dispatch(enterCourseID(id, text))
+		onChangeClassId: (id, text) => {
+			dispatch(enterCourseID(id,text))
 		},
 		onChangeGrade: (id, text) => {
-			dispatch(enterGrade(id,text))
+			dispatch(changeGrade(id,text))
 		},
 		onChangeWorkload: (id, text) => {
-			dispatch(enterWorkload(id,text))
+			dispatch(changeWorkload(id,text))
 		},
 		onChangeTerm: (id, text) => {
-			dispatch(enterTerm(id,text))
+			dispatch(changeTerm(id,text))
 		},
 		onChangeYear: (id, text) =>{
-			dispatch(enterClassYear(id,text))
+			dispatch(changeClassYear(id,text))
 		},
 		onClickEmoji: (id, emojiId) => {
 			dispatch(toggleEmoji(id, emojiId))
@@ -43,6 +44,18 @@ const mapDispatchToProps = (dispatch) => {
 		onClickRemove: (id) => {
 			dispatch(removeClass(id))
 		},
+		onSuggestionsClearRequested: () => {
+			dispatch(clearClassSuggestions())
+		},
+		getSuggestionValue: (suggestion) => {
+			return suggestion.catalogue_number
+		},
+		fetchClassSuggestions: (text) => {
+			dispatch(fetchClassSuggestions(text))
+		},
+		onSuggestionSelected: (classId, courseId) => {
+			dispatch(changeSuggestionSelected(classId, courseId))
+		}
 	}
 }
 

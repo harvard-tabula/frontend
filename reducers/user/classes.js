@@ -1,34 +1,77 @@
 import update from 'immutability-helper';
 
 import {ADD_CLASS, REMOVE_CLASS, ENTER_COURSEID, ENTER_GRADE, ENTER_WORKLOAD, ENTER_TERM, ENTER_CLASS_YEAR,
-	TOGGLE_EMOJI, REQUEST_CLASSES, RECEIVE_CLASSES} from '../../actions/user/index'
+	TOGGLE_EMOJI, REQUEST_CLASSES, RECEIVE_CLASSES, SUGGESTION_SELECTED, MARK_RECEIVED_CLASSES} from '../../actions/user/index'
 
 const classElement = (state={}, action) => {
 	switch (action.type){
 		case ADD_CLASS:
 			return {
 				course: {
-					id: ''
+					id: null,
+					name_short: null
 				},
-				grade: '',
-				workload: '',
-				semester: '',
-				term: '',
-				year: '',
-				course_tags: []
+				grade: null,
+				hours: null,
+				semester: null,
+				term: null,
+				year: null,
+				course_tags: [],
+				canPut: false,
+				suggestedName: false,
+				id: action.payload.id
 			}
 		case ENTER_COURSEID:
 			if (state.id != action.payload.id) {
 				return state
+			}
+			else if((state.grade!=null) && (state.term != null) && (state.year!=null)){
+				return update(state, {
+					course: {
+						name_short: {$set: action.payload.courseId}
+					},
+					canPut: {$set: true}
+				})
 			}
 			return update(state, {
 				course: {
 					name_short: {$set: action.payload.courseId}
 				}
 			})
+		case SUGGESTION_SELECTED:
+			if (state.id != action.payload.classId) {
+				return state
+			}
+			else if((state.grade!=null) && (state.term != null) && (state.year!=null)){
+				return update(state, {
+					course: {
+						id: {$set: action.payload.courseId}
+					},
+					suggestedName: {$set: true},
+					canPut: {$set: true}
+				})
+			}
+			return update(state, {
+				course: {
+					id: {$set: action.payload.courseId}
+				},
+				suggestedName: {$set: true}
+			})
+		case MARK_RECEIVED_CLASSES:
+			return update(state, {
+				canPut: {$set: true},
+				term: {$set: state.semester.split(' ')[0]},
+				year: {$set: state.semester.split(' ')[1]}
+			})
 		case ENTER_GRADE:
 			if (state.id != action.payload.id) {
 				return state
+			}
+			else if((state.term != null) && (state.year!=null) && (state.suggestedName)){
+				return Object.assign({}, state, {
+					grade: action.payload.grade,
+					canPut: true
+				})
 			}
 			return Object.assign({}, state, {
 				grade: action.payload.grade
@@ -38,11 +81,18 @@ const classElement = (state={}, action) => {
 				return state
 			}
 			return Object.assign({}, state, {
-				workload: action.payload.workload
+				hours: action.payload.hours
 			})
 		case ENTER_TERM:
 			if (state.id != action.payload.id) {
 				return state
+			} 
+			else if((state.grade!=null) && (state.year!=null) && (state.suggestedName)){
+				return Object.assign({}, state, {
+					term: action.payload.term,
+				semester: action.payload.term + ' ' + state.year,
+					canPut: true
+				})
 			}
 			return Object.assign({}, state, {
 				term: action.payload.term,
@@ -51,6 +101,13 @@ const classElement = (state={}, action) => {
 		case ENTER_CLASS_YEAR:
 			if (state.id != action.payload.id) {
 				return state
+			}
+			else if((state.grade!=null) && (state.term!=null) && (state.suggestedName)){
+				return Object.assign({}, state, {
+					year: action.payload.year,
+					semester: state.term + ' ' + action.payload.year,
+					canPut: true
+				})
 			}
 			return Object.assign({}, state, {
 				year: action.payload.year,
@@ -156,6 +213,14 @@ function classes(state = {
 				classes: {$apply: function(x) {return x.map(t => classElement(t, action));}}
 			})
 		case TOGGLE_EMOJI:
+			return update(state, {
+				classes: {$apply: function(x) {return x.map(t => classElement(t, action));}}
+			})
+		case SUGGESTION_SELECTED:
+			return update(state, {
+				classes: {$apply: function(x) {return x.map(t => classElement(t, action));}}
+			})
+		case MARK_RECEIVED_CLASSES:
 			return update(state, {
 				classes: {$apply: function(x) {return x.map(t => classElement(t, action));}}
 			})

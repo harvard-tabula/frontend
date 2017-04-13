@@ -6,6 +6,7 @@ import concentrations from './concentrations'
 import userInformation from './userInformation'
 import profile from './profile'
 import userInfo from './userInfo'
+import classSuggestions from './classSuggestions'
 
 const tagCategories = (state = [], action) => {
 	switch (action.type){
@@ -21,7 +22,8 @@ const userApp = combineReducers({
 	tagCategories,
 	semesters,
 	concentrations,
-	userInfo
+	userInfo,
+	classSuggestions
 })
 
 export default userApp
