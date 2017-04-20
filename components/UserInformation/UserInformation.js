@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 
 const UserInformation = ({profile, name, concentrations, years_coding, year, ethnicities, genders, concentration,
-onChangeName, onChangeEmail, onChangeConcentration, 
-onChangeYearsCoding, onChangeGraduation, onChangeGender, onChangeEthnicity}) => (
+  nameSuccess, emailSuccess, genderSuccess, ethcnitySuccess, concentrationSuccess, yearsCodingSuccess, yearSuccess,
+  onChangeName, onChangeEmail, onChangeConcentration, 
+  onChangeYearsCoding, onBlurYearsCoding, onChangeGraduation, onBlurYear, onChangeGender, onChangeEthnicity}) => (
   <section className="section">
     <div className="container">
       <div className="heading">
@@ -17,12 +18,12 @@ onChangeYearsCoding, onChangeGraduation, onChangeGender, onChangeEthnicity}) => 
         <div className="column">
           <label className="label">Name</label>
             <p className="control">
-              <input className="input" type="text" placeholder="ie. Rob Bowden" id="name"
+              <input className={nameSuccess ? "input is-success" : "input"} type="text" placeholder="ie. Rob Bowden" id="name"
               onChange={(e) => onChangeName(e.target.value)} value={profile.name}></input>
             </p>
           <label className="label">Email</label>
             <p className="control">
-              <input className="input" type="text" placeholder="ie. robbowden@college.harvard.edu" id="email"
+              <input className={emailSuccess ? "input is-success" : "input"} type="text" placeholder="ie. robbowden@college.harvard.edu" id="email"
               onChange={(e) => onChangeEmail(e.target.value)} value={profile.email}></input>
             </p>
           <label className="label">Gender</label>
@@ -54,13 +55,13 @@ onChangeYearsCoding, onChangeGraduation, onChangeGender, onChangeEthnicity}) => 
             </p>
           <label className="label">Years Coding</label>
             <p className="control">
-              <input className="input" type="text" placeholder="ie. .5"
-              onChange={(e) => onChangeYearsCoding(e.target.value)} value={profile.years_coding}></input>
+              <input className={yearsCodingSuccess ? "input is-success" : "input"} type="text" placeholder="ie. .5"
+              onChange={(e) => onChangeYearsCoding(e.target.value)} onBlur={onBlurYearsCoding} value={profile.years_coding}></input>
             </p>
           <label className="label">Graduation Year</label>
             <p className="control">
-              <input className="input" type="text" placeholder="ie. 2018"
-              onChange={(e) => onChangeGraduation(e.target.value)} value={profile.year}></input>
+              <input className={yearSuccess ? "input is-success" : "input"} type="text" placeholder="ie. 2018"
+              onChange={(e) => onChangeGraduation(e.target.value)} onBlur={onBlurYear} value={profile.year}></input>
             </p>
         </div>
       </div>

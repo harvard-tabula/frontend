@@ -5,7 +5,11 @@ export const ENTER_EMAIL = 'ENTER_EMAIL'
 export const ENTER_CONCENTRATION = 'ENTER_CONCENTRATION'
 export const ENTER_CONCENTRATION_ID = 'ENTER_CONCENTRATION_ID'
 export const ENTER_YEARS_CODING = 'ENTER_YEARS_CODING'
+export const MARK_YEARS_CODING_SUCCESS = 'MARK_YEARS_CODING_SUCCESS'
+export const MARK_YEARS_CODING_FAILURE = 'MARK_YEARS_CODING_FAILURE'
 export const ENTER_YEAR = 'ENTER_YEAR'
+export const MARK_YEAR_SUCCESS = 'MARK_YEAR_SUCCESS'
+export const MARK_YEAR_FAILURE = 'MARK_YEAR_FAILURE'
 export const ENTER_GENDER = 'ENTER_GENDER'
 export const ENTER_ETHNICITY = 'ENTER_ETHNICITY'
 export const ADD_CLASS = 'ADD_CLASS'
@@ -16,6 +20,8 @@ export const TOGGLE_EMOJI = 'TOGGLE_EMOJI'
 export const ENTER_COURSEID = 'ENTER_COURSEID'
 export const ENTER_GRADE = 'ENTER_GRADE'
 export const ENTER_WORKLOAD = 'ENTER_WORKLOAD'
+export const MARK_HOURS_SUCCESS = 'MARK_HOURS_SUCCESS'
+export const MARK_HOURS_FAILURE = 'MARK_HOURS_FAILURE'
 export const ENTER_TERM = 'ENTER_TERM'
 export const ENTER_CLASS_YEAR = 'ENTER_CLASS_YEAR'
 export const TOGGLE_TAG = 'TOGGLE_TAG'
@@ -34,6 +40,8 @@ export const RECEIVE_CONCENTRATIONS = 'RECEIVE_CONCENTRATIONS'
 export const REQUEST_USER_INFO = 'REQUEST_USER_INFO'
 export const RECEIVE_USER_INFO = 'RECEIVE_USER_INFO'
 export const MARK_RECEIVED_CLASSES = 'MARK_RECEIVED_CLASSES'
+export const MARK_RECEIVED_PROFILE = 'MARK_RECEIVED_PROFILE'
+
 
 let nextClassId = -1
 
@@ -49,13 +57,13 @@ export function changeName (text) {
 			method: 'PUT',
 			mode: 'cors',
 			body: JSON.stringify({
-				gender: newState.profile.profile.gender,
-				ethnicity: newState.profile.profile.ethnicity,
+				gender: (newState.profile.genderSuccess ? newState.profile.profile.gender : null),
+				ethnicity: (newState.profile.ethnicitySuccess ? newState.profile.profile.ethnicity : null),
 				name: newState.profile.profile.name,
 				tag_ids: newState.profile.tag_id,
-				concentration_id: newState.profile.concentration_id,
-				years_coding: newState.profile.profile.years_coding,
-				year: newState.profile.profile.year
+				concentration_id: (newState.profile.concentrationSuccess ? newState.profile.concentration_id : null),
+				years_coding: (newState.profile.yearsCodingSuccess ? newState.profile.profile.years_coding : null),
+				year: (newState.profile.yearSuccess ? newState.profile.profile.year : null)
 			}),
 			credentials: 'include',
 			headers: header
@@ -93,13 +101,13 @@ export function changeConcentration (text) {
 			method: 'PUT',
 			mode: 'cors',
 			body: JSON.stringify({
-				gender: newState.profile.profile.gender,
-				ethnicity: newState.profile.profile.ethnicity,
+				gender: (newState.profile.genderSuccess ? newState.profile.profile.gender : null),
+				ethnicity: (newState.profile.ethnicitySuccess ? newState.profile.profile.ethnicity : null),
 				name: newState.profile.profile.name,
 				tag_ids: newState.profile.tag_id,
-				concentration_id: newState.profile.concentration_id,
-				years_coding: newState.profile.profile.years_coding,
-				year: newState.profile.profile.year
+				concentration_id: (newState.profile.concentrationSuccess ? newState.profile.concentration_id : null),
+				years_coding: (newState.profile.yearsCodingSuccess ? newState.profile.profile.years_coding : null),
+				year: (newState.profile.yearSuccess ? newState.profile.profile.year : null)
 			}),
 			credentials: 'include',
 			headers: header
@@ -135,6 +143,51 @@ export function enterConcentration (text) {
 	}
 }
 
+export function markYearsCodingSuccess () {
+	return{
+		type: MARK_YEARS_CODING_SUCCESS
+	}
+}
+
+export function markYearsCodingFailure() {
+	return{
+		type: MARK_YEARS_CODING_FAILURE
+	}
+}
+
+export function blurYearsCoding() {
+	return (dispatch, getState) => {
+		const newState = getState()
+		let regex = /^[0-9]*\.?[0-9]+?$/
+		if (regex.test(newState.profile.profile.years_coding))
+		{
+			dispatch(markYearsCodingSuccess())
+			let header = new Headers({
+			'Content-Type': 'application/json'
+			})
+			let sentData ={
+				method: 'PUT',
+				mode: 'cors',
+				body: JSON.stringify({
+					gender: (newState.profile.genderSuccess ? newState.profile.profile.gender : null),
+					ethnicity: (newState.profile.ethnicitySuccess ? newState.profile.profile.ethnicity : null),
+					name: newState.profile.profile.name,
+					tag_ids: newState.profile.tag_id,
+					concentration_id: (newState.profile.concentrationSuccess ? newState.profile.concentration_id : null),
+					years_coding: (newState.profile.yearsCodingSuccess ? newState.profile.profile.years_coding : null),
+					year: (newState.profile.yearSuccess ? newState.profile.profile.year : null)
+				}),
+				credentials: 'include',
+				headers: header
+			}
+			fetch('https://api.tabula.life/profile', sentData)
+				.then(response => {console.log(response)})
+				.catch(error => {console.log(error); dispatch(markYearsCodingFailure())})
+
+		}
+	}
+}
+
 export function changeYearsCoding (text) {
 	return (dispatch, getState) => {
 		const originalState = getState()
@@ -147,13 +200,13 @@ export function changeYearsCoding (text) {
 			method: 'PUT',
 			mode: 'cors',
 			body: JSON.stringify({
-				gender: newState.profile.profile.gender,
-				ethnicity: newState.profile.profile.ethnicity,
+				gender: (newState.profile.genderSuccess ? newState.profile.profile.gender : null),
+				ethnicity: (newState.profile.ethnicitySuccess ? newState.profile.profile.ethnicity : null),
 				name: newState.profile.profile.name,
 				tag_ids: newState.profile.tag_id,
-				concentration_id: newState.profile.concentration_id,
-				years_coding: newState.profile.profile.years_coding,
-				year: newState.profile.profile.year
+				concentration_id: (newState.profile.concentrationSuccess ? newState.profile.concentration_id : null),
+				years_coding: (newState.profile.yearsCodingSuccess ? newState.profile.profile.years_coding : null),
+				year: (newState.profile.yearSuccess ? newState.profile.profile.year : null)
 			}),
 			credentials: 'include',
 			headers: header
@@ -171,6 +224,51 @@ export function enterYearsCoding (text) {
 	}
 }
 
+export function markYearSuccess () {
+	return {
+		type: MARK_YEAR_SUCCESS
+	}
+}
+
+export function markYearFailure () {
+	return {
+		type: MARK_YEAR_FAILURE
+	}
+}
+
+export function blurYear () {
+	return (dispatch, getState) => {
+		const newState = getState()
+		let regex = /^20[0-2][0-9]$/
+		if (regex.test(newState.profile.profile.year))
+		{
+			dispatch(markYearSuccess())
+			let header = new Headers({
+			'Content-Type': 'application/json'
+			})
+			let sentData ={
+				method: 'PUT',
+				mode: 'cors',
+				body: JSON.stringify({
+					gender: (newState.profile.genderSuccess ? newState.profile.profile.gender : null),
+					ethnicity: (newState.profile.ethnicitySuccess ? newState.profile.profile.ethnicity : null),
+					name: newState.profile.profile.name,
+					tag_ids: newState.profile.tag_id,
+					concentration_id: (newState.profile.concentrationSuccess ? newState.profile.concentration_id : null),
+					years_coding: (newState.profile.yearsCodingSuccess ? newState.profile.profile.years_coding : null),
+					year: (newState.profile.yearSuccess ? newState.profile.profile.year : null)
+				}),
+				credentials: 'include',
+				headers: header
+			}
+			fetch('https://api.tabula.life/profile', sentData)
+				.then(response => {console.log(response)})
+				.catch(error => {console.log(error); dispatch(markYearFailure())})
+
+		}
+	}
+}
+
 export function changeYear (text) {
 	return (dispatch, getState) => {
 		const originalState = getState()
@@ -183,13 +281,13 @@ export function changeYear (text) {
 			method: 'PUT',
 			mode: 'cors',
 			body: JSON.stringify({
-				gender: newState.profile.profile.gender,
-				ethnicity: newState.profile.profile.ethnicity,
+				gender: (newState.profile.genderSuccess ? newState.profile.profile.gender : null),
+				ethnicity: (newState.profile.ethnicitySuccess ? newState.profile.profile.ethnicity : null),
 				name: newState.profile.profile.name,
 				tag_ids: newState.profile.tag_id,
-				concentration_id: newState.profile.concentration_id,
-				years_coding: newState.profile.profile.years_coding,
-				year: newState.profile.profile.year
+				concentration_id: (newState.profile.concentrationSuccess ? newState.profile.concentration_id : null),
+				years_coding: (newState.profile.yearsCodingSuccess ? newState.profile.profile.years_coding : null),
+				year: (newState.profile.yearSuccess ? newState.profile.profile.year : null)
 			}),
 			credentials: 'include',
 			headers: header
@@ -219,13 +317,13 @@ export function changeGender (text) {
 			method: 'PUT',
 			mode: 'cors',
 			body: JSON.stringify({
-				gender: newState.profile.profile.gender,
-				ethnicity: newState.profile.profile.ethnicity,
+				gender: (newState.profile.genderSuccess ? newState.profile.profile.gender : null),
+				ethnicity: (newState.profile.ethnicitySuccess ? newState.profile.profile.ethnicity : null),
 				name: newState.profile.profile.name,
 				tag_ids: newState.profile.tag_id,
-				concentration_id: newState.profile.concentration_id,
-				years_coding: newState.profile.profile.years_coding,
-				year: newState.profile.profile.year
+				concentration_id: (newState.profile.concentrationSuccess ? newState.profile.concentration_id : null),
+				years_coding: (newState.profile.yearsCodingSuccess ? newState.profile.profile.years_coding : null),
+				year: (newState.profile.yearSuccess ? newState.profile.profile.year : null)
 			}),
 			credentials: 'include',
 			headers: header
@@ -255,13 +353,13 @@ export function changeEthnicity (text) {
 			method: 'PUT',
 			mode: 'cors',
 			body: JSON.stringify({
-				gender: newState.profile.profile.gender,
-				ethnicity: newState.profile.profile.ethnicity,
+				gender: (newState.profile.genderSuccess ? newState.profile.profile.gender : null),
+				ethnicity: (newState.profile.ethnicitySuccess ? newState.profile.profile.ethnicity : null),
 				name: newState.profile.profile.name,
 				tag_ids: newState.profile.tag_id,
-				concentration_id: newState.profile.concentration_id,
-				years_coding: newState.profile.profile.years_coding,
-				year: newState.profile.profile.year
+				concentration_id: (newState.profile.concentrationSuccess ? newState.profile.concentration_id : null),
+				years_coding: (newState.profile.yearsCodingSuccess ? newState.profile.profile.years_coding : null),
+				year: (newState.profile.yearSuccess ? newState.profile.profile.year : null)
 			}),
 			credentials: 'include',
 			headers: header
@@ -289,7 +387,7 @@ export function changeSuggestionSelected (classId, courseId) {
 					id: classElement.course.id,
 					semester: classElement.semester,
 					grade: classElement.grade,
-					course_tag_id: classElement.course_tags,
+					course_tag_id: classElement.tags,
 					hours: classElement.hours
 				}),
 				credentials: 'include',
@@ -359,7 +457,7 @@ export function changeGrade (id, text) {
 					id: classElement.course.id,
 					semester: classElement.semester,
 					grade: classElement.grade,
-					course_tag_id: classElement.course_tags,
+					course_tag_id: classElement.tags,
 					hours: classElement.hours
 				}),
 				credentials: 'include',
@@ -375,6 +473,51 @@ export function enterGrade (id, text) {
 	return {
 		type: ENTER_GRADE,
 		payload: {id: id.num, grade: text}
+	}
+}
+
+export function markHoursSuccess (id) {
+	return {
+		type: MARK_HOURS_SUCCESS,
+		payload: {id: id.num}
+	}
+}
+
+export function markHoursFailure (id) {
+	return {
+		type: MARK_HOURS_FAILURE,
+		payload: {id: id.num}
+	}
+}
+
+export function blurWorkload() {
+	return (dispatch, getState) => {
+		const newState = getState()
+		let regex = /^[0-9]*\.?[0-9]+?$/
+		var classElement = newState.classes.classes.find((classElement) => classElement.id==id.num)
+		if (regex.test(classElement.hours)){
+			dispatch(markHoursSuccess())
+		}
+		if(classElement.canPut){
+			let header = new Headers({
+				'Content-Type': 'application/json'
+			})
+			let sentData ={
+				method: 'PUT',
+				mode: 'cors',
+				body: JSON.stringify({
+					id: classElement.course.id,
+					semester: classElement.semester,
+					grade: classElement.grade,
+					course_tag_id: classElement.tags,
+					hours: classElement.hours
+				}),
+				credentials: 'include',
+				headers: header
+			}
+			fetch('https://api.tabula.life/history', sentData)
+				.then(response => {console.log(response)})
+		}
 	}
 }
 
@@ -395,7 +538,7 @@ export function changeWorkload (id, text) {
 					id: classElement.course.id,
 					semester: classElement.semester,
 					grade: classElement.grade,
-					course_tag_id: classElement.course_tags,
+					course_tag_id: classElement.tags,
 					hours: classElement.hours
 				}),
 				credentials: 'include',
@@ -431,7 +574,7 @@ export function changeTerm (id, text) {
 					id: classElement.course.id,
 					semester: classElement.semester,
 					grade: classElement.grade,
-					course_tag_id: classElement.course_tags,
+					course_tag_id: classElement.tags,
 					hours: classElement.hours
 				}),
 				credentials: 'include',
@@ -467,7 +610,7 @@ export function changeClassYear (id, text) {
 					id: classElement.course.id,
 					semester: classElement.semester,
 					grade: classElement.grade,
-					course_tag_id: classElement.course_tags,
+					course_tag_id: classElement.tags,
 					hours: classElement.hours
 				}),
 				credentials: 'include',
@@ -483,6 +626,42 @@ export function enterClassYear (id, text) {
 	return {
 		type: ENTER_CLASS_YEAR,
 		payload: {id: id.num, year:text}
+	}
+}
+
+export function changeEmoji (id, emojiId) {
+	return (dispatch, getState) => {
+		const originalState = getState()
+		dispatch(toggleEmoji(id,emojiId))
+		const newState = getState()
+		var classElement = newState.classes.classes.find((classElement) => classElement.id==id)
+		console.log(JSON.stringify({
+					id: classElement.course.id,
+					semester: classElement.semester,
+					grade: classElement.grade,
+					course_tag_id: classElement.tags,
+					hours: classElement.hours
+				}))
+		if(classElement.canPut){
+			let header = new Headers({
+				'Content-Type': 'application/json'
+			})
+			let sentData ={
+				method: 'PUT',
+				mode: 'cors',
+				body: JSON.stringify({
+					id: classElement.course.id,
+					semester: classElement.semester,
+					grade: classElement.grade,
+					course_tag_id: classElement.tags,
+					hours: classElement.hours
+				}),
+				credentials: 'include',
+				headers: header
+			}
+			fetch('https://api.tabula.life/history', sentData)
+				.then(response => {console.log(response)})
+		}
 	}
 }
 
@@ -545,7 +724,7 @@ function receiveClasses(json) {
 	}
 }
 
-function markReceivedClasses() {
+export function markReceivedClasses() {
 	return{
 		type: MARK_RECEIVED_CLASSES
 	}
@@ -689,6 +868,8 @@ export function fetchProfile() {
 			.then(json =>
 				{
 					dispatch(receiveProfile(json))
+					dispatch(getConcentrationId())
+					dispatch(markReceivedProfile())
 				}
 			)
 	}
@@ -712,6 +893,12 @@ export function fetchProfileIfNeeded() {
 		} else {
 			return Promise.resolve()
 		}
+	}
+}
+
+export function markReceivedProfile () {
+	return{
+		type: MARK_RECEIVED_PROFILE
 	}
 }
 

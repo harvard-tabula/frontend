@@ -17,7 +17,6 @@ class UserReduxPage extends Component {
 	}
 	
 	componentWillMount() {
-		console.log("component did mount")
 		const { dispatch } = this.props
 		dispatch(fetchProfileIfNeeded())
 		dispatch(fetchClassesIfNeeded())

@@ -1,7 +1,8 @@
 import update from 'immutability-helper';
 
 import {ADD_CLASS, REMOVE_CLASS, ENTER_COURSEID, ENTER_GRADE, ENTER_WORKLOAD, ENTER_TERM, ENTER_CLASS_YEAR,
-	TOGGLE_EMOJI, REQUEST_CLASSES, RECEIVE_CLASSES, SUGGESTION_SELECTED, MARK_RECEIVED_CLASSES} from '../../actions/user/index'
+	TOGGLE_EMOJI, REQUEST_CLASSES, RECEIVE_CLASSES, SUGGESTION_SELECTED, MARK_RECEIVED_CLASSES, 
+	MARK_HOURS_SUCCESS, MARK_HOURS_FAILURE} from '../../actions/user/index'
 
 const classElement = (state={}, action) => {
 	switch (action.type){
@@ -19,7 +20,9 @@ const classElement = (state={}, action) => {
 				course_tags: [],
 				canPut: false,
 				suggestedName: false,
-				id: action.payload.id
+				id: action.payload.id,
+				tags: [],
+				hoursSuccess: false
 			}
 		case ENTER_COURSEID:
 			if (state.id != action.payload.id) {
@@ -58,10 +61,16 @@ const classElement = (state={}, action) => {
 				suggestedName: {$set: true}
 			})
 		case MARK_RECEIVED_CLASSES:
+			let temp_tags = []
+			state.course_tags.map(tag =>{
+				temp_tags.push(tag.id)
+			})
 			return update(state, {
 				canPut: {$set: true},
 				term: {$set: state.semester.split(' ')[0]},
-				year: {$set: state.semester.split(' ')[1]}
+				year: {$set: state.semester.split(' ')[1]},
+				tags: {$set: temp_tags},
+				hoursSuccess: {$set: state.hours!= null ? true : false}
 			})
 		case ENTER_GRADE:
 			if (state.id != action.payload.id) {
@@ -81,7 +90,22 @@ const classElement = (state={}, action) => {
 				return state
 			}
 			return Object.assign({}, state, {
-				hours: action.payload.hours
+				hours: action.payload.hours,
+				hoursSuccess: false
+			})
+		case MARK_HOURS_SUCCESS:
+			if (state.id != action.payload.id) {
+				return state
+			}
+			return Object.assign({}, state, {
+				hoursSuccess: true
+			})
+		case MARK_HOURS_FAILURE:
+			if (state.id != action.payload.id) {
+				return state
+			}
+			return Object.assign({}, state, {
+				hoursSuccess: false
 			})
 		case ENTER_TERM:
 			if (state.id != action.payload.id) {
@@ -116,13 +140,13 @@ const classElement = (state={}, action) => {
 		case TOGGLE_EMOJI:
 			if (state.id != action.payload.id) {
 				return state
-			} else if (state.course_tags.indexOf(action.payload.emojiId) > -1){
+			} else if (state.tags.indexOf(action.payload.emojiId) > -1){
 				return update(state, {
-					course_tags: {$apply: function(x) {return x.filter((item) => item !== action.payload.emojiId)}}
+					tags: {$apply: function(x) {return x.filter((item) => item !== action.payload.emojiId)}}
 				})
 			}
 			return update(state,{
-				course_tags: {$push: [action.payload.emojiId]}
+				tags: {$push: [action.payload.emojiId]}
 			})
 		default:
 			return state
@@ -201,6 +225,14 @@ function classes(state = {
 				classes: {$apply: function(x) {return x.map(t => classElement(t, action));}}
 			})
 		case ENTER_WORKLOAD:
+			return update(state, {
+				classes: {$apply: function(x) {return x.map(t => classElement(t, action));}}
+			})
+		case MARK_HOURS_SUCCESS:
+			return update(state, {
+				classes: {$apply: function(x) {return x.map(t => classElement(t, action));}}
+			})
+		case MARK_HOURS_FAILURE:
 			return update(state, {
 				classes: {$apply: function(x) {return x.map(t => classElement(t, action));}}
 			})
