@@ -17,9 +17,9 @@ const mapStateToProps = (state) => {
 	return {
 		classes: state.classes.classes,
 		classSuggestions: state.classSuggestions.classSuggestions,
-		grades: state.userInfo.grades,
-		terms: state.userInfo.terms,
-		years: ["2014", "2015", "2016", "2017"],
+		grades: ["Grade"].concat(state.userInfo.grades),
+		terms: ["Term"].concat(state.userInfo.terms),
+		years: ["Year", "2014", "2015", "2016", "2017"],
 		emojis: state.tags.tags.filter(t => t.category == "user_history")
 			.map(function(tag) {
 				var emoji = emojiDict[tag.name]
