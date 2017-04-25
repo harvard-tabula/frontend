@@ -387,7 +387,7 @@ export function changeSuggestionSelected (classId, courseId) {
 					id: classElement.course.id,
 					semester: classElement.semester,
 					grade: classElement.grade,
-					course_tag_id: classElement.tags,
+					course_tag_ids: classElement.tags,
 					hours: classElement.hours
 				}),
 				credentials: 'include',
@@ -399,10 +399,13 @@ export function changeSuggestionSelected (classId, courseId) {
 	}
 }
 
-export function suggestionSelected(classId, courseId) {
+export function suggestionSelected(classId, suggestion) {
+	console.log(suggestion.catalog_number)
 	return{
 		type: SUGGESTION_SELECTED,
-		payload: {classId: classId, courseId: courseId}
+		payload: {classId: classId, 
+			courseId: suggestion.id, 
+			courseName: suggestion.catalog_number}
 	}
 }
 
@@ -457,7 +460,7 @@ export function changeGrade (id, text) {
 					id: classElement.course.id,
 					semester: classElement.semester,
 					grade: classElement.grade,
-					course_tag_id: classElement.tags,
+					course_tag_ids: classElement.tags,
 					hours: classElement.hours
 				}),
 				credentials: 'include',
@@ -509,7 +512,7 @@ export function blurWorkload() {
 					id: classElement.course.id,
 					semester: classElement.semester,
 					grade: classElement.grade,
-					course_tag_id: classElement.tags,
+					course_tag_ids: classElement.tags,
 					hours: classElement.hours
 				}),
 				credentials: 'include',
@@ -538,7 +541,7 @@ export function changeWorkload (id, text) {
 					id: classElement.course.id,
 					semester: classElement.semester,
 					grade: classElement.grade,
-					course_tag_id: classElement.tags,
+					course_tag_ids: classElement.tags,
 					hours: classElement.hours
 				}),
 				credentials: 'include',
@@ -574,7 +577,7 @@ export function changeTerm (id, text) {
 					id: classElement.course.id,
 					semester: classElement.semester,
 					grade: classElement.grade,
-					course_tag_id: classElement.tags,
+					course_tag_ids: classElement.tags,
 					hours: classElement.hours
 				}),
 				credentials: 'include',
@@ -610,7 +613,7 @@ export function changeClassYear (id, text) {
 					id: classElement.course.id,
 					semester: classElement.semester,
 					grade: classElement.grade,
-					course_tag_id: classElement.tags,
+					course_tag_ids: classElement.tags,
 					hours: classElement.hours
 				}),
 				credentials: 'include',
@@ -635,13 +638,6 @@ export function changeEmoji (id, emojiId) {
 		dispatch(toggleEmoji(id,emojiId))
 		const newState = getState()
 		var classElement = newState.classes.classes.find((classElement) => classElement.id==id)
-		console.log(JSON.stringify({
-					id: classElement.course.id,
-					semester: classElement.semester,
-					grade: classElement.grade,
-					course_tag_id: classElement.tags,
-					hours: classElement.hours
-				}))
 		if(classElement.canPut){
 			let header = new Headers({
 				'Content-Type': 'application/json'
@@ -653,7 +649,7 @@ export function changeEmoji (id, emojiId) {
 					id: classElement.course.id,
 					semester: classElement.semester,
 					grade: classElement.grade,
-					course_tag_id: classElement.tags,
+					course_tag_ids: classElement.tags,
 					hours: classElement.hours
 				}),
 				credentials: 'include',
@@ -847,8 +843,7 @@ function receiveProfile(json) {
 		payload : {
 			profile: json.data,
 			receivedAt: Date.now(),
-			tags: tags,
-			concentration_id: json.data.concentration.id
+			tags: tags
 		}
 	}
 }
