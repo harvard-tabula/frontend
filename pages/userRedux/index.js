@@ -7,7 +7,7 @@ import VisibleTagList from '../../containers/user/VisibleTagList';
 import VisibleTag from '../../containers/user/VisibleTag';
 import VisibleProfile from '../../containers/user/VisibleProfile';
 import Layout from '../../components/Layout';
-import { fetchProfileIfNeeded, fetchClassesIfNeeded, fetchConcentrationsIfNeeded, 
+import { fetchLogin, fetchProfileIfNeeded, fetchClassesIfNeeded, fetchConcentrationsIfNeeded, 
 	fetchTagsIfNeeded, fetchSemestersIfNeeded, fetchUserInfoIfNeeded } from '../../actions/user'
 
 class UserReduxPage extends Component {
@@ -18,6 +18,7 @@ class UserReduxPage extends Component {
 	
 	componentWillMount() {
 		const { dispatch } = this.props
+		// dispatch(fetchLogin())
 		dispatch(fetchProfileIfNeeded())
 		dispatch(fetchClassesIfNeeded())
 		dispatch(fetchConcentrationsIfNeeded())
