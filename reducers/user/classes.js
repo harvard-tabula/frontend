@@ -46,9 +46,11 @@ const classElement = (state={}, action) => {
 				return state
 			}
 			else if((state.grade!=null) && (state.term != null) && (state.year!=null)){
+				console.log(action.payload.courseName)
 				return update(state, {
 					course: {
-						id: {$set: action.payload.courseId}
+						id: {$set: action.payload.courseId},
+						name_short: {$set: action.payload.courseName}
 					},
 					suggestedName: {$set: true},
 					canPut: {$set: true}
@@ -56,7 +58,8 @@ const classElement = (state={}, action) => {
 			}
 			return update(state, {
 				course: {
-					id: {$set: action.payload.courseId}
+					id: {$set: action.payload.courseId},
+					name_short: {$set: action.payload.courseName}
 				},
 				suggestedName: {$set: true}
 			})

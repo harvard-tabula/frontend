@@ -15,7 +15,7 @@ const ClassComponentRedux = ({classSuggestions, grades, workloads, terms, years,
           onSuggestionsFetchRequested={onSuggestionsFetchRequested}
           onSuggestionsClearRequested={onSuggestionsClearRequested}
           getSuggestionValue={getSuggestionValue}
-          renderSuggestion={(suggestion) =>  <div>{suggestion.catalogue_number}</div>}
+          renderSuggestion={(suggestion) =>  <div>{suggestion.catalog_number}</div>}
           inputProps={{placeholder:'Enter Course Id', value:name, onChange:onChangeSuggestion}}
           onSuggestionSelected={onSuggestionSelected}
         />

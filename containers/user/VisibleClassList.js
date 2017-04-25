@@ -61,8 +61,8 @@ const mapDispatchToProps = (dispatch) => {
 		fetchClassSuggestions: (text) => {
 			dispatch(fetchClassSuggestions(text))
 		},
-		onSuggestionSelected: (classId, courseId) => {
-			dispatch(changeSuggestionSelected(classId, courseId))
+		onSuggestionSelected: (classId, suggestion) => {
+			dispatch(changeSuggestionSelected(classId, suggestion))
 		}
 	}
 }

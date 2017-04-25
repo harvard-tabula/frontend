@@ -41,7 +41,7 @@ const ClassListRedux = ({classes, classSuggestions, grades, workloads, terms, ye
                     hours={(classElement.hours==null) || (!classElement.hours) ? '' : classElement.hours}
                     hoursSuccess={classElement.hoursSuccess}
                     onChangeSuggestion={(event, { newValue }) => onChangeClassId(classElement.id, newValue)}
-                    onSuggestionSelected={(event, {suggestion}) => onSuggestionSelected(classElement.id, suggestion.id)}
+                    onSuggestionSelected={(event, {suggestion}) => onSuggestionSelected(classElement.id, suggestion)}
                     {...classElement}
                     onChangeGrade={onChangeGrade}
                     onChangeWorkload={onChangeWorkload}
