@@ -42,8 +42,7 @@ export const RECEIVE_USER_INFO = 'RECEIVE_USER_INFO';
 export const MARK_RECEIVED_CLASSES = 'MARK_RECEIVED_CLASSES';
 export const MARK_RECEIVED_PROFILE = 'MARK_RECEIVED_PROFILE';
 
-const BASE_URL = 'http://tabula.life/';
-
+const baseUrl = 'https://api.tabula.life/';
 let nextClassId = -1;
 
 export function changeName(text) {
@@ -77,7 +76,7 @@ export function changeName(text) {
       credentials: 'include',
       headers: header,
     };
-    fetch(`${BASE_URL}profile`, sentData).then(response => {
+    fetch(`${baseUrl}profile`, sentData).then(response => {
       console.log(response);
     }).catch(error => {
       console.log(error);
@@ -136,7 +135,7 @@ export function changeConcentration(text) {
       credentials: 'include',
       headers: header,
     };
-    fetch(`${BASE_URL}profile`, sentData).then(response => {
+    fetch(`${baseUrl}profile`, sentData).then(response => {
       console.log(response);
     }).catch(error => {
       console.log(error);
@@ -215,7 +214,7 @@ export function blurYearsCoding() {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${BASE_URL}profile`, sentData).then(response => {
+      fetch(`${baseUrl}profile`, sentData).then(response => {
         console.log(response);
       }).catch(error => {
         console.log(error);
@@ -256,7 +255,7 @@ export function changeYearsCoding(text) {
       credentials: 'include',
       headers: header,
     };
-    fetch(`${BASE_URL}profile`, sentData).then(response => {
+    fetch(`${baseUrl}profile`, sentData).then(response => {
       console.log(response);
     }).catch(error => {
       console.log(error);
@@ -315,7 +314,7 @@ export function blurYear() {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${BASE_URL}profile`, sentData).then(response => {
+      fetch(`${baseUrl}profile`, sentData).then(response => {
         console.log(response);
       }).catch(error => {
         console.log(error);
@@ -356,7 +355,7 @@ export function changeYear(text) {
       credentials: 'include',
       headers: header,
     };
-    fetch(`${BASE_URL}profile`, sentData).then(response => {
+    fetch(`${baseUrl}profile`, sentData).then(response => {
       console.log(response);
     }).catch(error => {
       console.log(error);
@@ -405,7 +404,7 @@ export function changeGender(text) {
       credentials: 'include',
       headers: header,
     };
-    fetch(`${BASE_URL}profile`, sentData).then(response => {
+    fetch(`${baseUrl}profile`, sentData).then(response => {
       console.log(response);
     }).catch(error => {
       console.log(error);
@@ -455,7 +454,7 @@ export function changeEthnicity(text) {
       credentials: 'include',
       headers: header,
     };
-    fetch(`${BASE_URL}profile`, sentData).then(response => {
+    fetch(`${baseUrl}profile`, sentData).then(response => {
       console.log(response);
     }).catch(error => {
       console.log(error);
@@ -479,7 +478,7 @@ export function changeSuggestionSelected(classId, courseId) {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${BASE_URL}history`, sentData).then(response => {
+      fetch(`${baseUrl}history`, sentData).then(response => {
         console.log(response);
       });
     }
@@ -533,7 +532,7 @@ export function onClickRemoveClass(id) {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${BASE_URL}history`, sentData).then(response => {
+      fetch(`${baseUrl}history`, sentData).then(response => {
         console.log(response);
       });
     }
@@ -575,7 +574,7 @@ export function changeGrade(id, text) {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${BASE_URL}history`, sentData).then(response => {
+      fetch(`${baseUrl}history`, sentData).then(response => {
         console.log(response);
       });
     }
@@ -627,7 +626,7 @@ export function blurWorkload() {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${BASE_URL}history`, sentData).then(response => {
+      fetch(`${baseUrl}history`, sentData).then(response => {
         console.log(response);
       });
     }
@@ -649,7 +648,7 @@ export function changeWorkload(id, text) {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${BASE_URL}history`, sentData).then(response => {
+      fetch(`${baseUrl}history`, sentData).then(response => {
         console.log(response);
       });
     }
@@ -681,7 +680,7 @@ export function changeTerm(id, text) {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${BASE_URL}history`, sentData).then(response => {
+      fetch(`${baseUrl}history`, sentData).then(response => {
         console.log(response);
       });
     }
@@ -713,7 +712,7 @@ export function changeClassYear(id, text) {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${BASE_URL}history`, sentData).then(response => {
+      fetch(`${baseUrl}history`, sentData).then(response => {
         console.log(response);
       });
     }
@@ -745,7 +744,7 @@ export function changeEmoji(id, emojiId) {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${BASE_URL}history`, sentData).then(response => {
+      fetch(`${baseUrl}history`, sentData).then(response => {
         console.log(response);
       });
     }
@@ -803,7 +802,7 @@ export function clickTag(id) {
       credentials: 'include',
       headers: header,
     };
-    fetch(`${BASE_URL}profile`, sentData).then(response => {
+    fetch(`${baseUrl}profile`, sentData).then(response => {
       console.log(response);
     }).catch(error => {
       console.log(error);
@@ -840,7 +839,7 @@ function fetchClasses() {
 
   return dispatch => {
     dispatch(requestClasses());
-    return fetch(`${BASE_URL}history`, sentData).then(response => response.json()).then(json => {
+    return fetch(`${baseUrl}history`, sentData).then(response => response.json()).then(json => {
       dispatch(receiveClasses(json));
       dispatch(markReceivedClasses());
     });
@@ -890,7 +889,7 @@ export function fetchClassSuggestions(text) {
 
   return (dispatch, getState) => {
     dispatch(requestClassSuggestions());
-    return fetch(`${BASE_URL}coursesearch/${text}`, sentData).then(response => response.json()).then(json => {
+    return fetch(`${baseUrl}coursesearch/${text}`, sentData).then(response => response.json()).then(json => {
       dispatch(receiveClassSuggestions(json));
     });
   };
@@ -944,7 +943,7 @@ export function fetchProfile() {
 
   return dispatch => {
     dispatch(requestProfile());
-    return fetch(`${BASE_URL}profile`, sentData).then(response => response.json()).then(json => {
+    return fetch(`${baseUrl}profile`, sentData).then(response => response.json()).then(json => {
       // 	if (json.redirect){
       // 		window.location = json.redirect
       // 	}
@@ -1004,7 +1003,7 @@ export function fetchTags() {
 
   return dispatch => {
     dispatch(requestTags());
-    return fetch(`${BASE_URL}tags`, sentData).then(response => response.json()).then(json => {
+    return fetch(`${baseUrl}tags`, sentData).then(response => response.json()).then(json => {
       dispatch(receiveTags(json));
     });
   };
@@ -1053,7 +1052,7 @@ export function fetchSemesters() {
 
   return dispatch => {
     dispatch(requestSemesters());
-    return fetch(`${BASE_URL}semesters`, sentData).then(response => response.json()).then(json => {
+    return fetch(`${baseUrl}semesters`, sentData).then(response => response.json()).then(json => {
       dispatch(receiveSemesters(json));
     });
   };
@@ -1102,7 +1101,7 @@ export function fetchConcentrations() {
 
   return dispatch => {
     dispatch(requestConcentrations());
-    return fetch(`${BASE_URL}concentrations`, sentData).then(response => response.json()).then(json => {
+    return fetch(`${baseUrl}concentrations`, sentData).then(response => response.json()).then(json => {
       dispatch(receiveConcentrations(json));
     });
   };
@@ -1151,7 +1150,7 @@ export function fetchUserInfo() {
 
   return dispatch => {
     dispatch(requestUserInfo());
-    return fetch(`${BASE_URL}ui`, sentData).then(response => response.json()).then(json => {
+    return fetch(`${baseUrl}ui`, sentData).then(response => response.json()).then(json => {
       dispatch(receiveUserInfo(json));
     });
   };
@@ -1184,7 +1183,7 @@ export function fetchLogin() {
     credentials: 'include',
   };
 
-  return () => fetch(`${BASE_URL}login`, sentData)
+  return () => fetch(`${baseUrl}login`, sentData)
       .then(response => response.json())
       .then(json => {
         if (json.redirect) {

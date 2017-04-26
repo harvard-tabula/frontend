@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 class ClassList extends React.Component {
-  render () {
+  render() {
     return (
       <section className="section">
         <div className="container">
