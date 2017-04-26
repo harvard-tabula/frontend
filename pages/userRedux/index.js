@@ -13,7 +13,7 @@ class UserReduxPage extends Component {
 
   componentWillMount() {
     const { dispatch } = this.props;
-    dispatch(fetchLogin());
+    dispatch(fetchLogin());  // TODO This should block calls below to avoid throwing errors.
     dispatch(fetchProfileIfNeeded());
     dispatch(fetchClassesIfNeeded());
     dispatch(fetchConcentrationsIfNeeded());
