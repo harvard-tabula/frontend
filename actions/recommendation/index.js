@@ -6,6 +6,8 @@ export const RECEIVE_CLASS_SUGGESTIONS = 'RECEIVE_CLASS_SUGGESTIONS'
 export const REQUEST_RECOMMENDATION = 'REQUEST_RECOMMENDATION'
 export const RECEIVE_RECOMMENDATION = 'RECEIVE_RECOMMENDATION'
 
+const BASE_URL = 'http://tabula.life/';
+
 export function changeClass (text) {
 	return{
 		type: CHANGE_CLASS,
@@ -26,7 +28,7 @@ export function suggestionSelected(suggestion) {
 	return{
 		type: SUGGESTION_SELECTED,
 		payload: {
-			courseId: suggestion.id, 
+			courseId: suggestion.id,
 			courseName: suggestion.catalog_number}
 	}
 }
@@ -63,7 +65,7 @@ export function fetchClassSuggestions(text){
 
 	return (dispatch, getState) =>{
 		dispatch(requestClassSuggestions())
-		return fetch('https://api.tabula.life/coursesearch/' + text, sentData)
+		return fetch(BASE_URL + 'coursesearch/' + text, sentData)
 			.then(response => response.json())
 			.then(json =>
 				{
@@ -98,7 +100,7 @@ export function fetchRecommendation(id){
 	}
 	return (dispatch, getState) =>{
 		dispatch(requestRecommendation())
-		return fetch('https://api.tabula.life/recommendation/' + id, sentData)
+		return fetch(BASE_URL + 'recommendation/' + id, sentData)
 			.then(response => response.json())
 			.then(json =>
 				{
@@ -116,7 +118,7 @@ export function fetchLogin() {
 		body: null,
 		credentials: 'include'
 	}
-	return fetch('https://api.tabula.life/login', sentData)
+	return fetch(BASE_URL + 'login', sentData)
 		.then(response => response.json())
 		.then(json => {
 			console.log("fetched")

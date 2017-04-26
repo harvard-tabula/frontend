@@ -42,6 +42,8 @@ export const RECEIVE_USER_INFO = 'RECEIVE_USER_INFO'
 export const MARK_RECEIVED_CLASSES = 'MARK_RECEIVED_CLASSES'
 export const MARK_RECEIVED_PROFILE = 'MARK_RECEIVED_PROFILE'
 
+const BASE_URL = 'http://tabula.life/';
+
 
 let nextClassId = -1
 
@@ -68,7 +70,7 @@ export function changeName (text) {
 			credentials: 'include',
 			headers: header
 		}
-		fetch('https://api.tabula.life/profile', sentData)
+		fetch(BASE_URL + 'profile', sentData)
 			.then(response => {console.log(response)})
 			.catch(error => {console.log(error); dispatch(enterName(originalState.userReducer.profile.name))})
 	}
@@ -112,7 +114,7 @@ export function changeConcentration (text) {
 			credentials: 'include',
 			headers: header
 		}
-		fetch('https://api.tabula.life/profile', sentData)
+		fetch(BASE_URL + 'profile', sentData)
 			.then(response => {console.log(response)})
 			.catch(error => {console.log(error); dispatch(enterConcentration(originalState.userReducer.profile.concentration))})
 	}
@@ -181,7 +183,7 @@ export function blurYearsCoding() {
 				credentials: 'include',
 				headers: header
 			}
-			fetch('https://api.tabula.life/profile', sentData)
+			fetch(BASE_URL + 'profile', sentData)
 				.then(response => {console.log(response)})
 				.catch(error => {console.log(error); dispatch(markYearsCodingFailure())})
 
@@ -212,7 +214,7 @@ export function changeYearsCoding (text) {
 			credentials: 'include',
 			headers: header
 		}
-		fetch('https://api.tabula.life/profile', sentData)
+		fetch(BASE_URL + 'profile', sentData)
 			.then(response => {console.log(response)})
 			.catch(error => {console.log(error); dispatch(enterYearsCoding(originalState.userReducer.profile.years_coding))})
 	}
@@ -263,7 +265,7 @@ export function blurYear () {
 				credentials: 'include',
 				headers: header
 			}
-			fetch('https://api.tabula.life/profile', sentData)
+			fetch(BASE_URL + 'profile', sentData)
 				.then(response => {console.log(response)})
 				.catch(error => {console.log(error); dispatch(markYearFailure())})
 
@@ -294,7 +296,7 @@ export function changeYear (text) {
 			credentials: 'include',
 			headers: header
 		}
-		fetch('https://api.tabula.life/profile', sentData)
+		fetch(BASE_URL + 'profile', sentData)
 			.then(response => {console.log(response)})
 			.catch(error => {console.log(error); dispatch(enterYear(originalState.userReducer.profile.year))})
 	}
@@ -330,7 +332,7 @@ export function changeGender (text) {
 			credentials: 'include',
 			headers: header
 		}
-		fetch('https://api.tabula.life/profile', sentData)
+		fetch(BASE_URL + 'profile', sentData)
 			.then(response => {console.log(response)})
 			.catch(error => {console.log(error); dispatch(enterGender(originalState.userReducer.profile.gender))})
 	}
@@ -367,7 +369,7 @@ export function changeEthnicity (text) {
 			credentials: 'include',
 			headers: header
 		}
-		fetch('https://api.tabula.life/profile', sentData)
+		fetch(BASE_URL + 'profile', sentData)
 			.then(response => {console.log(response)})
 			.catch(error => {console.log(error); dispatch(enterEthnicity(originalState.userReducer.profile.ethnicity))})
 	}
@@ -396,7 +398,7 @@ export function changeSuggestionSelected (classId, courseId) {
 				credentials: 'include',
 				headers: header
 			}
-			fetch('https://api.tabula.life/history', sentData)
+			fetch(BASE_URL + 'history', sentData)
 				.then(response => {console.log(response)})
 		}
 	}
@@ -406,8 +408,8 @@ export function suggestionSelected(classId, suggestion) {
 	console.log(suggestion.catalog_number)
 	return{
 		type: SUGGESTION_SELECTED,
-		payload: {classId: classId, 
-			courseId: suggestion.id, 
+		payload: {classId: classId,
+			courseId: suggestion.id,
 			courseName: suggestion.catalog_number}
 	}
 }
@@ -450,7 +452,7 @@ export function onClickRemoveClass (id) {
 				credentials: 'include',
 				headers: header
 			}
-			fetch('https://api.tabula.life/history', sentData)
+			fetch(BASE_URL + 'history', sentData)
 				.then(response => {console.log(response)})
 		}
 		dispatch(removeClass(id))
@@ -494,7 +496,7 @@ export function changeGrade (id, text) {
 				credentials: 'include',
 				headers: header
 			}
-			fetch('https://api.tabula.life/history', sentData)
+			fetch(BASE_URL + 'history', sentData)
 				.then(response => {console.log(response)})
 		}
 	}
@@ -546,7 +548,7 @@ export function blurWorkload() {
 				credentials: 'include',
 				headers: header
 			}
-			fetch('https://api.tabula.life/history', sentData)
+			fetch(BASE_URL + 'history', sentData)
 				.then(response => {console.log(response)})
 		}
 	}
@@ -575,7 +577,7 @@ export function changeWorkload (id, text) {
 				credentials: 'include',
 				headers: header
 			}
-			fetch('https://api.tabula.life/history', sentData)
+			fetch(BASE_URL + 'history', sentData)
 				.then(response => {console.log(response)})
 		}
 	}
@@ -611,7 +613,7 @@ export function changeTerm (id, text) {
 				credentials: 'include',
 				headers: header
 			}
-			fetch('https://api.tabula.life/history', sentData)
+			fetch(BASE_URL + 'history', sentData)
 				.then(response => {console.log(response)})
 		}
 	}
@@ -647,7 +649,7 @@ export function changeClassYear (id, text) {
 				credentials: 'include',
 				headers: header
 			}
-			fetch('https://api.tabula.life/history', sentData)
+			fetch(BASE_URL + 'history', sentData)
 				.then(response => {console.log(response)})
 		}
 	}
@@ -683,7 +685,7 @@ export function changeEmoji (id, emojiId) {
 				credentials: 'include',
 				headers: header
 			}
-			fetch('https://api.tabula.life/history', sentData)
+			fetch(BASE_URL + 'history', sentData)
 				.then(response => {console.log(response)})
 		}
 	}
@@ -727,7 +729,7 @@ export function clickTag (id) {
 			credentials: 'include',
 			headers: header
 		}
-		fetch('https://api.tabula.life/profile', sentData)
+		fetch(BASE_URL + 'profile', sentData)
 			.then(response => {console.log(response)})
 			.catch(error => {console.log(error); dispatch(toggleTag(id))})
 	}
@@ -765,7 +767,7 @@ function fetchClasses(){
 
 	return dispatch => {
 		dispatch(requestClasses())
-		return fetch('https://api.tabula.life/history', sentData)
+		return fetch(BASE_URL + 'history', sentData)
 			.then(response => response.json())
 			.then(json =>
 				{
@@ -823,7 +825,7 @@ export function fetchClassSuggestions(text){
 
 	return (dispatch, getState) =>{
 		dispatch(requestClassSuggestions())
-		return fetch('https://api.tabula.life/coursesearch/' + text, sentData)
+		return fetch(BASE_URL + 'coursesearch/' + text, sentData)
 			.then(response => response.json())
 			.then(json =>
 				{
@@ -887,7 +889,7 @@ export function fetchProfile() {
 
 	return dispatch => {
 		dispatch(requestProfile())
-		return fetch('https://api.tabula.life/profile', sentData)
+		return fetch(BASE_URL + 'profile', sentData)
 			.then(response => response.json())
 			.then(json =>{
 			// 	if (json.redirect){
@@ -955,7 +957,7 @@ export function fetchTags() {
 
 	return dispatch => {
 		dispatch(requestTags())
-		return fetch('https://api.tabula.life/tags', sentData)
+		return fetch(BASE_URL + 'tags', sentData)
 			.then(response => response.json())
 			.then(json =>
 				{
@@ -1012,7 +1014,7 @@ export function fetchSemesters() {
 
 	return dispatch => {
 		dispatch(requestSemesters())
-		return fetch('https://api.tabula.life/semesters', sentData)
+		return fetch(BASE_URL + 'semesters', sentData)
 			.then(response => response.json())
 			.then(json =>
 				{
@@ -1069,7 +1071,7 @@ export function fetchConcentrations() {
 
 	return dispatch => {
 		dispatch(requestConcentrations())
-		return fetch('https://api.tabula.life/concentrations', sentData)
+		return fetch(BASE_URL + 'concentrations', sentData)
 			.then(response => response.json())
 			.then(json =>
 				{
@@ -1126,7 +1128,7 @@ export function fetchUserInfo() {
 
 	return dispatch => {
 		dispatch(requestUserInfo())
-		return fetch('https://api.tabula.life/ui', sentData)
+		return fetch(BASE_URL + 'ui', sentData)
 			.then(response => response.json())
 			.then(json =>
 				{
@@ -1166,12 +1168,15 @@ export function fetchLogin() {
 		body: null,
 		credentials: 'include'
 	}
-	return fetch('https://api.tabula.life/login', sentData)
-		.then(response => response.json())
-		.then(json => {
-			console.log("fetched")
-			if (json.redirect){
-				window.location = json.redirect
-			}
-		})
+
+	return dispatch => {
+		// dispatch(authenticate())
+		return fetch(BASE_URL + 'login', sentData)
+			.then(response => response.json())
+			.then(json => {
+				if (json.redirect){
+					window.location = json.redirect;
+				}
+			});
+	}
 }
