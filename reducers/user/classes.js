@@ -28,12 +28,11 @@ const classElement = (state={}, action) => {
 			if (state.id != action.payload.id) {
 				return state
 			}
-			else if((state.grade!=null) && (state.term != null) && (state.year!=null)){
+			else if((state.term != null) && (state.year!=null)){
 				return update(state, {
 					course: {
 						name_short: {$set: action.payload.courseId}
-					},
-					canPut: {$set: true}
+					}
 				})
 			}
 			return update(state, {
@@ -45,8 +44,7 @@ const classElement = (state={}, action) => {
 			if (state.id != action.payload.classId) {
 				return state
 			}
-			else if((state.grade!=null) && (state.term != null) && (state.year!=null)){
-				console.log(action.payload.courseName)
+			else if((state.term != null) && (state.year!=null)){
 				return update(state, {
 					course: {
 						id: {$set: action.payload.courseId},
@@ -79,12 +77,6 @@ const classElement = (state={}, action) => {
 			if (state.id != action.payload.id) {
 				return state
 			}
-			else if((state.term != null) && (state.year!=null) && (state.suggestedName)){
-				return Object.assign({}, state, {
-					grade: action.payload.grade,
-					canPut: true
-				})
-			}
 			return Object.assign({}, state, {
 				grade: action.payload.grade
 			})
@@ -114,7 +106,7 @@ const classElement = (state={}, action) => {
 			if (state.id != action.payload.id) {
 				return state
 			} 
-			else if((state.grade!=null) && (state.year!=null) && (state.suggestedName)){
+			else if((state.year!=null) && (state.suggestedName)){
 				return Object.assign({}, state, {
 					term: action.payload.term,
 				semester: action.payload.term + ' ' + state.year,
@@ -129,7 +121,7 @@ const classElement = (state={}, action) => {
 			if (state.id != action.payload.id) {
 				return state
 			}
-			else if((state.grade!=null) && (state.term!=null) && (state.suggestedName)){
+			else if((state.term!=null) && (state.suggestedName)){
 				return Object.assign({}, state, {
 					year: action.payload.year,
 					semester: state.term + ' ' + action.payload.year,

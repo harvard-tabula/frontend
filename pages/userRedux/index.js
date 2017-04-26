@@ -18,7 +18,7 @@ class UserReduxPage extends Component {
 	
 	componentWillMount() {
 		const { dispatch } = this.props
-		dispatch(fetchLogin())
+		// dispatch(fetchLogin())
 		dispatch(fetchProfileIfNeeded())
 		dispatch(fetchClassesIfNeeded())
 		dispatch(fetchConcentrationsIfNeeded())

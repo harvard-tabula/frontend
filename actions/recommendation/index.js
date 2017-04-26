@@ -107,3 +107,21 @@ export function fetchRecommendation(id){
 			)
 	}
 }
+
+export function fetchLogin() {
+	console.log("attempt login")
+	let sentData ={
+		method: 'GET',
+		mode: 'cors',
+		body: null,
+		credentials: 'include'
+	}
+	return fetch('https://api.tabula.life/login', sentData)
+		.then(response => response.json())
+		.then(json => {
+			console.log("fetched")
+			if (json.redirect){
+				window.location = json.redirect
+			}
+		})
+}

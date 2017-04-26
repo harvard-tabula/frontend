@@ -432,6 +432,31 @@ export function addClass () {
 	}
 }
 
+export function onClickRemoveClass (id) {
+	return (dispatch, getState) => {
+		const originalState = getState()
+		var classElement = originalState.userReducer.classes.classes.find((classElement) => classElement.id==id.num)
+		if(classElement.canPut){
+			let header = new Headers({
+				'Content-Type': 'application/json'
+			})
+			let sentData ={
+				method: 'DELETE',
+				mode: 'cors',
+				body: JSON.stringify({
+					id: classElement.course.id,
+					semester: classElement.semester
+				}),
+				credentials: 'include',
+				headers: header
+			}
+			fetch('https://api.tabula.life/history', sentData)
+				.then(response => {console.log(response)})
+		}
+		dispatch(removeClass(id))
+	}
+}
+
 export function removeClass (id) {
 	return {
 		type: REMOVE_CLASS,
@@ -1134,20 +1159,19 @@ export function fetchUserInfoIfNeeded() {
 
 
 export function fetchLogin() {
+	console.log("attempt login")
 	let sentData ={
 		method: 'GET',
 		mode: 'cors',
 		body: null,
 		credentials: 'include'
 	}
-
-	return dispatch => {
-		return fetch('https://api.tabula.life/login', sentData)
-			.then(response => response.json())
-			.then(json => {
-				if (json.redirect){
-					window.location = json.redirect
-				}
-			})
-	}
+	return fetch('https://api.tabula.life/login', sentData)
+		.then(response => response.json())
+		.then(json => {
+			console.log("fetched")
+			if (json.redirect){
+				window.location = json.redirect
+			}
+		})
 }

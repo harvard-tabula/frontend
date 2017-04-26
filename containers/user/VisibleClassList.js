@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import ClassListRedux from '../../components/ClassListRedux/ClassListRedux'
 import { enterCourseID, changeGrade, changeWorkload, changeTerm, changeClassYear,
-		changeEmoji, removeClass, clearClassSuggestions, fetchClassSuggestions, 
+		changeEmoji, onClickRemoveClass, clearClassSuggestions, fetchClassSuggestions, 
 		changeSuggestionSelected } from '../../actions/user'
 
 const mapStateToProps = (state) => {
@@ -52,7 +52,7 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(changeEmoji(id, emojiId))
 		},
 		onClickRemove: (id) => {
-			dispatch(removeClass(id))
+			dispatch(onClickRemoveClass(id))
 		},
 		onSuggestionsClearRequested: () => {
 			dispatch(clearClassSuggestions())

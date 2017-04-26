@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { connect } from 'react-redux';
 import Layout from '../../components/Layout';
 import VisibleRecommendation from '../../containers/recommendation/VisibleRecommendation';
+import { fetchLogin } from '../../actions/recommendation'
 
 class RecommendationPage extends Component {
 
@@ -12,6 +13,7 @@ class RecommendationPage extends Component {
 	
 	componentWillMount() {
 		const { dispatch } = this.props
+		// dispatch(fetchLogin)
 	}
 
   	render() {
