@@ -13,7 +13,7 @@ class RecommendationPage extends Component {
 	
 	componentWillMount() {
 		const { dispatch } = this.props
-		// dispatch(fetchLogin)
+		dispatch(fetchLogin)
 	}
 
   	render() {
