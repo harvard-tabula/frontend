@@ -204,6 +204,7 @@ function classes(state = {
 				didInvalidate: false
 			})
 		case RECEIVE_CLASSES:
+			console.log(action.payload.classes)
 			return Object.assign({}, state,{
 				isFetching: false,
 				didInvalidate: false,

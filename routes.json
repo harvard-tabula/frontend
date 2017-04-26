@@ -25,5 +25,9 @@
   {
     "path": "/user/",
     "page": "./pages/userRedux"
+  },
+  {
+    "path": "/recommendation/",
+    "page": "./pages/recommendation"
   }
 ]

@@ -6,19 +6,19 @@ import { changeName, enterEmail, changeConcentration,
 
 const mapStateToProps = (state) => {
 	return {
-		profile: state.profile.profile,
-		name: state.profile.profile.name,
-		concentrations: state.concentrations.concentrations,
-		ethnicities: state.userInfo.ethnicities,
-		genders: state.userInfo.genders,
-		concentration: (state.profile.profile.concentration==null ? '' : state.profile.profile.concentration.name),
-		nameSuccess: state.profile.nameSuccess,
-		emailSuccess: state.profile.emailSuccess,
-		genderSuccess: state.profile.genderSuccess,
-		ethnicitySuccess: state.profile.ethnicitySuccess,
-		concentrationSuccess: state.profile.concentratoinSuccess,
-		yearsCodingSuccess: state.profile.yearsCodingSuccess,
-		yearSuccess: state.profile.yearSuccess
+		profile: state.userReducer.profile.profile,
+		name: state.userReducer.profile.profile.name,
+		concentrations: state.userReducer.concentrations.concentrations,
+		ethnicities: state.userReducer.userInfo.ethnicities,
+		genders: state.userReducer.userInfo.genders,
+		concentration: (state.userReducer.profile.profile.concentration==null ? '' : state.userReducer.profile.profile.concentration.name),
+		nameSuccess: state.userReducer.profile.nameSuccess,
+		emailSuccess: state.userReducer.profile.emailSuccess,
+		genderSuccess: state.userReducer.profile.genderSuccess,
+		ethnicitySuccess: state.userReducer.profile.ethnicitySuccess,
+		concentrationSuccess: state.userReducer.profile.concentratoinSuccess,
+		yearsCodingSuccess: state.userReducer.profile.yearsCodingSuccess,
+		yearSuccess: state.userReducer.profile.yearSuccess
 	}
 }
 

@@ -15,7 +15,7 @@ const tagCategories = (state = [], action) => {
 	}
 }
 
-const userApp = combineReducers({
+const userReducer = combineReducers({
 	classes,
 	tags,
 	profile,
@@ -26,4 +26,4 @@ const userApp = combineReducers({
 	classSuggestions
 })
 
-export default userApp
+export default userReducer

@@ -11,7 +11,7 @@
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 import { createStore, applyMiddleware } from 'redux';
-import userApp from '../reducers/user/' 
+import appReducer from '../reducers/' 
 import { markReceivedClasses, markReceivedProfile, fetchTagsIfNeeded,
     fetchSemestersIfNeeded, fetchConcentrationsIfNeeded, fetchLogin } from '../actions/user'
 
@@ -419,7 +419,7 @@ const initialState = {
 const loggerMiddleware = createLogger();
 
 const store = createStore(
-  userApp,
+  appReducer,
   // initialState,
   applyMiddleware(
     thunkMiddleware,

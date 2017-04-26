@@ -12,15 +12,17 @@ const mapStateToProps = (state) => {
 		"Happy": {text:'😀', hover:'Liked It'},
 		"Angry": {text:'😡', hover:'Hated It'},
 		"Sad": {text:'🙁', hover:'Disliked It'},
-		"Learning": {text:'📚', hover:'I learned a lot'}
+		"Learning": {text:'📚', hover:'I learned a lot'},
+		"Easy": {text:'💯', hover:'It was easy'},
+		"Boring": {text:'😴', hover:'It was boring'},
 	}
 	return {
-		classes: state.classes.classes,
-		classSuggestions: state.classSuggestions.classSuggestions,
-		grades: ["Grade"].concat(state.userInfo.grades),
-		terms: ["Term"].concat(state.userInfo.terms),
+		classes: state.userReducer.classes.classes,
+		classSuggestions: state.userReducer.classSuggestions.classSuggestions,
+		grades: ["Grade"].concat(state.userReducer.userInfo.grades),
+		terms: ["Term"].concat(state.userReducer.userInfo.terms),
 		years: ["Year", "2014", "2015", "2016", "2017"],
-		emojis: state.tags.tags.filter(t => t.category == "user_history")
+		emojis: state.userReducer.tags.tags.filter(t => t.category == "user_history")
 			.map(function(tag) {
 				var emoji = emojiDict[tag.name]
 				emoji.id = tag.id

@@ -3,7 +3,7 @@ import SuccessTagCategory from '../../components/SuccessTagCategory/SuccessTagCa
 
 const mapStateToProps = (state) => {
 	return {
-		tagCategories: state.userInfo.tags_categories.filter(category => category.category != "user_history")
+		tagCategories: state.userReducer.userInfo.tags_categories.filter(category => category.category != "user_history")
 	}
 }
 
