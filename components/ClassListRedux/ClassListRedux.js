@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import ClassComponentRedux from '../ClassComponentRedux/ClassComponentRedux'
 
-const ClassListRedux = ({classes, classSuggestions, grades, workloads, terms, years, emojis,
-  onBlurCourseId, onChangeClassId, onChangeGrade, onChangeWorkload, onChangeTerm, onChangeYear, onClickEmoji,
-  onClickRemove, onSuggestionsClearRequested, getSuggestionValue, renderSuggestion, fetchClassSuggestions,
+const ClassListRedux = ({classes, classSuggestions, grades, terms, years, emojis,
+  onChangeClassId, onChangeGrade, onChangeWorkload, onChangeTerm, onChangeYear, onClickEmoji,
+  onClickRemove, onSuggestionsClearRequested, getSuggestionValue, fetchClassSuggestions,
   onSuggestionSelected }) => (
   <section className="section">
         <div className="container">
@@ -28,7 +28,6 @@ const ClassListRedux = ({classes, classSuggestions, grades, workloads, terms, ye
                     kye={classElement.id}
                     grades={grades}
                     classSuggestions={classSuggestions}
-                    workloads={workloads}
                     terms={terms}
                     years={years}
                     num={classElement.id}
@@ -51,7 +50,6 @@ const ClassListRedux = ({classes, classSuggestions, grades, workloads, terms, ye
                     onClickRemove={onClickRemove}
                     onSuggestionsClearRequested={onSuggestionsClearRequested}
                     getSuggestionValue={getSuggestionValue}
-                    renderSuggestion={renderSuggestion}
                     onSuggestionsFetchRequested={({ value }) => fetchClassSuggestions(value)}
                   />
                 )}

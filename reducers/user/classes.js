@@ -148,41 +148,6 @@ const classElement = (state={}, action) => {
 	}
 }
 
-// // Original redux without api
-// const classes = (state = [], action) => {
-// 	switch (action.type) {
-// 		case ADD_CLASS:
-// 			return [
-// 				...state,
-// 				classElement(undefined, action)
-// 			]
-		// case REMOVE_CLASS:
-		// 	return state.filter((item) => item.id !== action.payload.id)
-// 		case ENTER_COURSEID:
-// 			return state.map(t =>
-// 				classElement(t, action)
-// 			)
-// 		case ENTER_GRADE:
-// 			return state.map(t =>
-// 				classElement(t, action)
-// 			)
-// 		case ENTER_WORKLOAD:
-// 			return state.map(t =>
-// 				classElement(t, action)
-// 			)
-// 		case ENTER_SEMESTER:
-// 			return state.map(t =>
-// 				classElement(t, action)
-// 			)
-// 		case TOGGLE_EMOJI:
-// 			return state.map(t =>
-// 				classElement(t, action)
-// 			)
-// 		default:
-// 			return state
-// 	}
-// }
-
 function classes(state = {
 	isFetching: false,
 	didInvalidate: false,
@@ -196,7 +161,6 @@ function classes(state = {
 				didInvalidate: false
 			})
 		case RECEIVE_CLASSES:
-			console.log(action.payload.classes)
 			return Object.assign({}, state,{
 				isFetching: false,
 				didInvalidate: false,

@@ -27,7 +27,6 @@ function profile(state = {
 				fetched: false
 			})
 		case RECEIVE_PROFILE:
-			console.log(action.payload.profile)
 			return Object.assign({}, state, {
 				isFetching: false,
 				didInvalidate: false,
@@ -38,7 +37,6 @@ function profile(state = {
 				concentration_id: action.payload.profile.concentration_id
 			})
 		case MARK_RECEIVED_PROFILE: 
-			console.log(state.profile.name)
 			return Object.assign({}, state, {
 				nameSuccess: (state.profile.name!=null ? true : false),
 				emailSuccess: (state.profile.email!=null ? true : false),

@@ -486,7 +486,6 @@ export function changeSuggestionSelected(classId, courseId) {
 }
 
 export function suggestionSelected(classId, suggestion) {
-  console.log(suggestion.catalog_number);
   return {
     type: SUGGESTION_SELECTED,
     payload: {

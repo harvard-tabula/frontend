@@ -24,10 +24,10 @@ const mapStateToProps = (state) => {
     years: ['Year', '2014', '2015', '2016', '2017'],
     emojis: state.userReducer.tags.tags.filter(t => t.category === 'user_history')
 			.map((tag) => {
-  const emoji = emojiDict[tag.name];
-  emoji.id = tag.id;
-  return emoji;
-}),
+        const emoji = emojiDict[tag.name];
+        emoji.id = tag.id;
+        return emoji;
+      })
   };
 };
 

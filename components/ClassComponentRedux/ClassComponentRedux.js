@@ -3,10 +3,10 @@ import Autosuggest from 'react-autosuggest';
 import SuccessTag from '../SuccessTag';
 import SuccessTagRedux from '../SuccessTagRedux/SuccessTagRedux'
 
-const ClassComponentRedux = ({classSuggestions, grades, workloads, terms, years, num, emojis, tags,
+const ClassComponentRedux = ({classSuggestions, grades, terms, years, num, emojis, tags,
   name, grade, term, year, hours, classSuccess,
   onChangeGrade, onChangeWorkload, onChangeTerm, onChangeYear, onClickEmoji,
-  onClickRemove, onSuggestionsClearRequested, renderSuggestion, getSuggestionValue, onChangeSuggestion,
+  onClickRemove, onSuggestionsClearRequested, getSuggestionValue, onChangeSuggestion,
   fetchClassSuggestions, onSuggestionsFetchRequested, onSuggestionSelected }) => (
     <tr>
       <td>

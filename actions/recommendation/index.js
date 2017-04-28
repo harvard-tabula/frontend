@@ -24,7 +24,6 @@ export function changeSuggestionSelected(suggestion) {
 }
 
 export function suggestionSelected(suggestion) {
-  console.log(suggestion);
   return {
     type: SUGGESTION_SELECTED,
     payload: {
@@ -109,7 +108,6 @@ export function fetchRecommendation(id) {
 }
 
 export function fetchLogin() {
-  console.log('attempt login');
   const sentData = {
     method: 'GET',
     mode: 'cors',
@@ -119,7 +117,6 @@ export function fetchLogin() {
   return fetch(`${baseUrl}login`, sentData)
 		.then(response => response.json())
 		.then(json => {
-  console.log('fetched');
   if (json.redirect) {
     window.location = json.redirect;
   }
