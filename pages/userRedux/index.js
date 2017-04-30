@@ -6,37 +6,22 @@ import VisibleClassList from '../../containers/user/VisibleClassList';
 import VisibleTag from '../../containers/user/VisibleTag';
 import VisibleProfile from '../../containers/user/VisibleProfile';
 import Layout from '../../components/Layout';
-import { fetchLogin, fetchProfileIfNeeded, fetchClassesIfNeeded, fetchConcentrationsIfNeeded,
+import { fetchProfileIfNeeded, fetchClassesIfNeeded, fetchConcentrationsIfNeeded,
   fetchTagsIfNeeded, fetchSemestersIfNeeded, fetchUserInfoIfNeeded } from '../../actions/user';
-
-const baseUrl = 'https://api.tabula.life/';
+import { authenticateCalls } from '../../core/api';
 
 class UserReduxPage extends Component {
 
   componentWillMount() {
     const { dispatch } = this.props;
-
-    const sentData = {
-      method: 'GET',
-      mode: 'cors',
-      body: null,
-      credentials: 'include',
-    };
-
-    fetch(`${baseUrl}login`, sentData)
-      .then(response => response.json())
-      .then(json => {
-        if (json.redirect) {
-          window.location = json.redirect;
-        } else {
-          dispatch(fetchProfileIfNeeded());
-          dispatch(fetchClassesIfNeeded());
-          dispatch(fetchConcentrationsIfNeeded());
-          dispatch(fetchSemestersIfNeeded());
-          dispatch(fetchTagsIfNeeded());
-          dispatch(fetchUserInfoIfNeeded());
-        }
-      });
+    authenticateCalls(dispatch, [
+      fetchProfileIfNeeded,
+      fetchClassesIfNeeded,
+      fetchConcentrationsIfNeeded,
+      fetchSemestersIfNeeded,
+      fetchTagsIfNeeded,
+      fetchUserInfoIfNeeded,
+    ]);
   }
 
   render() {

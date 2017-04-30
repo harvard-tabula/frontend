@@ -1,3 +1,5 @@
+import { baseUrl } from '../../core/api';
+
 export const CHANGE_CLASS = 'CHANGE_CLASS';
 export const SUGGESTION_SELECTED = 'SUGGESTION_SELECTED';
 export const CLEAR_CLASS_SUGGESTIONS = 'CLEAR_CLASS_SUGGESTIONS';
@@ -5,8 +7,6 @@ export const REQUEST_CLASS_SUGGESTIONS = 'REQUEST_CLASS_SUGGESTIONS';
 export const RECEIVE_CLASS_SUGGESTIONS = 'RECEIVE_CLASS_SUGGESTIONS';
 export const REQUEST_RECOMMENDATION = 'REQUEST_RECOMMENDATION';
 export const RECEIVE_RECOMMENDATION = 'RECEIVE_RECOMMENDATION';
-
-const baseUrl = 'https://api.tabula.life/';
 
 export function changeClass(text) {
   return {
@@ -105,20 +105,4 @@ export function fetchRecommendation(id) {
 }
 			);
   };
-}
-
-export function fetchLogin() {
-  const sentData = {
-    method: 'GET',
-    mode: 'cors',
-    body: null,
-    credentials: 'include',
-  };
-  return fetch(`${baseUrl}login`, sentData)
-		.then(response => response.json())
-		.then(json => {
-  if (json.redirect) {
-    window.location = json.redirect;
-  }
-});
 }

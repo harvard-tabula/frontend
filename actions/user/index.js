@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import { baseUrl } from '../../core/api';
 
 export const ENTER_NAME = 'ENTER_NAME';
 export const ENTER_EMAIL = 'ENTER_EMAIL';
@@ -42,7 +43,6 @@ export const RECEIVE_USER_INFO = 'RECEIVE_USER_INFO';
 export const MARK_RECEIVED_CLASSES = 'MARK_RECEIVED_CLASSES';
 export const MARK_RECEIVED_PROFILE = 'MARK_RECEIVED_PROFILE';
 
-const baseUrl = 'https://api.tabula.life/';
 let nextClassId = -1;
 
 export function changeName(text) {
@@ -728,28 +728,6 @@ export function enterClassYear(id, text) {
   };
 }
 
-export function changeEmoji(id, emojiId) {
-  return (dispatch, getState) => {
-    const originalState = getState();
-    dispatch(toggleEmoji(id, emojiId));
-    const newState = getState();
-    const classElement = newState.userReducer.classes.classes.find((classElement) => classElement.id == id);
-    if (classElement.canPut) {
-      const header = new Headers({ 'Content-Type': 'application/json' });
-      const sentData = {
-        method: 'PUT',
-        mode: 'cors',
-        body: JSON.stringify({ id: classElement.course.id, semester: classElement.semester, grade: classElement.grade, course_tag_ids: classElement.tags, hours: classElement.hours }),
-        credentials: 'include',
-        headers: header,
-      };
-      fetch(`${baseUrl}history`, sentData).then(response => {
-        console.log(response);
-      });
-    }
-  };
-}
-
 export function toggleEmoji(id, emojiId) {
   return {
     type: TOGGLE_EMOJI,
@@ -757,6 +735,31 @@ export function toggleEmoji(id, emojiId) {
       id,
       emojiId,
     },
+  };
+}
+
+export function changeEmoji(id, emojiId) {
+  return (dispatch, getState) => {
+    dispatch(toggleEmoji(id, emojiId));
+    const newState = getState();
+    const classElement = newState.userReducer.classes.classes.find((classElement) => classElement.id === id);
+    if (classElement.canPut) {
+      const header = new Headers({ 'Content-Type': 'application/json' });
+      const sentData = {
+        method: 'PUT',
+        mode: 'cors',
+        body: JSON.stringify({
+          id: classElement.course.id,
+          semester: classElement.semester,
+          grade: classElement.grade,
+          course_tag_ids: classElement.tags,
+          hours: classElement.hours,
+        }),
+        credentials: 'include',
+        headers: header,
+      };
+      fetch(`${baseUrl}history`, sentData);
+    }
   };
 }
 
@@ -838,10 +841,12 @@ function fetchClasses() {
 
   return dispatch => {
     dispatch(requestClasses());
-    return fetch(`${baseUrl}history`, sentData).then(response => response.json()).then(json => {
-      dispatch(receiveClasses(json));
-      dispatch(markReceivedClasses());
-    });
+    return fetch(`${baseUrl}history`, sentData)
+      .then(response => response.json())
+      .then(json => {
+        dispatch(receiveClasses(json));
+        dispatch(markReceivedClasses());
+      });
   };
 }
 
@@ -886,11 +891,13 @@ export function fetchClassSuggestions(text) {
     credentials: 'include',
   };
 
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(requestClassSuggestions());
-    return fetch(`${baseUrl}coursesearch/${text}`, sentData).then(response => response.json()).then(json => {
-      dispatch(receiveClassSuggestions(json));
-    });
+    return fetch(`${baseUrl}coursesearch/${text}`, sentData)
+      .then(response => response.json())
+      .then(json => {
+        dispatch(receiveClassSuggestions(json));
+      });
   };
 }
 
@@ -919,7 +926,7 @@ function requestProfile() {
 
 function receiveProfile(json) {
   const tags = [];
-  json.data.tags.map(tag => {
+  json.data.tags.forEach(tag => {
     tags.push(tag.id);
   });
   return {
@@ -932,6 +939,10 @@ function receiveProfile(json) {
   };
 }
 
+export function markReceivedProfile() {
+  return { type: MARK_RECEIVED_PROFILE };
+}
+
 export function fetchProfile() {
   const sentData = {
     method: 'GET',
@@ -942,16 +953,13 @@ export function fetchProfile() {
 
   return dispatch => {
     dispatch(requestProfile());
-    return fetch(`${baseUrl}profile`, sentData).then(response => response.json()).then(json => {
-      // 	if (json.redirect){
-      // 		window.location = json.redirect
-      // 	}
-      // else {
-      dispatch(receiveProfile(json));
-      dispatch(getConcentrationId());
-      dispatch(markReceivedProfile());
-      // }
-    });
+    return fetch(`${baseUrl}profile`, sentData)
+      .then(response => response.json())
+      .then(json => {
+        dispatch(receiveProfile(json));
+        dispatch(getConcentrationId());
+        dispatch(markReceivedProfile());
+      });
   };
 }
 
@@ -972,10 +980,6 @@ export function fetchProfileIfNeeded() {
     }
     return Promise.resolve();
   };
-}
-
-export function markReceivedProfile() {
-  return { type: MARK_RECEIVED_PROFILE };
 }
 
 function requestTags() {
@@ -1002,9 +1006,11 @@ export function fetchTags() {
 
   return dispatch => {
     dispatch(requestTags());
-    return fetch(`${baseUrl}tags`, sentData).then(response => response.json()).then(json => {
-      dispatch(receiveTags(json));
-    });
+    return fetch(`${baseUrl}tags`, sentData)
+      .then(response => response.json())
+      .then(json => {
+        dispatch(receiveTags(json));
+      });
   };
 }
 
@@ -1051,9 +1057,11 @@ export function fetchSemesters() {
 
   return dispatch => {
     dispatch(requestSemesters());
-    return fetch(`${baseUrl}semesters`, sentData).then(response => response.json()).then(json => {
-      dispatch(receiveSemesters(json));
-    });
+    return fetch(`${baseUrl}semesters`, sentData)
+      .then(response => response.json())
+      .then(json => {
+        dispatch(receiveSemesters(json));
+      });
   };
 }
 
@@ -1100,9 +1108,11 @@ export function fetchConcentrations() {
 
   return dispatch => {
     dispatch(requestConcentrations());
-    return fetch(`${baseUrl}concentrations`, sentData).then(response => response.json()).then(json => {
-      dispatch(receiveConcentrations(json));
-    });
+    return fetch(`${baseUrl}concentrations`, sentData)
+      .then(response => response.json())
+      .then(json => {
+        dispatch(receiveConcentrations(json));
+      });
   };
 }
 
