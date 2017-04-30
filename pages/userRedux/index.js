@@ -27,7 +27,7 @@ class UserReduxPage extends Component {
   render() {
     return (
       <Layout className="section">
-        <div className="container">
+        <div className="container is-fluid">
           <div className="has-text-centered">
             <h1 className="title">User Profile</h1>
           </div>

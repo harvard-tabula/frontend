@@ -1,21 +1,22 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux';
 import { addClass } from '../../actions/user';
 
-let AddClass = ({ dispatch }) => {
-  let input
-
-  return (
-    <div>
-      <a className="button" onClick={e => {
-        e.preventDefault()
-        dispatch(addClass())
-      }}>
+const AddClassComponent = ({ dispatch }) => (
+  <div className="columns">
+    <div className="column has-text-centered">
+      <a
+        className="button"
+        onClick={e => {
+          e.preventDefault();
+          dispatch(addClass());
+        }}
+      >
         Add Class
       </a>
     </div>
-  )
-}
-AddClass = connect()(AddClass)
+  </div>
+);
+const AddClass = connect()(AddClassComponent);
 
-export default AddClass
+export default AddClass;

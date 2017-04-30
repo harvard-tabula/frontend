@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import Autosuggest from 'react-autosuggest';
 import SuccessTagRedux from '../SuccessTagRedux/SuccessTagRedux';
-import style from './style.css';
 
 const ClassComponentRedux = ({ classSuggestions, grades, terms, years, num, emojis, tags,
   name, grade, term, year, hours, classSuccess,
