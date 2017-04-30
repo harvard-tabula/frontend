@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Autosuggest from 'react-autosuggest';
 
-const Recommendation = ({classSuggestions, name, recommendations, recommendationFetched,
+const Recommendation = ({classSuggestions, name, recommendations, recommendationFetched, tags,
 	onSuggestionsClearRequested, getSuggestionValue, fetchClassSuggestions,
 	onSuggestionSelected, onChangeClassId, onSuggestionsFetchRequested}) => (
 		<div>
@@ -18,9 +18,11 @@ const Recommendation = ({classSuggestions, name, recommendations, recommendation
 	    {recommendationFetched ? 
 	    	<div>
 		    	<h1 className="subtitle">{recommendations.course.title}</h1>
+		    	<h2>{recommendations.course.catalog_number}</h2>
+		    	<h2>{recommendations.course.description}</h2>
 		    	<p>Expected Grade: {recommendations.grade}</p>
 		    	<p>Expected Workload: {recommendations.hours} hours</p>
-		    	{recommendations.associated_tags.map((tag) => 
+		    	{tags.map((tag) => 
 		    		<span className="tag is-medium">{tag.name}</span>)}
 	    	</div>
 	    : null}
