@@ -9,19 +9,23 @@ const ClassComponentRedux = ({ classSuggestions, grades, terms, years, num, emoj
   fetchClassSuggestions, onSuggestionsFetchRequested, onSuggestionSelected }) => (
   <div className="columns">
     <div className="column is-2">
-      <Autosuggest
-        theme={{ input: 'input' }}
-        suggestions={classSuggestions}
-        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={(suggestion) => <div>{suggestion.catalog_number}</div>}
-        inputProps={{ placeholder: 'Enter Course Id', value: name, onChange: onChangeSuggestion }}
-        onSuggestionSelected={onSuggestionSelected}
-      />
+      <div className="field">
+        <p className="control">
+          <Autosuggest
+            theme={{ input: 'input' }}
+            suggestions={classSuggestions}
+            onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={onSuggestionsClearRequested}
+            getSuggestionValue={getSuggestionValue}
+            renderSuggestion={(suggestion) => <div>{suggestion.catalog_number}</div>}
+            inputProps={{ placeholder: 'Enter Course Id', value: name, onChange: onChangeSuggestion }}
+            onSuggestionSelected={onSuggestionSelected}
+          />
+        </p>
+      </div>
     </div>
     <div className="column is-1">
-      {/* <div className="field"> */}
+      <div className="field">
         <p className="control">
           <span className="select">
             <select
@@ -32,35 +36,39 @@ const ClassComponentRedux = ({ classSuggestions, grades, terms, years, num, emoj
             </select>
           </span>
         </p>
-      {/* </div> */}
+      </div>
     </div>
     <div className="column is-1">
-      {/* <div className="field"> */}
+      <div className="field">
         <p className="control">
           <input
             className="input" type="text" placeholder="Num of Hours (ie. 1)"
             onChange={(e) => onChangeWorkload({ num }, e.target.value)} value={hours}
           />
         </p>
-      {/* </div> */}
+      </div>
     </div>
     <div className="column is-1">
-      <p className="control">
-        <span className="select">
-          <select onChange={(e) => onChangeTerm({ num }, e.target.value)} value={term}>
-            {terms.map(term => <option value={term}>{term}</option>)}
-          </select>
-        </span>
-      </p>
+      <div className="field">
+        <p className="control">
+          <span className="select">
+            <select onChange={(e) => onChangeTerm({ num }, e.target.value)} value={term}>
+              {terms.map(term => <option value={term}>{term}</option>)}
+            </select>
+          </span>
+        </p>
+      </div>
     </div>
     <div className="column is-1">
-      <p className="control">
-        <span className="select">
-          <select onChange={(e) => onChangeYear({ num }, e.target.value)} value={year}>
-            {years.map(year => <option value={year}>{year}</option>)}
-          </select>
-        </span>
-      </p>
+      <div className="field">
+        <p className="control">
+          <span className="select">
+            <select onChange={(e) => onChangeYear({ num }, e.target.value)} value={year}>
+              {years.map(year => <option value={year}>{year}</option>)}
+            </select>
+          </span>
+        </p>
+      </div>
     </div>
     <div className="column is-4">
       {emojis.map(emoji =>
