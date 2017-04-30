@@ -7,72 +7,77 @@ const ClassComponentRedux = ({ classSuggestions, grades, terms, years, num, emoj
   onChangeGrade, onChangeWorkload, onChangeTerm, onChangeYear, onClickEmoji,
   onClickRemove, onSuggestionsClearRequested, getSuggestionValue, onChangeSuggestion,
   fetchClassSuggestions, onSuggestionsFetchRequested, onSuggestionSelected }) => (
-    <tr>
-      <td>
-        <Autosuggest
-          suggestions={classSuggestions}
-          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={onSuggestionsClearRequested}
-          getSuggestionValue={getSuggestionValue}
-          renderSuggestion={(suggestion) => <div>{suggestion.catalog_number}</div>}
-          inputProps={{ placeholder: 'Enter Course Id', value: name, onChange: onChangeSuggestion }}
-          onSuggestionSelected={onSuggestionSelected}
-        />
-      </td>
-      <td>
+  <div className="columns">
+    <div className="column is-2">
+      <Autosuggest
+        theme={{ input: 'input' }}
+        suggestions={classSuggestions}
+        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={onSuggestionsClearRequested}
+        getSuggestionValue={getSuggestionValue}
+        renderSuggestion={(suggestion) => <div>{suggestion.catalog_number}</div>}
+        inputProps={{ placeholder: 'Enter Course Id', value: name, onChange: onChangeSuggestion }}
+        onSuggestionSelected={onSuggestionSelected}
+      />
+    </div>
+    <div className="column is-1">
+      {/* <div className="field"> */}
         <p className="control">
           <span className="select">
             <select
-              onChange={(e) => onChangeGrade({ num }, e.target.value)} value={grade}
+              onChange={(e) => onChangeGrade({ num }, e.target.value)}
+              value={grade}
             >
-              {grades.map(grade => <option value={grade}>{grade}</option>)}
+            {grades.map(grade => <option value={grade}>{grade}</option>)}
             </select>
           </span>
         </p>
-      </td>
-      <td>
-        <input className="input" type="text" placeholder="Num of Hours (ie. 1)"
-          onChange={(e) => onChangeWorkload({ num }, e.target.value)} value={hours}
-        ></input>
-      </td>
-      <td>
+      {/* </div> */}
+    </div>
+    <div className="column is-1">
+      {/* <div className="field"> */}
         <p className="control">
-          <span className="select">
-            <select
-              onChange={(e) => onChangeTerm({ num }, e.target.value)} value={term}
-            >
-              {terms.map(term => <option value={term}>{term}</option>)}
-            </select>
-          </span>
-        </p>
-      </td>
-      <td>
-        <p className="control">
-          <span className="select">
-            <select
-              onChange={(e) => onChangeYear({ num }, e.target.value)} value={year}
-            >
-              {years.map(year => <option value={year}>{year}</option>)}
-            </select>
-          </span>
-        </p>
-      </td>
-      <td>
-        {emojis.map(emoji =>
-          <SuccessTagRedux
-            key={emoji.id}
-            text={emoji.text}
-            success={(tags.indexOf(emoji.id) > -1)}
-            title={emoji.hover}
-            {...emoji}
-            onClick={() => onClickEmoji(num, emoji.id)}
+          <input
+            className="input" type="text" placeholder="Num of Hours (ie. 1)"
+            onChange={(e) => onChangeWorkload({ num }, e.target.value)} value={hours}
           />
-        )}
-      </td>
-      <td>
-        <a className="delete" onClick={() => onClickRemove({ num })}></a>
-      </td>
-    </tr>
+        </p>
+      {/* </div> */}
+    </div>
+    <div className="column is-1">
+      <p className="control">
+        <span className="select">
+          <select onChange={(e) => onChangeTerm({ num }, e.target.value)} value={term}>
+            {terms.map(term => <option value={term}>{term}</option>)}
+          </select>
+        </span>
+      </p>
+    </div>
+    <div className="column is-1">
+      <p className="control">
+        <span className="select">
+          <select onChange={(e) => onChangeYear({ num }, e.target.value)} value={year}>
+            {years.map(year => <option value={year}>{year}</option>)}
+          </select>
+        </span>
+      </p>
+    </div>
+    <div className="column is-4">
+      {emojis.map(emoji =>
+        <SuccessTagRedux
+          key={emoji.id}
+          text={emoji.text}
+          success={(tags.indexOf(emoji.id) > -1)}
+          title={emoji.hover}
+          {...emoji}
+          onClick={() => onClickEmoji(num, emoji.id)}
+        />
+      )}
+    </div>
+    <div className="column is-2">
+      <a className="delete" onClick={() => onClickRemove({ num })}></a>
+    </div>
+  </div>
 );
 
 export default ClassComponentRedux;

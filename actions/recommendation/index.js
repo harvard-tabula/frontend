@@ -15,20 +15,54 @@ export function changeClass(text) {
   };
 }
 
-export function changeSuggestionSelected(suggestion) {
-  return (dispatch, getState) => {
-    dispatch(suggestionSelected(suggestion.suggestion));
-    const newState = getState();
-    dispatch(fetchRecommendation(newState.recommendationReducer.classSuggestions.id));
-  };
-}
-
 export function suggestionSelected(suggestion) {
   return {
     type: SUGGESTION_SELECTED,
     payload: {
       courseId: suggestion.id,
       courseName: suggestion.catalog_number },
+  };
+}
+
+export function requestRecommendation() {
+  return {
+    type: REQUEST_RECOMMENDATION,
+  };
+}
+
+export function receiveRecommendation(json) {
+  return {
+    type: RECEIVE_RECOMMENDATION,
+    payload: {
+      recommendations: json.data,
+      receivedAt: Date.now(),
+    },
+  };
+}
+
+export function fetchRecommendation(id) {
+  const sentData = {
+    method: 'GET',
+    mode: 'cors',
+    body: null,
+    credentials: 'include',
+  };
+  return (dispatch) => {
+    dispatch(requestRecommendation());
+    return fetch(`${baseUrl}recommendation/${id}`, sentData)
+			.then(response => response.json())
+			.then(json =>				{
+  dispatch(receiveRecommendation(json));
+}
+			);
+  };
+}
+
+export function changeSuggestionSelected(suggestion) {
+  return (dispatch, getState) => {
+    dispatch(suggestionSelected(suggestion.suggestion));
+    const newState = getState();
+    dispatch(fetchRecommendation(newState.recommendationReducer.classSuggestions.id));
   };
 }
 
@@ -62,47 +96,10 @@ export function fetchClassSuggestions(text) {
     credentials: 'include',
   };
 
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(requestClassSuggestions());
     return fetch(`${baseUrl}coursesearch/${text}`, sentData)
 			.then(response => response.json())
-			.then(json =>				{
-  dispatch(receiveClassSuggestions(json));
-}
-			);
-  };
-}
-
-export function requestRecommendation() {
-  return {
-    type: REQUEST_RECOMMENDATION,
-  };
-}
-
-export function receiveRecommendation(json) {
-  return {
-    type: RECEIVE_RECOMMENDATION,
-    payload: {
-      recommendations: json.data,
-      receivedAt: Date.now(),
-    },
-  };
-}
-
-export function fetchRecommendation(id) {
-  const sentData = {
-    method: 'GET',
-    mode: 'cors',
-    body: null,
-    credentials: 'include',
-  };
-  return (dispatch, getState) => {
-    dispatch(requestRecommendation());
-    return fetch(`${baseUrl}recommendation/${id}`, sentData)
-			.then(response => response.json())
-			.then(json =>				{
-  dispatch(receiveRecommendation(json));
-}
-			);
+			.then(json => dispatch(receiveClassSuggestions(json)));
   };
 }
