@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import Autosuggest from 'react-autosuggest';
 import SuccessTagRedux from '../SuccessTagRedux/SuccessTagRedux';
+import style from './style.css';
 
 const ClassComponentRedux = ({ classSuggestions, grades, terms, years, num, emojis, tags,
   name, grade, term, year, hours, classSuccess,
@@ -12,7 +13,11 @@ const ClassComponentRedux = ({ classSuggestions, grades, terms, years, num, emoj
       <div className="field">
         <p className="control">
           <Autosuggest
-            theme={{ input: 'input' }}
+            theme={{
+              input: 'input',
+              suggestionsContainerOpen: 'card',
+              suggestion: 'button is-white is-fullwidth',
+            }}
             suggestions={classSuggestions}
             onSuggestionsFetchRequested={onSuggestionsFetchRequested}
             onSuggestionsClearRequested={onSuggestionsClearRequested}
