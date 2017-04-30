@@ -7,19 +7,36 @@ import VisibleTag from '../../containers/user/VisibleTag';
 import VisibleProfile from '../../containers/user/VisibleProfile';
 import Layout from '../../components/Layout';
 import { fetchLogin, fetchProfileIfNeeded, fetchClassesIfNeeded, fetchConcentrationsIfNeeded,
-	fetchTagsIfNeeded, fetchSemestersIfNeeded, fetchUserInfoIfNeeded } from '../../actions/user';
+  fetchTagsIfNeeded, fetchSemestersIfNeeded, fetchUserInfoIfNeeded } from '../../actions/user';
+
+const baseUrl = 'https://api.tabula.life/';
 
 class UserReduxPage extends Component {
 
   componentWillMount() {
     const { dispatch } = this.props;
-    dispatch(fetchLogin());  // TODO This should block calls below to avoid throwing errors.
-    dispatch(fetchProfileIfNeeded());
-    dispatch(fetchClassesIfNeeded());
-    dispatch(fetchConcentrationsIfNeeded());
-    dispatch(fetchSemestersIfNeeded());
-    dispatch(fetchTagsIfNeeded());
-    dispatch(fetchUserInfoIfNeeded());
+
+    const sentData = {
+      method: 'GET',
+      mode: 'cors',
+      body: null,
+      credentials: 'include',
+    };
+
+    fetch(`${baseUrl}login`, sentData)
+      .then(response => response.json())
+      .then(json => {
+        if (json.redirect) {
+          window.location = json.redirect;
+        } else {
+          dispatch(fetchProfileIfNeeded());
+          dispatch(fetchClassesIfNeeded());
+          dispatch(fetchConcentrationsIfNeeded());
+          dispatch(fetchSemestersIfNeeded());
+          dispatch(fetchTagsIfNeeded());
+          dispatch(fetchUserInfoIfNeeded());
+        }
+      });
   }
 
   render() {

@@ -1173,20 +1173,3 @@ export function fetchUserInfoIfNeeded() {
     return Promise.resolve();
   };
 }
-
-export function fetchLogin() {
-  const sentData = {
-    method: 'GET',
-    mode: 'cors',
-    body: null,
-    credentials: 'include',
-  };
-
-  return () => fetch(`${baseUrl}login`, sentData)
-      .then(response => response.json())
-      .then(json => {
-        if (json.redirect) {
-          window.location = json.redirect;
-        }
-      });
-}
