@@ -5,13 +5,14 @@ import { changeName, enterEmail, changeConcentration,
 	changeEthnicity } from '../../actions/user'
 
 const mapStateToProps = (state) => {
+	console.log(['Concentration'].concat(state.userReducer.concentrations.concentrations))
 	return {
 		profile: state.userReducer.profile.profile,
 		name: state.userReducer.profile.profile.name,
-		concentrations: state.userReducer.concentrations.concentrations,
-		ethnicities: state.userReducer.userInfo.ethnicities,
-		genders: state.userReducer.userInfo.genders,
-		concentration: (state.userReducer.profile.profile.concentration==null ? '' : state.userReducer.profile.profile.concentration.name),
+		concentrations: ['Concentration'].concat(state.userReducer.concentrations.concentrations),
+		ethnicities: ['Ethnicity'].concat(state.userReducer.userInfo.ethnicities),
+		genders: ['Gender'].concat(state.userReducer.userInfo.genders),
+		concentration: (state.userReducer.profile.profile.concentration==null ? [] : state.userReducer.profile.profile.concentration.name),
 		nameSuccess: state.userReducer.profile.nameSuccess,
 		emailSuccess: state.userReducer.profile.emailSuccess,
 		genderSuccess: state.userReducer.profile.genderSuccess,
