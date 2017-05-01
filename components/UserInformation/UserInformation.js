@@ -17,7 +17,7 @@ const UserInformation = ({ profile, name, concentrations, years_coding, year, et
           </figure>
         </div>
         <div className="column">
-          <div className="columns">
+          <div className="columns is-multiline">
             <div className="column">
               <div className="field">
                 <label className="label">Name</label>
@@ -45,7 +45,7 @@ const UserInformation = ({ profile, name, concentrations, years_coding, year, et
               </div>
             </div>
           </div>
-          <div className="columns">
+          <div className="columns is-multiline">
             <div className="column">
               <div className="field">
                 <label className="label">Concentration</label>
