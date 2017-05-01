@@ -15,14 +15,7 @@ class RecommendationPage extends Component {
   render() {
     return (
       <Layout className="section">
-        <div className="container">
-          <div className="has-text-centered">
-            <h1 className="title">Course Recommendation</h1>
-          </div>
-        </div>
-        <div>
-          <VisibleRecommendation />
-        </div>
+        <VisibleRecommendation />
       </Layout>
     );
   }
