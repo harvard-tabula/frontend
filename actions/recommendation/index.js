@@ -1,3 +1,5 @@
+import { baseUrl } from '../../core/api';
+
 export const CHANGE_CLASS = 'CHANGE_CLASS';
 export const SUGGESTION_SELECTED = 'SUGGESTION_SELECTED';
 export const CLEAR_CLASS_SUGGESTIONS = 'CLEAR_CLASS_SUGGESTIONS';
@@ -29,20 +31,67 @@ export function changeClass(text) {
   };
 }
 
-export function changeSuggestionSelected(suggestion) {
-  return (dispatch, getState) => {
-    dispatch(suggestionSelected(suggestion.suggestion));
-    const newState = getState();
-    dispatch(fetchRecommendation(newState.recommendationReducer.classSuggestions.id));
-  };
-}
-
 export function suggestionSelected(suggestion) {
   return {
     type: SUGGESTION_SELECTED,
     payload: {
       courseId: suggestion.id,
       courseName: suggestion.catalog_number },
+  };
+}
+
+export function requestRecommendation() {
+  return {
+    type: REQUEST_RECOMMENDATION,
+  };
+}
+
+export function receiveRecommendation(json) {
+  return {
+    type: RECEIVE_RECOMMENDATION,
+    payload: {
+      recommendations: json.data,
+      receivedAt: Date.now(),
+    },
+  };
+}
+
+export function fetchRecommendation(id) {
+  const sentData = {
+    method: 'GET',
+    mode: 'cors',
+    body: null,
+    credentials: 'include',
+  };
+  return (dispatch) => {
+    dispatch(requestRecommendation());
+    return fetch(`${baseUrl}recommendation/${id}`, sentData)
+			.then(response => response.json())
+<<<<<<< HEAD
+  			.then(json =>
+          {
+            if(json.redirect){
+              dispatch(showModal)
+            }
+            else{
+              dispatch(receiveClassSuggestions(json));
+            }
+          }
+  			);
+=======
+			.then(json =>				{
+  dispatch(receiveRecommendation(json));
+}
+			);
+>>>>>>> 8aafcaa3388ba3832a555458db85598ef3cb4165
+  };
+}
+
+export function changeSuggestionSelected(suggestion) {
+  return (dispatch, getState) => {
+    dispatch(suggestionSelected(suggestion.suggestion));
+    const newState = getState();
+    dispatch(fetchRecommendation(newState.recommendationReducer.classSuggestions.id));
   };
 }
 
@@ -75,47 +124,6 @@ export function fetchClassSuggestions(text) {
     body: null,
     credentials: 'include',
   };
-
-  return (dispatch, getState) => {
-    dispatch(requestClassSuggestions());
-    return fetch(`${baseUrl}coursesearch/${text}`, sentData)
-			.then(response => response.json())
-  			.then(json =>
-          {
-            if(json.redirect){
-              dispatch(showModal)
-            }
-            else{
-              dispatch(receiveClassSuggestions(json));
-            }
-          }
-  			);
-  };
-}
-
-export function requestRecommendation() {
-  return {
-    type: REQUEST_RECOMMENDATION,
-  };
-}
-
-export function receiveRecommendation(json) {
-  return {
-    type: RECEIVE_RECOMMENDATION,
-    payload: {
-      recommendations: json.data,
-      receivedAt: Date.now(),
-    },
-  };
-}
-
-export function fetchRecommendation(id) {
-  const sentData = {
-    method: 'GET',
-    mode: 'cors',
-    body: null,
-    credentials: 'include',
-  };
   return (dispatch, getState) => {
     dispatch(requestRecommendation());
     return fetch(`${baseUrl}recommendation/${id}`, sentData)
@@ -131,20 +139,4 @@ export function fetchRecommendation(id) {
         }
 			);
   };
-}
-
-export function fetchLogin() {
-  const sentData = {
-    method: 'GET',
-    mode: 'cors',
-    body: null,
-    credentials: 'include',
-  };
-  return fetch(`${baseUrl}login`, sentData)
-		.then(response => response.json())
-		.then(json => {
-  if (json.redirect) {
-    window.location = json.redirect;
-  }
-});
 }

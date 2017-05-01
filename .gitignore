@@ -1,4 +1,5 @@
 .DS_Store
-public/dist/*
+public/dist/
+public/sitemap.xml
 index.html
 node_modules

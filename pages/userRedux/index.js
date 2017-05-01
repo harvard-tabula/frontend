@@ -1,26 +1,26 @@
 import React, { Component, PropTypes } from 'react';
 import { render } from 'react-dom';
 import { connect } from 'react-redux';
-import AddClass from '../../containers/user/AddClass';
 import VisibleClassList from '../../containers/user/VisibleClassList';
-import VisibleTag from '../../containers/user/VisibleTag';
 import VisibleProfile from '../../containers/user/VisibleProfile';
 import VisibleModal from '../../containers/user/VisibleModal';
 import Layout from '../../components/Layout';
-import { fetchLogin, fetchProfileIfNeeded, fetchClassesIfNeeded, fetchConcentrationsIfNeeded,
-	fetchTagsIfNeeded, fetchSemestersIfNeeded, fetchUserInfoIfNeeded } from '../../actions/user';
+import { fetchProfileIfNeeded, fetchClassesIfNeeded, fetchConcentrationsIfNeeded,
+  fetchTagsIfNeeded, fetchSemestersIfNeeded, fetchUserInfoIfNeeded } from '../../actions/user';
+import { authenticateCalls } from '../../core/api';
 
 class UserReduxPage extends Component {
 
   componentWillMount() {
     const { dispatch } = this.props;
-    dispatch(fetchLogin());  // TODO This should block calls below to avoid throwing errors.
-    dispatch(fetchProfileIfNeeded());
-    dispatch(fetchClassesIfNeeded());
-    dispatch(fetchConcentrationsIfNeeded());
-    dispatch(fetchSemestersIfNeeded());
-    dispatch(fetchTagsIfNeeded());
-    dispatch(fetchUserInfoIfNeeded());
+    authenticateCalls(dispatch, [
+      fetchProfileIfNeeded,
+      fetchClassesIfNeeded,
+      fetchConcentrationsIfNeeded,
+      fetchSemestersIfNeeded,
+      fetchTagsIfNeeded,
+      fetchUserInfoIfNeeded,
+    ]);
   }
 
   render() {

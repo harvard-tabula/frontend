@@ -1,4 +1,5 @@
-import fetch from 'isomorphic-fetch';
+fimport fetch from 'isomorphic-fetch';
+import { baseUrl } from '../../core/api';
 
 export const ENTER_NAME = 'ENTER_NAME';
 export const ENTER_EMAIL = 'ENTER_EMAIL';
@@ -44,7 +45,6 @@ export const MARK_RECEIVED_PROFILE = 'MARK_RECEIVED_PROFILE';
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 
-const baseUrl = 'https://api.tabula.life/';
 let nextClassId = -1;
 
 export function showModal() {
@@ -805,18 +805,33 @@ export function enterClassYear(id, text) {
   };
 }
 
+export function toggleEmoji(id, emojiId) {
+  return {
+    type: TOGGLE_EMOJI,
+    payload: {
+      id,
+      emojiId,
+    },
+  };
+}
+
 export function changeEmoji(id, emojiId) {
   return (dispatch, getState) => {
-    const originalState = getState();
     dispatch(toggleEmoji(id, emojiId));
     const newState = getState();
-    const classElement = newState.userReducer.classes.classes.find((classElement) => classElement.id == id);
+    const classElement = newState.userReducer.classes.classes.find((classElement) => classElement.id === id);
     if (classElement.canPut) {
       const header = new Headers({ 'Content-Type': 'application/json' });
       const sentData = {
         method: 'PUT',
         mode: 'cors',
-        body: JSON.stringify({ id: classElement.course.id, semester: classElement.semester, grade: classElement.grade, course_tag_ids: classElement.tags, hours: classElement.hours }),
+        body: JSON.stringify({
+          id: classElement.course.id,
+          semester: classElement.semester,
+          grade: classElement.grade,
+          course_tag_ids: classElement.tags,
+          hours: classElement.hours,
+        }),
         credentials: 'include',
         headers: header,
       };
@@ -828,16 +843,6 @@ export function changeEmoji(id, emojiId) {
             }
           })
     }
-  };
-}
-
-export function toggleEmoji(id, emojiId) {
-  return {
-    type: TOGGLE_EMOJI,
-    payload: {
-      id,
-      emojiId,
-    },
   };
 }
 
@@ -980,7 +985,7 @@ export function fetchClassSuggestions(text) {
     credentials: 'include',
   };
 
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(requestClassSuggestions());
     return fetch(`${baseUrl}coursesearch/${text}`, sentData)
     .then(response => response.json())
@@ -1021,7 +1026,7 @@ function requestProfile() {
 
 function receiveProfile(json) {
   const tags = [];
-  json.data.tags.map(tag => {
+  json.data.tags.forEach(tag => {
     tags.push(tag.id);
   });
   return {
@@ -1032,6 +1037,10 @@ function receiveProfile(json) {
       tags,
     },
   };
+}
+
+export function markReceivedProfile() {
+  return { type: MARK_RECEIVED_PROFILE };
 }
 
 export function fetchProfile() {
@@ -1074,10 +1083,6 @@ export function fetchProfileIfNeeded() {
     }
     return Promise.resolve();
   };
-}
-
-export function markReceivedProfile() {
-  return { type: MARK_RECEIVED_PROFILE };
 }
 
 function requestTags() {
@@ -1158,6 +1163,7 @@ export function fetchSemesters() {
 
   return dispatch => {
     dispatch(requestSemesters());
+<<<<<<< HEAD
     return fetch(`${baseUrl}semesters`, sentData).then(response => response.json()).then(json => {
       if (json.redirect) {
         dispatch(showModal())
@@ -1166,6 +1172,13 @@ export function fetchSemesters() {
         dispatch(receiveSemesters(json));
       }
     });
+=======
+    return fetch(`${baseUrl}semesters`, sentData)
+      .then(response => response.json())
+      .then(json => {
+        dispatch(receiveSemesters(json));
+      });
+>>>>>>> 8aafcaa3388ba3832a555458db85598ef3cb4165
   };
 }
 
@@ -1212,6 +1225,7 @@ export function fetchConcentrations() {
 
   return dispatch => {
     dispatch(requestConcentrations());
+<<<<<<< HEAD
     return fetch(`${baseUrl}concentrations`, sentData).then(response => response.json()).then(json => {
       if (json.redirect) {
         dispatch(showModal())
@@ -1220,6 +1234,13 @@ export function fetchConcentrations() {
         dispatch(receiveConcentrations(json));
       }
     });
+=======
+    return fetch(`${baseUrl}concentrations`, sentData)
+      .then(response => response.json())
+      .then(json => {
+        dispatch(receiveConcentrations(json));
+      });
+>>>>>>> 8aafcaa3388ba3832a555458db85598ef3cb4165
   };
 }
 
@@ -1294,21 +1315,4 @@ export function fetchUserInfoIfNeeded() {
     }
     return Promise.resolve();
   };
-}
-
-export function fetchLogin() {
-  const sentData = {
-    method: 'GET',
-    mode: 'cors',
-    body: null,
-    credentials: 'include',
-  };
-
-  return () => fetch(`${baseUrl}login`, sentData)
-      .then(response => response.json())
-      .then(json => {
-        if (json.redirect) {
-          window.location = json.redirect;
-        }
-      });
 }

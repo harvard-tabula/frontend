@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import ClassListRedux from '../../components/ClassListRedux/ClassListRedux';
 import { enterCourseID, changeGrade, changeWorkload, changeTerm, changeClassYear,
-		changeEmoji, onClickRemoveClass, clearClassSuggestions, fetchClassSuggestions,
-		changeSuggestionSelected } from '../../actions/user';
+    changeEmoji, onClickRemoveClass, clearClassSuggestions, fetchClassSuggestions,
+    changeSuggestionSelected } from '../../actions/user';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const emojiDict = {
     Neutral: { text: '😐', hover: 'It was okay' },
     Difficult: { text: '💀', hover: 'It was difficult' },
@@ -23,15 +23,15 @@ const mapStateToProps = (state) => {
     terms: ['Term'].concat(state.userReducer.userInfo.terms),
     years: ['Year', '2014', '2015', '2016', '2017'],
     emojis: state.userReducer.tags.tags.filter(t => t.category === 'user_history')
-			.map((tag) => {
+      .map(tag => {
         const emoji = emojiDict[tag.name];
         emoji.id = tag.id;
         return emoji;
-      })
+      }),
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   onChangeClassId: (id, text) => {
     dispatch(enterCourseID(id, text));
   },
@@ -66,8 +66,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const VisibleClassList = connect(
-	mapStateToProps,
-	mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(ClassListRedux);
 
 export default VisibleClassList;

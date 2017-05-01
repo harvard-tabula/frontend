@@ -1,8 +1,8 @@
-import { connect } from 'react-redux'
-import UserInformation from '../../components/UserInformation/UserInformation'
-import { changeName, enterEmail, changeConcentration, 
+import { connect } from 'react-redux';
+import UserInformation from '../../components/UserInformation/UserInformation';
+import { changeName, enterEmail, changeConcentration,
 	enterYearsCoding, blurYearsCoding, enterYear, blurYear, changeGender,
-	changeEthnicity } from '../../actions/user'
+	changeEthnicity } from '../../actions/user';
 
 const mapStateToProps = (state) => {
 	return {
@@ -58,6 +58,6 @@ const mapDispatchToProps = (dispatch) => {
 const VisibleUserInformation = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(UserInformation)
+)(UserInformation);
 
-export default VisibleUserInformation
+export default VisibleUserInformation;
