@@ -5,6 +5,7 @@ const UserInformation = ({ profile, name, concentrations, years_coding, year, et
   nameSuccess, emailSuccess, genderSuccess, ethcnitySuccess, concentrationSuccess, yearsCodingSuccess, yearSuccess,
   onChangeName, onChangeEmail, onChangeConcentration,
   onChangeYearsCoding, onBlurYearsCoding, onChangeGraduation, onBlurYear, onChangeGender, onChangeEthnicity }) => (
+  <div className="section">
     <div className="container is-fluid">
       <div className="heading">
         <h2 className="subtitle">Personal Profile</h2>
@@ -99,6 +100,7 @@ const UserInformation = ({ profile, name, concentrations, years_coding, year, et
         </div>
       </div>
     </div>
+  </div>
 );
 
 export default UserInformation;
