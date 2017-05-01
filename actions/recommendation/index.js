@@ -5,8 +5,22 @@ export const REQUEST_CLASS_SUGGESTIONS = 'REQUEST_CLASS_SUGGESTIONS';
 export const RECEIVE_CLASS_SUGGESTIONS = 'RECEIVE_CLASS_SUGGESTIONS';
 export const REQUEST_RECOMMENDATION = 'REQUEST_RECOMMENDATION';
 export const RECEIVE_RECOMMENDATION = 'RECEIVE_RECOMMENDATION';
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';
 
 const baseUrl = 'https://api.tabula.life/';
+
+export function showModal() {
+  return{
+    type: SHOW_MODAL
+  }
+}
+
+export function hideModal(){
+  return{
+    type: HIDE_MODAL
+  }
+}
 
 export function changeClass(text) {
   return {
@@ -66,10 +80,16 @@ export function fetchClassSuggestions(text) {
     dispatch(requestClassSuggestions());
     return fetch(`${baseUrl}coursesearch/${text}`, sentData)
 			.then(response => response.json())
-			.then(json =>				{
-  dispatch(receiveClassSuggestions(json));
-}
-			);
+  			.then(json =>
+          {
+            if(json.redirect){
+              dispatch(showModal)
+            }
+            else{
+              dispatch(receiveClassSuggestions(json));
+            }
+          }
+  			);
   };
 }
 
@@ -100,9 +120,15 @@ export function fetchRecommendation(id) {
     dispatch(requestRecommendation());
     return fetch(`${baseUrl}recommendation/${id}`, sentData)
 			.then(response => response.json())
-			.then(json =>				{
-  dispatch(receiveRecommendation(json));
-}
+			.then(json =>				
+        {
+          if(json.redirect){
+            showModal()
+          }
+          else{
+            dispatch(receiveRecommendation(json));
+          }
+        }
 			);
   };
 }

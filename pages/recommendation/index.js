@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { connect } from 'react-redux';
 import Layout from '../../components/Layout';
 import VisibleRecommendation from '../../containers/recommendation/VisibleRecommendation';
+import VisibleModal from '../../containers/recommendation/VisibleModal';
 import { fetchLogin } from '../../actions/recommendation'
 
 class RecommendationPage extends Component {
@@ -26,6 +27,7 @@ class RecommendationPage extends Component {
 		        </div>
 		    	<div>
 		    		<VisibleRecommendation />
+		    		<VisibleModal />
 				</div>
 			</Layout>
 	    );

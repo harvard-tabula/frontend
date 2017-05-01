@@ -6,6 +6,7 @@ import concentrations from './concentrations'
 import profile from './profile'
 import userInfo from './userInfo'
 import classSuggestions from './classSuggestions'
+import modal from './modal'
 
 const tagCategories = (state = [], action) => {
 	switch (action.type){
@@ -22,7 +23,8 @@ const userReducer = combineReducers({
 	semesters,
 	concentrations,
 	userInfo,
-	classSuggestions
+	classSuggestions,
+	modal
 })
 
 export default userReducer

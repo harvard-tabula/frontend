@@ -5,6 +5,7 @@ import AddClass from '../../containers/user/AddClass';
 import VisibleClassList from '../../containers/user/VisibleClassList';
 import VisibleTag from '../../containers/user/VisibleTag';
 import VisibleProfile from '../../containers/user/VisibleProfile';
+import VisibleModal from '../../containers/user/VisibleModal';
 import Layout from '../../components/Layout';
 import { fetchLogin, fetchProfileIfNeeded, fetchClassesIfNeeded, fetchConcentrationsIfNeeded,
 	fetchTagsIfNeeded, fetchSemestersIfNeeded, fetchUserInfoIfNeeded } from '../../actions/user';
@@ -35,6 +36,7 @@ class UserReduxPage extends Component {
           <VisibleClassList />
           <AddClass />
           <VisibleTag />
+          <VisibleModal />
         </div>
       </Layout>
     );

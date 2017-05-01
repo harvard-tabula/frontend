@@ -5,7 +5,6 @@ import { changeName, enterEmail, changeConcentration,
 	changeEthnicity } from '../../actions/user'
 
 const mapStateToProps = (state) => {
-	console.log(['Concentration'].concat(state.userReducer.concentrations.concentrations))
 	return {
 		profile: state.userReducer.profile.profile,
 		name: state.userReducer.profile.profile.name,
