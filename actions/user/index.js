@@ -1,4 +1,4 @@
-fimport fetch from 'isomorphic-fetch';
+import fetch from 'isomorphic-fetch';
 import { baseUrl } from '../../core/api';
 
 export const ENTER_NAME = 'ENTER_NAME';
@@ -1163,7 +1163,6 @@ export function fetchSemesters() {
 
   return dispatch => {
     dispatch(requestSemesters());
-<<<<<<< HEAD
     return fetch(`${baseUrl}semesters`, sentData).then(response => response.json()).then(json => {
       if (json.redirect) {
         dispatch(showModal())
@@ -1172,13 +1171,6 @@ export function fetchSemesters() {
         dispatch(receiveSemesters(json));
       }
     });
-=======
-    return fetch(`${baseUrl}semesters`, sentData)
-      .then(response => response.json())
-      .then(json => {
-        dispatch(receiveSemesters(json));
-      });
->>>>>>> 8aafcaa3388ba3832a555458db85598ef3cb4165
   };
 }
 
@@ -1225,7 +1217,6 @@ export function fetchConcentrations() {
 
   return dispatch => {
     dispatch(requestConcentrations());
-<<<<<<< HEAD
     return fetch(`${baseUrl}concentrations`, sentData).then(response => response.json()).then(json => {
       if (json.redirect) {
         dispatch(showModal())
@@ -1234,13 +1225,6 @@ export function fetchConcentrations() {
         dispatch(receiveConcentrations(json));
       }
     });
-=======
-    return fetch(`${baseUrl}concentrations`, sentData)
-      .then(response => response.json())
-      .then(json => {
-        dispatch(receiveConcentrations(json));
-      });
->>>>>>> 8aafcaa3388ba3832a555458db85598ef3cb4165
   };
 }
 

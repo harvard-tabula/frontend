@@ -10,8 +10,6 @@ export const RECEIVE_RECOMMENDATION = 'RECEIVE_RECOMMENDATION';
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 
-const baseUrl = 'https://api.tabula.life/';
-
 export function showModal() {
   return{
     type: SHOW_MODAL
@@ -67,7 +65,6 @@ export function fetchRecommendation(id) {
     dispatch(requestRecommendation());
     return fetch(`${baseUrl}recommendation/${id}`, sentData)
 			.then(response => response.json())
-<<<<<<< HEAD
   			.then(json =>
           {
             if(json.redirect){
@@ -78,12 +75,6 @@ export function fetchRecommendation(id) {
             }
           }
   			);
-=======
-			.then(json =>				{
-  dispatch(receiveRecommendation(json));
-}
-			);
->>>>>>> 8aafcaa3388ba3832a555458db85598ef3cb4165
   };
 }
 
