@@ -42,8 +42,22 @@ export const REQUEST_USER_INFO = 'REQUEST_USER_INFO';
 export const RECEIVE_USER_INFO = 'RECEIVE_USER_INFO';
 export const MARK_RECEIVED_CLASSES = 'MARK_RECEIVED_CLASSES';
 export const MARK_RECEIVED_PROFILE = 'MARK_RECEIVED_PROFILE';
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';
 
 let nextClassId = -1;
+
+export function showModal() {
+  return{
+    type: SHOW_MODAL
+  }
+}
+
+export function hideModal(){
+  return{
+    type: HIDE_MODAL
+  }
+}
 
 export function changeName(text) {
   return (dispatch, getState) => {
@@ -76,12 +90,17 @@ export function changeName(text) {
       credentials: 'include',
       headers: header,
     };
-    fetch(`${baseUrl}profile`, sentData).then(response => {
-      console.log(response);
-    }).catch(error => {
-      console.log(error);
-      dispatch(enterName(originalState.userReducer.profile.name));
-    });
+    fetch(`${baseUrl}profile`, sentData)
+      .then(response => response.json())
+        .then(json => {
+          if (json.redirect) {
+            dispatch(showModal())
+          }
+        })
+      .catch(error => {
+        console.log(error);
+        dispatch(enterName(originalState.userReducer.profile.name));
+      });
   };
 }
 
@@ -135,12 +154,17 @@ export function changeConcentration(text) {
       credentials: 'include',
       headers: header,
     };
-    fetch(`${baseUrl}profile`, sentData).then(response => {
-      console.log(response);
-    }).catch(error => {
-      console.log(error);
-      dispatch(enterConcentration(originalState.userReducer.profile.concentration));
-    });
+    fetch(`${baseUrl}profile`, sentData)
+      .then(response => response.json())
+          .then(json => {
+            if (json.redirect) {
+              dispatch(showModal())
+            }
+          })
+      .catch(error => {
+        console.log(error);
+        dispatch(enterConcentration(originalState.userReducer.profile.concentration));
+      });
   };
 }
 
@@ -214,12 +238,17 @@ export function blurYearsCoding() {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${baseUrl}profile`, sentData).then(response => {
-        console.log(response);
-      }).catch(error => {
-        console.log(error);
-        dispatch(markYearsCodingFailure());
-      });
+      fetch(`${baseUrl}profile`, sentData)
+        .then(response => response.json())
+          .then(json => {
+            if (json.redirect) {
+              dispatch(showModal())
+            }
+          })
+        .catch(error => {
+          console.log(error);
+          dispatch(markYearsCodingFailure());
+        });
     }
   };
 }
@@ -255,12 +284,17 @@ export function changeYearsCoding(text) {
       credentials: 'include',
       headers: header,
     };
-    fetch(`${baseUrl}profile`, sentData).then(response => {
-      console.log(response);
-    }).catch(error => {
-      console.log(error);
-      dispatch(enterYearsCoding(originalState.userReducer.profile.years_coding));
-    });
+    fetch(`${baseUrl}profile`, sentData)
+      .then(response => response.json())
+          .then(json => {
+            if (json.redirect) {
+              dispatch(showModal())
+            }
+          })
+      .catch(error => {
+        console.log(error);
+        dispatch(enterYearsCoding(originalState.userReducer.profile.years_coding));
+      });
   };
 }
 
@@ -314,12 +348,17 @@ export function blurYear() {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${baseUrl}profile`, sentData).then(response => {
-        console.log(response);
-      }).catch(error => {
-        console.log(error);
-        dispatch(markYearFailure());
-      });
+      fetch(`${baseUrl}profile`, sentData)
+        .then(response => response.json())
+          .then(json => {
+            if (json.redirect) {
+              dispatch(showModal())
+            }
+          })
+        .catch(error => {
+          console.log(error);
+          dispatch(markYearFailure());
+        });
     }
   };
 }
@@ -355,12 +394,17 @@ export function changeYear(text) {
       credentials: 'include',
       headers: header,
     };
-    fetch(`${baseUrl}profile`, sentData).then(response => {
-      console.log(response);
-    }).catch(error => {
-      console.log(error);
-      dispatch(enterYear(originalState.userReducer.profile.year));
-    });
+    fetch(`${baseUrl}profile`, sentData)
+      .then(response => response.json())
+          .then(json => {
+            if (json.redirect) {
+              dispatch(showModal())
+            }
+          })
+      .catch(error => {
+        console.log(error);
+        dispatch(enterYear(originalState.userReducer.profile.year));
+      });
   };
 }
 
@@ -404,12 +448,17 @@ export function changeGender(text) {
       credentials: 'include',
       headers: header,
     };
-    fetch(`${baseUrl}profile`, sentData).then(response => {
-      console.log(response);
-    }).catch(error => {
-      console.log(error);
-      dispatch(enterGender(originalState.userReducer.profile.gender));
-    });
+    fetch(`${baseUrl}profile`, sentData)
+      .then(response => response.json())
+          .then(json => {
+            if (json.redirect) {
+              dispatch(showModal())
+            }
+          })
+      .catch(error => {
+        console.log(error);
+        dispatch(enterGender(originalState.userReducer.profile.gender));
+      });
   };
 }
 
@@ -478,9 +527,13 @@ export function changeSuggestionSelected(classId, courseId) {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${baseUrl}history`, sentData).then(response => {
-        console.log(response);
-      });
+      fetch(`${baseUrl}history`, sentData)
+        .then(response => response.json())
+          .then(json => {
+            if (json.redirect) {
+              dispatch(showModal())
+            }
+          })
     }
   };
 }
@@ -531,9 +584,13 @@ export function onClickRemoveClass(id) {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${baseUrl}history`, sentData).then(response => {
-        console.log(response);
-      });
+      fetch(`${baseUrl}history`, sentData)
+        .then(response => response.json())
+          .then(json => {
+            if (json.redirect) {
+              dispatch(showModal())
+            }
+          })
     }
     dispatch(removeClass(id));
   };
@@ -573,9 +630,13 @@ export function changeGrade(id, text) {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${baseUrl}history`, sentData).then(response => {
-        console.log(response);
-      });
+      fetch(`${baseUrl}history`, sentData)
+        .then(response => response.json())
+          .then(json => {
+            if (json.redirect) {
+              dispatch(showModal())
+            }
+          })
     }
   };
 }
@@ -625,9 +686,13 @@ export function blurWorkload() {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${baseUrl}history`, sentData).then(response => {
-        console.log(response);
-      });
+      fetch(`${baseUrl}history`, sentData)
+        .then(response => response.json())
+          .then(json => {
+            if (json.redirect) {
+              dispatch(showModal())
+            }
+          })
     }
   };
 }
@@ -647,9 +712,13 @@ export function changeWorkload(id, text) {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${baseUrl}history`, sentData).then(response => {
-        console.log(response);
-      });
+      fetch(`${baseUrl}history`, sentData)
+        .then(response => response.json())
+          .then(json => {
+            if (json.redirect) {
+              dispatch(showModal())
+            }
+          })
     }
   };
 }
@@ -679,9 +748,13 @@ export function changeTerm(id, text) {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${baseUrl}history`, sentData).then(response => {
-        console.log(response);
-      });
+      fetch(`${baseUrl}history`, sentData)
+        .then(response => response.json())
+          .then(json => {
+            if (json.redirect) {
+              dispatch(showModal())
+            }
+          })
     }
   };
 }
@@ -711,9 +784,13 @@ export function changeClassYear(id, text) {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${baseUrl}history`, sentData).then(response => {
-        console.log(response);
-      });
+      fetch(`${baseUrl}history`, sentData)
+      .then(response => response.json())
+        .then(json => {
+          if (json.redirect) {
+            dispatch(showModal())
+          }
+        })
     }
   };
 }
@@ -758,7 +835,13 @@ export function changeEmoji(id, emojiId) {
         credentials: 'include',
         headers: header,
       };
-      fetch(`${baseUrl}history`, sentData);
+      fetch(`${baseUrl}history`, sentData)
+        .then(response => response.json())
+          .then(json => {
+            if (json.redirect) {
+              dispatch(showModal())
+            }
+          })
     }
   };
 }
@@ -804,12 +887,17 @@ export function clickTag(id) {
       credentials: 'include',
       headers: header,
     };
-    fetch(`${baseUrl}profile`, sentData).then(response => {
-      console.log(response);
-    }).catch(error => {
-      console.log(error);
-      dispatch(toggleTag(id));
-    });
+    fetch(`${baseUrl}profile`, sentData)
+      .then(response => response.json())
+        .then(json => {
+          if (json.redirect) {
+            dispatch(showModal())
+          }
+        })
+      .catch(error => {
+        console.log(error);
+        dispatch(toggleTag(id));
+      });
   };
 }
 
@@ -842,10 +930,16 @@ function fetchClasses() {
   return dispatch => {
     dispatch(requestClasses());
     return fetch(`${baseUrl}history`, sentData)
-      .then(response => response.json())
-      .then(json => {
-        dispatch(receiveClasses(json));
-        dispatch(markReceivedClasses());
+    .then(response => response.json())
+      .then(json => 
+      {
+        if (json.redirect) {
+          dispatch(showModal());
+        }
+        else{
+          dispatch(receiveClasses(json));
+          dispatch(markReceivedClasses());
+        }
       });
   };
 }
@@ -894,10 +988,16 @@ export function fetchClassSuggestions(text) {
   return (dispatch) => {
     dispatch(requestClassSuggestions());
     return fetch(`${baseUrl}coursesearch/${text}`, sentData)
-      .then(response => response.json())
-      .then(json => {
-        dispatch(receiveClassSuggestions(json));
-      });
+    .then(response => response.json())
+      .then(json => 
+        {
+          if (json.redirect) {
+            dispatch(showModal())
+          }
+          else {
+            dispatch(receiveClassSuggestions(json));
+          }
+        });
   };
 }
 
@@ -953,13 +1053,16 @@ export function fetchProfile() {
 
   return dispatch => {
     dispatch(requestProfile());
-    return fetch(`${baseUrl}profile`, sentData)
-      .then(response => response.json())
-      .then(json => {
-        dispatch(receiveProfile(json));
-        dispatch(getConcentrationId());
-        dispatch(markReceivedProfile());
-      });
+    return fetch(`${baseUrl}profile`, sentData).then(response => response.json()).then(json => {
+      	if (json.redirect){
+      		dispatch(showModal())
+      	}
+      else {
+      dispatch(receiveProfile(json));
+      dispatch(getConcentrationId());
+      dispatch(markReceivedProfile());
+      }
+    });
   };
 }
 
@@ -1006,11 +1109,14 @@ export function fetchTags() {
 
   return dispatch => {
     dispatch(requestTags());
-    return fetch(`${baseUrl}tags`, sentData)
-      .then(response => response.json())
-      .then(json => {
+    return fetch(`${baseUrl}tags`, sentData).then(response => response.json()).then(json => {
+      if (json.redirect) {
+        dispatch(showModal())
+      }
+      else{
         dispatch(receiveTags(json));
-      });
+      }
+    });
   };
 }
 
@@ -1057,11 +1163,14 @@ export function fetchSemesters() {
 
   return dispatch => {
     dispatch(requestSemesters());
-    return fetch(`${baseUrl}semesters`, sentData)
-      .then(response => response.json())
-      .then(json => {
+    return fetch(`${baseUrl}semesters`, sentData).then(response => response.json()).then(json => {
+      if (json.redirect) {
+        dispatch(showModal())
+      }
+      else{
         dispatch(receiveSemesters(json));
-      });
+      }
+    });
   };
 }
 
@@ -1108,11 +1217,14 @@ export function fetchConcentrations() {
 
   return dispatch => {
     dispatch(requestConcentrations());
-    return fetch(`${baseUrl}concentrations`, sentData)
-      .then(response => response.json())
-      .then(json => {
+    return fetch(`${baseUrl}concentrations`, sentData).then(response => response.json()).then(json => {
+      if (json.redirect) {
+        dispatch(showModal())
+      }
+      else{
         dispatch(receiveConcentrations(json));
-      });
+      }
+    });
   };
 }
 
@@ -1160,7 +1272,12 @@ export function fetchUserInfo() {
   return dispatch => {
     dispatch(requestUserInfo());
     return fetch(`${baseUrl}ui`, sentData).then(response => response.json()).then(json => {
-      dispatch(receiveUserInfo(json));
+      if (json.redirect) {
+        dispatch(showModal())
+      }
+      else{
+        dispatch(receiveUserInfo(json));
+      }
     });
   };
 }
