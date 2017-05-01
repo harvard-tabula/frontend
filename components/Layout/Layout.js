@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import Header from './Header';
 import Footer from '../Footer';
-import cx from 'classnames';
 
 
 class Layout extends React.Component {
@@ -16,7 +15,7 @@ class Layout extends React.Component {
         <div>
           <Header />
           <main>
-            <div {...this.props}/>
+            <div {...this.props} />
             <Footer />
           </main>
         </div>

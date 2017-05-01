@@ -34,9 +34,9 @@ class UserReduxPage extends Component {
         </div>
         <div>
           <VisibleProfile />
+          <VisibleTag />
           <VisibleClassList />
           <AddClass />
-          <VisibleTag />
         </div>
       </Layout>
     );
