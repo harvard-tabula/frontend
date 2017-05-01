@@ -49,7 +49,7 @@ const Recommendation = ({ classSuggestions, name, recommendations, recommendatio
               <p>Expected Grade: {recommendations.grade}</p>
               <p>Expected Workload: {recommendations.hours} hours</p>
               {tags.map((tag) =>
-                <span className="tag is-medium">{tag.name}</span>)}
+                <span className="tag is-medium" key={tag.id}>{tag.name}</span>)}
             </div>
           : null}
         </div>

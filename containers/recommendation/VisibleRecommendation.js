@@ -26,11 +26,11 @@ const mapStateToProps = (state) => {
       if (t.category == 'user_history') {
         const emoji = emojiDict[t.name];
         emoji.id = t.id;
+        emoji.name = emoji.text;
         return emoji;
       }
-
       return t;
-    }),
+    })
   };
 };
 
