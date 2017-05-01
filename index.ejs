@@ -1,0 +1,34 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title><%= config.title %></title>
+    <meta name="description" content="<%= config.description %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  </head>
+  <body>
+    <div id="container"></div>
+    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+    <script>
+      var config = {
+        apiKey: "AIzaSyBYzST-I7MSJK3tR9mjIhz0gzHa4VuKua8",
+        authDomain: "tabula-158417.firebaseapp.com",
+        databaseURL: "https://tabula-158417.firebaseio.com",
+        storageBucket: "tabula-158417.appspot.com",
+        messagingSenderId: "744871386196"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script src="<%= bundle %>"></script>
+    <%_ if (!debug && config.trackingID) { _%>
+    <script>
+      window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+      ga('create','<%= config.gSuiteId %>','auto');ga('send','pageview')
+    </script>
+    <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+    <%_ } _%>
+  </body>
+</html>
