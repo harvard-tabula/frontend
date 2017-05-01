@@ -26,16 +26,9 @@ class UserReduxPage extends Component {
   render() {
     return (
       <Layout className="section">
-        <div className="container">
-          <div className="has-text-centered">
-            <h1 className="title">User Profile</h1>
-          </div>
-        </div>
-        <div>
-          <VisibleProfile />
-          <VisibleClassList />
-          <VisibleModal />
-        </div>
+        <VisibleProfile />
+        <VisibleClassList />
+        <VisibleModal />
       </Layout>
     );
   }

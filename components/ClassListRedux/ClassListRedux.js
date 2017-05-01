@@ -12,7 +12,7 @@ const ClassListRedux = ({ classes, classSuggestions, grades, terms, years, emoji
           <h2 className="subtitle">Classes Taken</h2>
         </div>
         <div className="columns">
-          <div className="column is-2">Class name</div>
+          <div className="column is-2">Catalog Number</div>
           <div className="column is-1">Grade</div>
           <div className="column is-1">Hours</div>
           <div className="column is-1">Term</div>
