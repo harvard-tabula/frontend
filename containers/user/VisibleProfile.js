@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
 	return {
 		profile: state.userReducer.profile.profile,
 		name: state.userReducer.profile.profile.name,
-		concentrations: ['Concentration'].concat(state.userReducer.concentrations.concentrations),
+		concentrations: [{name: 'Concentration', id:-1}].concat(state.userReducer.concentrations.concentrations),
 		ethnicities: ['Ethnicity'].concat(state.userReducer.userInfo.ethnicities),
 		genders: ['Gender'].concat(state.userReducer.userInfo.genders),
 		concentration: (state.userReducer.profile.profile.concentration==null ? [] : state.userReducer.profile.profile.concentration.name),
@@ -31,6 +31,7 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(enterEmail(text))
 		},
 		onChangeConcentration: (text) => {
+			console.log(text)
 			dispatch(changeConcentration(text))
 		},
 		onChangeYearsCoding: (text) => {
