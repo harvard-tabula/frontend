@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { addClass } from '../../actions/user';
 
 const AddClassComponent = ({ dispatch }) => (
-  <div className="columns">
-    <div className="column has-text-centered">
+  <div className="section is-small">
+    <div className="container has-text-centered">
       <a
         className="button"
         onClick={e => {

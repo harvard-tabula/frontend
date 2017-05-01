@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { render } from 'react-dom';
 import { connect } from 'react-redux';
-import AddClass from '../../containers/user/AddClass';
 import VisibleClassList from '../../containers/user/VisibleClassList';
 import VisibleProfile from '../../containers/user/VisibleProfile';
 import Layout from '../../components/Layout';
@@ -28,7 +27,6 @@ class UserReduxPage extends Component {
       <Layout className="section">
         <VisibleProfile />
         <VisibleClassList />
-        <AddClass />
       </Layout>
     );
   }

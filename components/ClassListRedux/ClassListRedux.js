@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import ClassComponentRedux from '../ClassComponentRedux/ClassComponentRedux';
+import AddClass from '../../containers/user/AddClass';
 
 const ClassListRedux = ({ classes, classSuggestions, grades, terms, years, emojis,
   onChangeClassId, onChangeGrade, onChangeWorkload, onChangeTerm, onChangeYear, onClickEmoji,
@@ -50,6 +51,7 @@ const ClassListRedux = ({ classes, classSuggestions, grades, terms, years, emoji
           />
         )}
       </div>
+      <AddClass />
     </section>
   );
 
