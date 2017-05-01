@@ -3,7 +3,6 @@ import { render } from 'react-dom';
 import { connect } from 'react-redux';
 import AddClass from '../../containers/user/AddClass';
 import VisibleClassList from '../../containers/user/VisibleClassList';
-import VisibleTag from '../../containers/user/VisibleTag';
 import VisibleProfile from '../../containers/user/VisibleProfile';
 import Layout from '../../components/Layout';
 import { fetchProfileIfNeeded, fetchClassesIfNeeded, fetchConcentrationsIfNeeded,
@@ -34,7 +33,6 @@ class UserReduxPage extends Component {
         </div>
         <div>
           <VisibleProfile />
-          <VisibleTag />
           <VisibleClassList />
           <AddClass />
         </div>

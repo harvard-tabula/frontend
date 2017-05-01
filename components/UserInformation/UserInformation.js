@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import VisibleTag from '../../containers/user/VisibleTag';
 
 const UserInformation = ({ profile, name, concentrations, years_coding, year, ethnicities, genders, concentration,
   nameSuccess, emailSuccess, genderSuccess, ethcnitySuccess, concentrationSuccess, yearsCodingSuccess, yearSuccess,
@@ -9,7 +10,7 @@ const UserInformation = ({ profile, name, concentrations, years_coding, year, et
         <h2 className="subtitle">Personal Profile</h2>
       </div>
       <div className="columns">
-        <div className="column is-one-quarter">
+        <div className="column is-one-third">
           <figure className="image is-square">
             <img src={profile.avatar} alt="Your beautiful face." />
           </figure>
@@ -91,6 +92,9 @@ const UserInformation = ({ profile, name, concentrations, years_coding, year, et
                 </p>
               </div>
             </div>
+          </div>
+          <div className="columns">
+            <VisibleTag />
           </div>
         </div>
       </div>
