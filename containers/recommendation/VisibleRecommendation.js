@@ -17,16 +17,6 @@ const mapStateToProps = (state) => {
   };
   const tags = (!(state.recommendationReducer.recommendations.fetched) ? []
     : state.recommendationReducer.recommendations.recommendations.associated_tags);
-  console.log(tags.map(t => {
-    if (t.category == 'user_history') {
-      const emoji = emojiDict[t.name];
-      emoji.id = t.id;
-      emoji.name = emoji.text;
-      return emoji;
-    }
-
-    return t;
-  }));
   return {
     classSuggestions: state.recommendationReducer.classSuggestions.classSuggestions,
     name: state.recommendationReducer.classSuggestions.value,

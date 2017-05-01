@@ -71,7 +71,7 @@ export function fetchRecommendation(id) {
               dispatch(showModal)
             }
             else{
-              dispatch(receiveClassSuggestions(json));
+              dispatch(receiveRecommendation(json));
             }
           }
   			);
@@ -108,7 +108,7 @@ function receiveClassSuggestions(json) {
   };
 }
 
-export function fetchClassSuggestions(text) {
+export function fetchClassSuggestions(id) {
   const sentData = {
     method: 'GET',
     mode: 'cors',
@@ -117,7 +117,7 @@ export function fetchClassSuggestions(text) {
   };
   return (dispatch, getState) => {
     dispatch(requestRecommendation());
-    return fetch(`${baseUrl}recommendation/${id}`, sentData)
+    return fetch(`${baseUrl}coursesearch/${id}`, sentData)
 			.then(response => response.json())
 			.then(json =>				
         {
@@ -125,7 +125,7 @@ export function fetchClassSuggestions(text) {
             showModal()
           }
           else{
-            dispatch(receiveRecommendation(json));
+            dispatch(receiveClassSuggestions(json));
           }
         }
 			);
