@@ -8,9 +8,9 @@
 
 ### Getting up to speed
 
-* Read the [boilerplate's routing guide](https://medium.freecodecamp.com/you-might-not-need-react-router-38673620f3d#.i818ofeqo) and [the justification for using it](https://github.com/kriasoft/react-static-boilerplate/blob/master/docs/routing-and-navigation.md) to get up to speed on routing
-* Go through the documentation for [Redux](http://redux.js.org/docs/introduction/), [Webpack](https://webpack.js.org/concepts/), [redux-thunk](https://github.com/gaearon/redux-thunk), and [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch)
-* Check out [Bulma's documentation](http://bulma.io/documentation/overview/start/) to get a feel for what the CSS framework we're using offers
+* Read the [boilerplate's routing guide](https://medium.freecodecamp.com/you-might-not-need-react-router-38673620f3d#.i818ofeqo) and [the justification for using it](https://github.com/kriasoft/react-static-boilerplate/blob/master/docs/routing-and-navigation.md) to get up to speed on routing.
+* Go through the documentation for [Redux](http://redux.js.org/docs/introduction/), [Webpack](https://webpack.js.org/concepts/), [redux-thunk](https://github.com/gaearon/redux-thunk), and [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch).
+* Check out [Bulma's documentation](http://bulma.io/documentation/overview/start/) to get a feel for what the CSS framework we're using offers.
 * Read [Cloudlflare's guide](https://blog.cloudflare.com/secure-and-fast-github-pages-with-cloudflare/) to getting free SSL hosting with a custom domain hosted on `gh-pages`.
 * Brush up on CORS from a [frontend](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS) and [backend](https://medium.com/statuscode/cors-a-guided-tour-4e72230a8739) perspective.
 
