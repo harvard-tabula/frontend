@@ -47,11 +47,25 @@ const Recommendation = ({ classSuggestions, name, recommendations, recommendatio
         </div>
         <div className="column">
           {recommendationFetched ?
-            <div>
-              <p>Expected Grade: {recommendations.grade}</p>
-              <p>Expected Workload: {recommendations.hours} hours</p>
-              {tags.map((tag) =>
-                <span className="tag is-medium">{tag.name}</span>)}
+            <div className="content">
+              <h4>Predictions</h4>
+              <p>
+                Based on your class history and interests we'd expect you to receive an
+                <strong> {recommendations.grade} </strong>
+                and spend an average of
+                <strong> {recommendations.hours} hours </strong>
+                per week working on the class.
+              </p>
+              <h4>Recommendation</h4>
+              <p>
+                This class is a good fit for you right now! That said, if you first take
+                <strong> STAT 110 </strong>
+                we predict that you'd receive an
+                <strong> A </strong>
+                while spending roughly the same amount of time per week.
+              </p>
+              <h4>Commonly Associated Tags</h4>
+              {tags.map((tag) => <span className="tag is-medium">{tag.name}</span>)}
             </div>
           : null}
         </div>

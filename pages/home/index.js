@@ -5,7 +5,7 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <Layout className="section is-large">
+      <Layout className="section is-large is-fullheight">
         <div className="container">
           <div className="heading has-text-centered">
             <h1 className="title">The start of something beautiful</h1>

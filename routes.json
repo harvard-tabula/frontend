@@ -8,14 +8,6 @@
     "page": "./pages/error"
   },
   {
-    "path": "/about/",
-    "page": "./pages/about"
-  },
-  {
-    "path": "/tasks/:status(pending|completed)?",
-    "page": "./pages/home"
-  },
-  {
     "path": "/privacy/",
     "page": "./pages/privacy"
   },
