@@ -23,14 +23,14 @@ const mapStateToProps = (state) => {
     recommendations: state.recommendationReducer.recommendations.recommendations,
     recommendationFetched: state.recommendationReducer.recommendations.fetched,
     tags: tags.map(t => {
-      if (t.category == 'user_history') {
+      if (t.category === 'user_history') {
         const emoji = emojiDict[t.name];
         emoji.id = t.id;
         emoji.name = emoji.text;
         return emoji;
       }
       return t;
-    })
+    }),
   };
 };
 

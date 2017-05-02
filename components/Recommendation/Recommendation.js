@@ -18,7 +18,7 @@ const Recommendation = ({ classSuggestions, name, recommendations, recommendatio
             onSuggestionsFetchRequested={onSuggestionsFetchRequested}
             onSuggestionsClearRequested={onSuggestionsClearRequested}
             getSuggestionValue={getSuggestionValue}
-            renderSuggestion={(suggestion) => <div>{suggestion.catalog_number}</div>}
+            renderSuggestion={suggestion => <span key={suggestion.id}>{suggestion.catalog_number}</span>}
             inputProps={{ placeholder: 'Search for the Couse', value: name, onChange: (event, { newValue }) => onChangeClassId(newValue) }}
             onSuggestionSelected={onSuggestionSelected}
           />
@@ -37,7 +37,9 @@ const Recommendation = ({ classSuggestions, name, recommendations, recommendatio
                 <div className="card-content">
                   <div className="content">
                     <h4>Description</h4>
-                    <p>{recommendations.course.description}</p>
+                    <p>{recommendations.course.description ? recommendations.course.description : 'Not available.'}</p>
+                    <h4>Preqrequisites</h4>
+                    <p>{recommendations.course.prerequisites ? recommendations.course.prerequisites : 'None listed.'}</p>
                   </div>
                 </div>
               </div>
@@ -49,7 +51,7 @@ const Recommendation = ({ classSuggestions, name, recommendations, recommendatio
               <p>Expected Grade: {recommendations.grade}</p>
               <p>Expected Workload: {recommendations.hours} hours</p>
               {tags.map((tag) =>
-                <span className="tag is-medium" key={tag.id}>{tag.name}</span>)}
+                <span className="tag is-medium">{tag.name}</span>)}
             </div>
           : null}
         </div>

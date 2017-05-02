@@ -11,15 +11,15 @@ export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 
 export function showModal() {
-  return{
-    type: SHOW_MODAL
-  }
+  return {
+    type: SHOW_MODAL,
+  };
 }
 
-export function hideModal(){
-  return{
-    type: HIDE_MODAL
-  }
+export function hideModal() {
+  return {
+    type: HIDE_MODAL,
+  };
 }
 
 export function changeClass(text) {
@@ -61,20 +61,17 @@ export function fetchRecommendation(id) {
     body: null,
     credentials: 'include',
   };
-  return (dispatch) => {
+  return dispatch => {
     dispatch(requestRecommendation());
     return fetch(`${baseUrl}recommendation/${id}`, sentData)
-			.then(response => response.json())
-  			.then(json =>
-          {
-            if(json.redirect){
-              dispatch(showModal)
-            }
-            else{
-              dispatch(receiveRecommendation(json));
-            }
-          }
-  			);
+      .then(response => response.json())
+      .then(json => {
+        if (json.redirect) {
+          dispatch(showModal);
+        } else {
+          dispatch(receiveRecommendation(json));
+        }
+      });
   };
 }
 
@@ -89,12 +86,6 @@ export function changeSuggestionSelected(suggestion) {
 export function clearClassSuggestions() {
   return {
     type: CLEAR_CLASS_SUGGESTIONS,
-  };
-}
-
-function requestClassSuggestions() {
-  return {
-    type: REQUEST_CLASS_SUGGESTIONS,
   };
 }
 
@@ -115,19 +106,16 @@ export function fetchClassSuggestions(id) {
     body: null,
     credentials: 'include',
   };
-  return (dispatch, getState) => {
+  return dispatch => {
     dispatch(requestRecommendation());
     return fetch(`${baseUrl}coursesearch/${id}`, sentData)
-			.then(response => response.json())
-			.then(json =>				
-        {
-          if(json.redirect){
-            showModal()
-          }
-          else{
-            dispatch(receiveClassSuggestions(json));
-          }
+      .then(response => response.json())
+      .then(json => {
+        if (json.redirect) {
+          showModal();
+        } else {
+          dispatch(receiveClassSuggestions(json));
         }
-			);
+      });
   };
 }
