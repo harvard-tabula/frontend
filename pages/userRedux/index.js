@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import VisibleClassList from '../../containers/user/VisibleClassList';
 import VisibleProfile from '../../containers/user/VisibleProfile';
 import VisibleModal from '../../containers/user/VisibleModal';
-import Layout from '../../components/Layout';
+import Layout from '../../components/Layout/Layout';
 import { fetchProfileIfNeeded, fetchClassesIfNeeded, fetchConcentrationsIfNeeded,
   fetchTagsIfNeeded, fetchSemestersIfNeeded, fetchUserInfoIfNeeded } from '../../actions/user';
 import { authenticateCalls } from '../../core/api';

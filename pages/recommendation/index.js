@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { render } from 'react-dom';
 import { connect } from 'react-redux';
-import Layout from '../../components/Layout';
+import Layout from '../../components/Layout/Layout';
 import VisibleRecommendation from '../../containers/recommendation/VisibleRecommendation';
 import VisibleModal from '../../containers/recommendation/VisibleModal';
 import { authenticateCalls } from '../../core/api';
