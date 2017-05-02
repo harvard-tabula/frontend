@@ -16,6 +16,13 @@ function Footer() {
             </a>
           </p>
         </div>
+        <div className="content">
+          <p>
+            <em>
+              Tabula is currently in the data-collection phase. By sharing your preferences and course history you'll be joining your classmates at SEAS in improving the experience for everyone. Once you've completed your profile, check back in at the end of the summer to get predictions for the classes on your shopping list.
+            </em>
+          </p>
+        </div>
       </div>
     </footer>
   );
