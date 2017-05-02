@@ -1,9 +1,9 @@
 import React from 'react';
 import style from './style.css';
 
-const Modal = ({showModal}) => (
+const Modal = ({ showModal }) => (
   <div>
-    {showModal ? 
+    {showModal ?
       <div id="modal" className={style.modal}>
         <div className={style.modalcontent}>
           <p>Your session has timed out</p>
@@ -12,6 +12,6 @@ const Modal = ({showModal}) => (
       </div>
       : null}
   </div>
-)
+);
 
 export default Modal;

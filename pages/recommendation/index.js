@@ -15,7 +15,7 @@ class RecommendationPage extends Component {
 
   render() {
     return (
-      <Layout className="section">
+      <Layout>
         <VisibleRecommendation />
         <VisibleModal />
       </Layout>

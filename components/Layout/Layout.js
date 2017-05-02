@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import Header from './Header';
-import Footer from '../Footer';
-
+import Footer from '../Footer/Footer';
 
 class Layout extends React.Component {
 
@@ -11,14 +10,10 @@ class Layout extends React.Component {
 
   render() {
     return (
-      <div ref={node => (this.root = node)}>
-        <div>
-          <Header />
-          <main>
-            <div {...this.props} />
-            <Footer />
-          </main>
-        </div>
+      <div className="hero is-fullheight" ref={node => (this.root = node)}>
+        <Header />
+        {this.props.children}
+        <Footer />
       </div>
     );
   }

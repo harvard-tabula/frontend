@@ -70,7 +70,7 @@ const UserInformation = ({ profile, name, concentrations, years_coding, year, et
             </div>
             <div className="column">
               <div className="field">
-                <label className="label">Years Coding Before College</label>
+                <label className="label">Years Coding</label>
                 <p className="control">
                   <input
                     className={yearsCodingSuccess ? 'input is-success' : 'input'}

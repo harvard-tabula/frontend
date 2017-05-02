@@ -1,7 +1,5 @@
 import React from 'react';
-import Link from '../Link';
-import s from './Footer.css';
-import cx from 'classnames';
+import Link from '../Link/Link';
 
 
 function Footer() {
@@ -10,13 +8,13 @@ function Footer() {
       <div className="container">
         <div className="content has-text-centered">
           <p>
-          <Link to="/privacy">Privacy & Terms</Link>
+            <Link to="/privacy">Privacy & Terms</Link>
           </p>
           <p>
-            <a className="icon" href="https://github.com/josephwandile/tabula">
+            <a className="icon" href="https://github.com/harvard-tabula">
               <i className="fa fa-github" aria-hidden="true"></i>
             </a>
-           </p>
+          </p>
         </div>
       </div>
     </footer>

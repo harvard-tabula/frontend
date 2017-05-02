@@ -4,8 +4,8 @@ import Autosuggest from 'react-autosuggest';
 const Recommendation = ({ classSuggestions, name, recommendations, recommendationFetched, tags,
   onSuggestionsClearRequested, getSuggestionValue, fetchClassSuggestions,
   onSuggestionSelected, onChangeClassId, onSuggestionsFetchRequested }) => (
-  <div className="section">
-    <div className="container has-text-centered">
+  <div style={{ flexGrow: 2 }} className="section">
+    <div className="container">
       <div className="field">
         <p className="control">
           <Autosuggest
