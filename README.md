@@ -80,7 +80,7 @@ We highly recommend reading
 ```
 
 
-### Getting Started
+### Getting Started, Running Locally
 
 **Step 1**. Make sure that you have [Node.js](https://nodejs.org/) v6 or newer installed on your
 machine.
